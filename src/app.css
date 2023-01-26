@@ -1,0 +1,13 @@
+#spinoco-webchat * {
+    font-size: 12px !important;
+    color: blue !important;
+}
+
+#spinoco-webchat .window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: 400px;
+    max-height: 600px;
+}
+

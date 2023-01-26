@@ -1,0 +1,14 @@
+services:
+    app:
+        image: node:18.2.0-buster-slim
+        ports:
+            - "3000:3000"
+        volumes:
+            - .:/app
+        working_dir: /app
+        entrypoint: tail -f /dev/null
+        networks:
+            - app
+
+networks:
+    app:
