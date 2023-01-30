@@ -4,9 +4,10 @@
     "version": "0.0.1",
     "type": "module",
     "scripts": {
-        "dev": "vite --port=3000 --host",
+        "dev": "vite",
         "build": "tsc && vite build",
-        "preview": "vite preview --port=3000",
+        "start": "tsc && vite build",
+        "preview": "vite preview",
         "eslint": "eslint src --fix"
     },
     "dependencies": {
@@ -20,6 +21,7 @@
         "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@typescript-eslint/parser": "^5.49.0",
         "@vitejs/plugin-react": "^3.0.0",
+        "dns": "^0.2.2",
         "eslint": "^8.32.0",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-prettier": "^4.2.1",

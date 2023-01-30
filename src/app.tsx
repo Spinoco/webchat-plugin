@@ -14,21 +14,30 @@ interface AppProps {
 // styleOptions={styleOptions}
 
 export const App: React.FC<AppProps> = ({ data }) => {
+    console.log("INIT");
+
     const [directLine, setDirectLine] = useState<DirectLine>();
 
     useMemo(async () => {
+        console.log("WTF");
         const res = await fetch("https://webchat-mockbot.azurewebsites.net/directline/token", { method: "POST" });
         const { token } = await res.json();
 
+        console.log("TOKEN");
+        console.log({ token });
+
         const dl = createDirectLine({ token });
+
+        console.log("DL");
         console.log(dl);
+
         setDirectLine(dl);
     }, []);
 
     return (
         <div className="window">
-            <div>BgColor: {data.bgColor}</div>
-            {directLine ? <FullReactWebChat directLine={directLine} /> : null}
+            <div>BgColorsss: {data.bgColor}</div>
+            {directLine ? <FullReactWebChat directLine={directLine} /> : "NO DL"}
         </div>
     );
 };

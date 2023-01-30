@@ -13,12 +13,16 @@ chatWrapperElement.setAttribute("id", CHAT_ID);
 document.body.appendChild(chatWrapperElement);
 
 // fetch configuration from API
-const dataResponse = await fetch(`${API_URL}/configuration-example.json`);
-const data = (await dataResponse.json()) as ConfigurationInterface;
+const configurationRequest = fetch(`${API_URL}/configuration-example.json`);
+configurationRequest.then((configurationResponse) => {
+    configurationResponse.json().then((configuration) => {
+        // render React chat into wrapper element
+        ReactDOM.createRoot(chatWrapperElement).render(
+            <React.StrictMode>
+                <App data={configuration as ConfigurationInterface} />
+            </React.StrictMode>,
+        );
 
-// render React chat into wrapper element
-ReactDOM.createRoot(chatWrapperElement).render(
-    <React.StrictMode>
-        <App data={data} />
-    </React.StrictMode>,
-);
+        console.log("Spinoco webchat sucessfully initialized.");
+    });
+});
