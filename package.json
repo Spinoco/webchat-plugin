@@ -4,9 +4,8 @@
     "version": "0.0.1",
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
-        "start": "tsc && vite build",
+        "dev": "NODE_ENV=production vite",
+        "build": "NODE_ENV=production tsc && vite build",
         "preview": "vite preview",
         "eslint": "eslint src --fix"
     },

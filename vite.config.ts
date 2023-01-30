@@ -4,9 +4,11 @@ import dns from "dns";
 
 dns.setDefaultResultOrder("verbatim");
 
+console.log(process.env.NODE_ENV);
+
 export default defineConfig({
-    plugins: [react()],
-    mode: "production",
+    plugins: [react({ fastRefresh: false })],
+    mode: "development",
     publicDir: "public",
     build: {
         target: "es2015",
@@ -15,22 +17,14 @@ export default defineConfig({
         copyPublicDir: true,
     },
     server: {
-        // https: false,
-        // cors: false,
-        // hmr: false,
-        // proxy: {
-        //     "/webchat-api": {
-        //         // https://directline.botframework.com/v3/directline/conversations
-        //         target: "https://directline.botframework.com/v3/directline",
-        //         changeOrigin: true,
-        //         // rewrite: (path) => path.replace(/^\/api/, ""),
-        //     },
-        // },
+        https: false,
+        cors: false,
+        hmr: true,
         port: 4444,
         host: "0.0.0.0",
     },
     preview: {
-        // cors: false,
+        cors: false,
         port: 4444,
         host: "0.0.0.0",
     },
