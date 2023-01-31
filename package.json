@@ -7,7 +7,7 @@
         "dev": "NODE_ENV=production vite",
         "build": "NODE_ENV=production tsc && vite build",
         "preview": "vite preview",
-        "eslint": "eslint src --fix"
+        "eslint": "eslint src --fix --max-warnings=0 "
     },
     "dependencies": {
         "botframework-webchat": "^4.15.6",

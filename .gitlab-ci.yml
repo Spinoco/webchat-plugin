@@ -1,0 +1,43 @@
+cache: &global_cache
+    key:
+        files:
+            - package-lock.json
+    paths:
+        - node_modules
+    policy: pull-push
+
+stages:
+    - install
+    - eslint
+    - build
+
+install:
+    image: node:18.2.0-buster-slim
+    stage: install
+    script:
+        - npm i --production=false
+    tags:
+        - docker
+
+eslint:
+    image: node:18.2.0-buster-slim
+    stage: eslint
+    script:
+        - npm run eslint
+    tags:
+        - docker
+    needs:
+        - install
+    cache:
+        <<: *global_cache
+        policy: pull
+
+build:
+    image: node:18.2.0-buster-slim
+    stage: build
+    script:
+        - npm run build
+    tags:
+        - docker
+    needs:
+        - eslint
