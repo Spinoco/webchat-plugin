@@ -39,7 +39,7 @@ if (chatWrapperElement) {
             // render React chat into wrapper element
             ReactDOM.createRoot(chatWrapperElement).render(
                 <React.StrictMode>
-                    <App user={user} data={configuration as ConfigurationInterface} />
+                    <App clientId={clientId} user={user} data={configuration as ConfigurationInterface} />
                 </React.StrictMode>,
             );
 

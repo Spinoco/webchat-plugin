@@ -10,6 +10,8 @@ import { avatarMiddleware } from "./middlewares/avatar-middleware";
 interface AppProps {
     data: ConfigurationInterface;
     user?: UserInterface;
+
+    clientId: string;
 }
 
 const REDUX_STORE_KEY = "REDUX_STORE";
@@ -46,7 +48,8 @@ window.addEventListener("keydown", (event) => {
     }
 });
 
-export const App: React.FC<AppProps> = ({ user, data }) => {
+export const App: React.FC<AppProps> = ({ clientId, user, data }) => {
+    const [opened, setOpened] = useState<boolean>(false);
     const [directLine, setDirectLine] = useState<DirectLine>();
 
     const styleOptions: StyleOptions = {
@@ -72,16 +75,33 @@ export const App: React.FC<AppProps> = ({ user, data }) => {
     }, []);
 
     return (
-        <div className="spinoco-webchat-plugin-wrapper">
-            {directLine ? (
-                <ReactWebChat
-                    avatarMiddleware={avatarMiddleware}
-                    locale={getLocale()}
-                    styleOptions={styleOptions}
-                    directLine={directLine}
-                    store={store}
-                />
-            ) : null}
+        <div className="swp-wrapper">
+            {opened && directLine ? (
+                <>
+                    <div
+                        className="swp-header"
+                        onClick={() => {
+                            setOpened(false);
+                        }}
+                    >
+                        ClientId: {clientId}
+                    </div>
+                    <ReactWebChat
+                        avatarMiddleware={avatarMiddleware}
+                        locale={getLocale()}
+                        styleOptions={styleOptions}
+                        directLine={directLine}
+                        store={store}
+                    />
+                </>
+            ) : (
+                <div
+                    onClick={() => {
+                        setOpened(true);
+                    }}
+                    className="swp-trigger"
+                ></div>
+            )}
         </div>
     );
 };
