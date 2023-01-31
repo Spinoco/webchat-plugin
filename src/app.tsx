@@ -33,6 +33,8 @@ const store = createStoreWithDevTools(
         },
 );
 
+console.log(store);
+
 store.subscribe(() => {
     localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(store.getState()));
 });
@@ -57,6 +59,11 @@ export const App: React.FC<AppProps> = ({ clientId, user, data }) => {
 
     const styleOptions: StyleOptions = {
         sendBoxBackground: data.sendBoxBackground,
+        // avatars configuration
+        botAvatarImage: "/bot-avatar.jpg",
+        userAvatarImage: "/user-avatar.jpg",
+        botAvatarInitials: "BF",
+        userAvatarInitials: "WC",
     };
 
     console.log({
@@ -85,8 +92,8 @@ export const App: React.FC<AppProps> = ({ clientId, user, data }) => {
 
     return (
         <div className="swp-wrapper">
-            {opened && directLine ? (
-                <>
+            {directLine ? (
+                <div className={`${opened ? "" : "swp-hidden"}`}>
                     <div
                         className="swp-header"
                         onClick={() => {
@@ -97,20 +104,23 @@ export const App: React.FC<AppProps> = ({ clientId, user, data }) => {
                     </div>
                     <ReactWebChat
                         // avatarMiddleware={avatarMiddleware}
+                        username={user?.name}
                         locale={getLocale()}
                         styleOptions={styleOptions}
                         directLine={directLine}
                         store={store}
                     />
-                </>
-            ) : (
+                </div>
+            ) : null}
+
+            {!opened ? (
                 <div
                     onClick={() => {
                         setOpened(true);
                     }}
                     className="swp-trigger"
                 ></div>
-            )}
+            ) : null}
         </div>
     );
 };
