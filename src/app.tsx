@@ -5,30 +5,33 @@ import { DirectLine } from "botframework-directlinejs";
 import { StyleOptions } from "botframework-webchat-api";
 import { UserInterface } from "./interfaces/user-interface";
 import { getLocale } from "./models/get-locale";
-import { avatarMiddleware } from "./middlewares/avatar-middleware";
 
 interface AppProps {
     data: ConfigurationInterface;
     user?: UserInterface;
-
     clientId: string;
 }
 
 const REDUX_STORE_KEY = "REDUX_STORE";
 
-const store = createStoreWithDevTools({}, ({ dispatch }) => (next) => (action) => {
-    if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
-        dispatch({
-            type: "WEB_CHAT/SEND_EVENT",
-            payload: {
-                name: "webchat/join",
-                value: { language: getLocale() },
-            },
-        });
-    }
+const store = createStoreWithDevTools(
+    {},
+    ({ dispatch }: { dispatch: (props: object) => void }) =>
+        (next: (action: unknown) => void) =>
+        (action: { type: string }) => {
+            if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
+                dispatch({
+                    type: "WEB_CHAT/SEND_EVENT",
+                    payload: {
+                        name: "webchat/join",
+                        value: { language: getLocale() },
+                    },
+                });
+            }
 
-    return next(action);
-});
+            return next(action);
+        },
+);
 
 store.subscribe(() => {
     localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(store.getState()));
@@ -55,6 +58,12 @@ export const App: React.FC<AppProps> = ({ clientId, user, data }) => {
     const styleOptions: StyleOptions = {
         sendBoxBackground: data.sendBoxBackground,
     };
+
+    console.log({
+        clientId,
+        user,
+        data,
+    });
 
     useMemo(async () => {
         const res = await fetch("https://webchat-mockbot.azurewebsites.net/directline/token", { method: "POST" });
@@ -87,7 +96,7 @@ export const App: React.FC<AppProps> = ({ clientId, user, data }) => {
                         ClientId: {clientId}
                     </div>
                     <ReactWebChat
-                        avatarMiddleware={avatarMiddleware}
+                        // avatarMiddleware={avatarMiddleware}
                         locale={getLocale()}
                         styleOptions={styleOptions}
                         directLine={directLine}

@@ -9,7 +9,14 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
     ],
-    "overrides": [
+    overrides: [
+        {
+            files: ['**/*.tsx'],
+            rules: {
+                'react/prop-types': 'off',
+                'react/display-name': 'off',
+            },
+        },
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
