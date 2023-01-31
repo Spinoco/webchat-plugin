@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dns from "dns";
+import path from "path";
 
 dns.setDefaultResultOrder("verbatim");
 
@@ -18,6 +19,12 @@ export default defineConfig({
         ssr: false,
         emptyOutDir: true,
         copyPublicDir: true,
+        rollupOptions: {
+            input: {
+                basic: path.resolve(__dirname, "examples/basic.html"),
+                slevomat: path.resolve(__dirname, "examples/slevomat.html"),
+            },
+        },
     },
     server: {
         https: false,
