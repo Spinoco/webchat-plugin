@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigurationInterface } from "./interfaces/configuration-interface";
 import { App } from "./app";
-import "./app.css";
+import "./app.sass";
 
 const CHAT_ID = "spinoco-webchat";
 const API_URL = "";

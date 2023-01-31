@@ -4,13 +4,16 @@ import dns from "dns";
 
 dns.setDefaultResultOrder("verbatim");
 
-console.log(process.env.NODE_ENV);
+console.log(`We are in ${process.env.NODE_ENV}`);
 
 export default defineConfig({
-    plugins: [react({ fastRefresh: false })],
-    mode: "development",
+    // { fastRefresh: false }
+    plugins: [react()],
+    mode: "production",
     publicDir: "public",
     build: {
+        minify: "terser",
+        manifest: false,
         target: "es2015",
         ssr: false,
         emptyOutDir: true,
