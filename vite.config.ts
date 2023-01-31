@@ -21,6 +21,7 @@ export default defineConfig({
         copyPublicDir: true,
         rollupOptions: {
             input: {
+                index: path.resolve(__dirname, "index.html"),
                 basic: path.resolve(__dirname, "examples/basic.html"),
                 slevomat: path.resolve(__dirname, "examples/slevomat.html"),
             },
