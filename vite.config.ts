@@ -5,12 +5,12 @@ import path from "path";
 
 dns.setDefaultResultOrder("verbatim");
 
-console.log(`We are in ${process.env.NODE_ENV}`);
+const isProduction = process.env.NODE_ENV === "production";
 
 export default defineConfig({
     // { fastRefresh: false }
     plugins: [react()],
-    mode: "production",
+    mode: isProduction ? "production" : "development",
     publicDir: "public",
     build: {
         minify: "terser",
@@ -24,6 +24,7 @@ export default defineConfig({
                 index: path.resolve(__dirname, "index.html"),
                 basic: path.resolve(__dirname, "examples/basic.html"),
                 slevomat: path.resolve(__dirname, "examples/slevomat.html"),
+                zasilkovna: path.resolve(__dirname, "examples/zasilkovna.html"),
             },
         },
     },
