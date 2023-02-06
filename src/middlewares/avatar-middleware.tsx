@@ -4,7 +4,6 @@ import { ImageAvatar } from "../components/image-avatar";
 import { InitialsAvatar } from "../components/initials-avatar";
 
 export const avatarMiddleware: AvatarMiddleware = () => () => (props) => {
-    console.log(props);
     // user avatar is defined in app.tsx
     if (props.fromUser) {
         if (props.styleOptions.userAvatarImage) {

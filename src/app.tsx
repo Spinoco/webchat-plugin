@@ -28,8 +28,6 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
 
     const styleOptions = createStyleOptions(configuration, user);
 
-    console.log(styleOptions);
-
     return (
         <div className="swp-wrapper">
             {directLine ? (
