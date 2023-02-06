@@ -2,6 +2,7 @@ name: Spinoco webchat plugin github actions
 on: [push]
 jobs:
     install:
+        runs-on: ubuntu-latest
         steps:
             - uses: docker://node:18.2.0-buster-slim
             - uses: actions/checkout@v3
@@ -14,6 +15,7 @@ jobs:
             - run: npm i --production=false
 
     lint:
+        runs-on: ubuntu-latest
         steps:
             - uses: docker://node:18.2.0-buster-slim
             - uses: actions/checkout@v3
@@ -24,6 +26,7 @@ jobs:
             - run: npm run eslint
 
     build:
+        runs-on: ubuntu-latest
         steps:
             - uses: docker://node:18.2.0-buster-slim
             - uses: actions/checkout@v3
