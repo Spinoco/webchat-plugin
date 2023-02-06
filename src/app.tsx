@@ -7,6 +7,7 @@ import { getLocale } from "./models/get-locale";
 import { avatarMiddleware } from "./middlewares/avatar-middleware";
 import { createStore } from "./models/create-store";
 import { createStyleOptions } from "./models/create-style-options";
+import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 
 const store = createStore();
 
@@ -42,6 +43,8 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
                     </div>
                     <ReactWebChat
                         avatarMiddleware={avatarMiddleware}
+                        sendTypingIndicator={true}
+                        typingIndicatorMiddleware={botTypingIndicatorMiddleware}
                         username={user?.name}
                         locale={getLocale()}
                         styleOptions={styleOptions}
