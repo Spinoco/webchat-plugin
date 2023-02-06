@@ -1,37 +1,35 @@
 import React from "react";
-// import { AvatarMiddleware } from "botframework-webchat-api";
+import AvatarMiddleware from "botframework-webchat-api/src/types/AvatarMiddleware";
+import { ImageAvatar } from "../components/image-avatar";
+import { InitialsAvatar } from "../components/initials-avatar";
 
-// interface PortraitAvatarProps {
-//     fromUser: boolean;
-// }
+export const avatarMiddleware: AvatarMiddleware = () => () => (props) => {
+    console.log(props);
+    // user avatar is defined in app.tsx
+    if (props.fromUser) {
+        if (props.styleOptions.userAvatarImage) {
+            return () => <ImageAvatar image={props.styleOptions.userAvatarImage} />;
+        } else if (props.styleOptions.userAvatarInitials) {
+            return () => <InitialsAvatar initials={props.styleOptions.userAvatarInitials} />;
+        }
+        return () => <></>;
+    }
 
-// const PortraitAvatar: React.FC<PortraitAvatarProps> = (props) => {
-//     return (
-//         <img
-//             className="app__portraitAvatar"
-//             src={props.fromUser ? "react.svg" : "react.svg"}
-//             style={{ borderRadius: 4 }}
-//         />
-//     );
-// };
+    // bot avatar is defined from channelData
+    let botAvatarInitials: string | null = null;
+    if (props.activity.channelData.botAvatarInitials) {
+        botAvatarInitials = props.activity.channelData.botAvatarInitials;
+    }
 
-export const avatarMiddleware: React.FC = () => {
-    console.log("Not implemented yet!");
-    return null;
+    let botAvatarImage: string | null = null;
+    if (props.activity.channelData.botAvatarImage) {
+        botAvatarImage = props.activity.channelData.botAvatarImage;
+    }
+
+    if (botAvatarImage !== null) {
+        return () => (botAvatarImage ? <ImageAvatar image={botAvatarImage} /> : <></>); // FIXME: fix this issue
+    } else if (botAvatarInitials !== null) {
+        return () => (botAvatarInitials ? <InitialsAvatar initials={botAvatarInitials} /> : <></>); // FIXME: fix this issue
+    }
+    return () => <></>;
 };
-
-// export const avatarMiddleware: AvatarMiddleware = () => (next) => (props) => {
-//     console.log(next, props);
-//     // const { text = "" } = activity;
-//     //
-//     // if (~text.indexOf("1")) {
-//     //     return false;
-//     // } else if (~text.indexOf("2")) {
-//     //     return <PortraitAvatar fromUser={fromUser} />;
-//     // }
-//
-//     return <PortraitAvatar fromUser={props.fromUser} />;
-//
-//     // const renderNext = next(props);
-//     // return renderNext && (() => <PortraitAvatar fromUser={props.fromUser}>{renderNext()}</PortraitAvatar>);
-// };

@@ -1,48 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigurationInterface } from "./interfaces/configuration-interface";
-import { UserInterface } from "./interfaces/user-interface";
+import { createUserFromWrapperData } from "./models/create-user-from-wrapper-data";
 import { App } from "./app";
 import "./styles/app.sass";
 
-const CHAT_ID = "spinoco-webchat-plugin";
-
-// FIXME: value should depend on NODE_ENV
-const API_URL = "";
+const WEBCHAT_PLUGIN_ID = "spinoco-webchat-plugin";
 
 // find wrapper element
-const wrapperElement = document.getElementById(CHAT_ID);
+const wrapperElement = document.getElementById(WEBCHAT_PLUGIN_ID);
 if (!wrapperElement) {
     throw new Error('Spinoco webchat plugin: No div with "spinoco-webchat-plugin" id found.');
 }
 
-// get client and user identification
+// get client identification
 const clientId = wrapperElement.getAttribute("data-client-id");
 if (!clientId) {
     throw new Error(`Spinoco webchat plugin: Please set data-client-id on div with id "spinoco-webchat-plugin".`);
 }
 
-const userName = wrapperElement.getAttribute("data-user-name");
-const userEmail = wrapperElement.getAttribute("data-user-email");
-let user: UserInterface | undefined = undefined;
-if (userName && userName.length && userEmail && userEmail.length) {
-    user = {
-        name: userName,
-        email: userEmail,
-    };
-}
+// create user from wrapper data
+const user = createUserFromWrapperData(wrapperElement);
 
 // fetch configuration from API
-const configurationRequest = fetch(`${API_URL}/${clientId}.json`);
-configurationRequest.then((configurationResponse) => {
-    configurationResponse.json().then((configuration) => {
-        // render react webchat plugin into wrapper element
+fetch(`${import.meta.env.VITE_WEBCHAT_API_URL}/${clientId}.json`)
+    .then((response) => response.json())
+    .then((configuration) => {
         ReactDOM.createRoot(wrapperElement).render(
             <React.StrictMode>
-                <App clientId={clientId} user={user} data={configuration as ConfigurationInterface} />
+                <App clientId={clientId} user={user} configuration={configuration as ConfigurationInterface} />
             </React.StrictMode>,
         );
-
-        console.log("Spinoco webchat sucessfully initialized.");
+        console.log("Spinoco webchat plugin: sucessfully initialized.");
+    })
+    .catch(() => {
+        throw new Error(`Spinoco webchat plugin: Failed to load configuration for clientId "${clientId}".`);
     });
-});
