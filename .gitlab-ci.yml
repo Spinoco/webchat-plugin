@@ -41,3 +41,8 @@ build:
         - docker
     needs:
         - eslint
+    artifacts:
+        name: "spinoco-webchat-plugin"
+        paths:
+            - dist
+        expire_in: 1 week

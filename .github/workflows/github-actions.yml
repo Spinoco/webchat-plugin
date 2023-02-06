@@ -1,0 +1,37 @@
+name: Spinoco webchat plugin github actions
+on: [push]
+jobs:
+    install:
+        steps:
+            - uses: actions/cache@v3
+              with:
+                path: node_modules
+                key: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: docker://node:18.2.0-buster-slim
+            - run: npm i --production=false
+
+    lint:
+        steps:
+            - uses: actions/cache@v3
+              with:
+                  path: node_modules
+                  restore-keys: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: docker://node:18.2.0-buster-slim
+            - run: npm run eslint
+
+    build:
+        steps:
+            - uses: actions/cache@v3
+              with:
+                  path: node_modules
+                  restore-keys: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: docker://node:18.2.0-buster-slim
+            - run: npm run build
+            - uses: actions/upload-artifact@v3
+              with:
+                name: webchat plugin dist artifact
+                path: dist
