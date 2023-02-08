@@ -8,9 +8,5 @@ export const botTypingIndicatorMiddleware: TypingIndicatorMiddleware = () => (ne
         return null;
     }
 
-    return (
-        <span className="webchat__typingIndicator">
-            ...
-        </span>
-    );
+    return <span className="webchat__typingIndicator">...</span>;
 };
