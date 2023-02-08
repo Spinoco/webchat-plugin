@@ -17,14 +17,21 @@ interface AppProps {
     clientId: string;
 }
 
+const echoBotToken = import.meta.env.VITE_ECHO_BOT_TOKEN;
+
 export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
     const [opened, setOpened] = useState(false);
     const [directLine, setDirectLine] = useState<DirectLine>();
 
     useMemo(async () => {
-        const res = await fetch("https://webchat-mockbot.azurewebsites.net/directline/token", { method: "POST" });
-        const data = await res.json();
-        setDirectLine(createDirectLine({ token: data.token, watermark: "0", conversationId: data.conversationId }));
+        if (echoBotToken.length > 0) {
+            setDirectLine(createDirectLine({ token: echoBotToken, watermark: "0" }));
+        } else {
+            const mockBotUrl = "https://webchat-mockbot.azurewebsites.net/directline/token";
+            const res = await fetch(mockBotUrl, { method: "POST" });
+            const data = await res.json();
+            setDirectLine(createDirectLine({ token: data.token, watermark: "0", conversationId: data.conversationId }));
+        }
     }, []);
 
     const styleOptions = createStyleOptions(configuration, user);
