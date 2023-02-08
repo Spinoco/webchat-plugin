@@ -3,11 +3,12 @@ import { ConfigurationInterface } from "./interfaces/configuration-interface";
 import ReactWebChat, { createDirectLine } from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
 import { UserInterface } from "./interfaces/user-interface";
-import { getLocale } from "./models/get-locale";
+import { getLocale } from "./utils/get-locale";
 import { avatarMiddleware } from "./middlewares/avatar-middleware";
 import { createStore } from "./models/create-store";
 import { createStyleOptions } from "./models/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
+import { Header } from "./components/header";
 
 const store = createStore();
 
@@ -33,14 +34,7 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
         <div className="swp-wrapper">
             {directLine ? (
                 <div className={`${opened ? "" : "swp-hidden"}`}>
-                    <div
-                        className="swp-header"
-                        onClick={() => {
-                            setOpened(false);
-                        }}
-                    >
-                        ClientId: {clientId}
-                    </div>
+                    <Header clientId={clientId} configuration={configuration} setOpened={setOpened} />
                     <ReactWebChat
                         avatarMiddleware={avatarMiddleware}
                         sendTypingIndicator={true}
@@ -56,6 +50,7 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
 
             {!opened ? (
                 <div
+                    style={{ backgroundColor: configuration.primaryColor }}
                     onClick={() => {
                         setOpened(true);
                     }}
