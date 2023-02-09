@@ -1,35 +1,36 @@
 import { StyleOptions } from "botframework-webchat-api";
 import { UserInterface } from "../interfaces/user-interface";
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
-import { getBase64Prefix } from "../utils/get-base64-prefix";
 import { getInitials } from "../utils/get-initials";
 
-export const createStyleOptions = (configuration: ConfigurationInterface, user?: UserInterface): StyleOptions => {
+export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterface): StyleOptions => {
     const styleOptions: StyleOptions = {
-        accent: configuration.accent,
-        subtle: configuration.subtle ? configuration.subtle : configuration.secondaryColor,
-        rootHeight: configuration.root && configuration.root.height ? configuration.root.height : "500px",
-        rootWidth: configuration.root && configuration.root.width ? configuration.root.width : "400px",
-        rootZIndex: configuration.root && configuration.root.zIndex ? configuration.root.zIndex : undefined,
-        bubbleBorderWidth: configuration.bubbleBorderWidth,
-        bubbleBorderColor: configuration.bubbleBorderColor,
-        bubbleFromUserBorderWidth: configuration.bubbleBorderWidth,
-        bubbleFromUserBorderColor: configuration.bubbleBorderColor,
-        sendBoxBackground: configuration.sendBoxBackground,
-        sendBoxHeight: configuration.sendBoxHeight,
-        sendBoxButtonColor: configuration.sendBoxButtonColor
-            ? configuration.sendBoxButtonColor
-            : configuration.primaryColor,
-        sendBoxButtonShadeInset: configuration.sendBoxButtonShadeInset,
+        accent: c.accent,
+        subtle: c.subtle ? c.subtle : c.secondaryColor,
+        rootHeight: c.root && c.root.height ? c.root.height : "500px",
+        rootWidth: c.root && c.root.width ? c.root.width : "400px",
+        rootZIndex: c.root && c.root.zIndex ? c.root.zIndex : undefined,
+        bubbleBorderWidth: c?.bubble?.border?.width,
+        bubbleBorderColor: c?.bubble?.border?.color,
+        bubbleFromUserBorderWidth: c?.bubble?.border?.width,
+        bubbleFromUserBorderColor: c?.bubble?.border?.color,
+        sendBoxBackground: c.sendBox?.background,
+        sendBoxHeight: c.sendBox?.height,
+        sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
+        sendBoxButtonShadeInset: c.sendBox?.button?.shadeInset,
         avatarSize: 20,
-        userAvatarBackgroundColor: configuration.primaryColor,
+        userAvatarBackgroundColor: c.primaryColor,
         // bot avatar have to be defined in channelData
         // botAvatarImage: "/bot-avatar.jpg",
         // botAvatarInitials: "B",
     };
 
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
-    styleOptions["groupTimestamp"] = import.meta.env.VITE_GROUP_BY_SECONDS * 1000;
+    styleOptions.groupTimestamp = import.meta.env.VITE_GROUP_BY_SECONDS * 1000;
+
+    styleOptions.botAvatarBackgroundColor = "red";
+    styleOptions.botAvatarInitials = "a";
+    styleOptions.userAvatarBackgroundColor = "blue";
 
     // user avatar
     if (user) {

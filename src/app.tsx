@@ -9,6 +9,7 @@ import { createStore } from "./models/create-store";
 import { createStyleOptions } from "./models/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
+import { createStyleFeaturesClasses } from "./models/create-style-feature-classes";
 
 const store = createStore();
 
@@ -36,6 +37,7 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
     }, []);
 
     const styleOptions = createStyleOptions(configuration, user);
+    const classes = createStyleFeaturesClasses(configuration);
 
     return (
         <div className="swp-wrapper">
@@ -43,6 +45,7 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
                 <div className={`${opened ? "" : "swp-hidden"}`}>
                     <Header clientId={clientId} configuration={configuration} setOpened={setOpened} />
                     <ReactWebChat
+                        className={classes}
                         avatarMiddleware={avatarMiddleware}
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}

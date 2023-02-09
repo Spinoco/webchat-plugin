@@ -1,10 +1,12 @@
 import { RootInterface } from "./configuration/root-interface";
 import { HeaderInterface } from "./configuration/header-interface";
+import { BubbleInterface } from "./configuration/bubble-interface";
+import { SendBoxInterface } from "./configuration/send-box-interface";
 
 export interface ConfigurationInterface {
     // Custom
     header?: HeaderInterface;
-    logo?: string;
+    logoBase64?: string;
     primaryColor: string;
     secondaryColor: string;
 
@@ -12,16 +14,7 @@ export interface ConfigurationInterface {
     accent?: string;
     subtle?: string;
 
-    // Root
     root?: RootInterface;
-
-    // Bubble
-    bubbleBorderWidth?: number;
-    bubbleBorderColor?: string;
-
-    // Send box
-    sendBoxBackground: string;
-    sendBoxHeight?: number | string;
-    sendBoxButtonColor?: string;
-    sendBoxButtonShadeInset?: number;
+    bubble?: BubbleInterface;
+    sendBox?: SendBoxInterface;
 }

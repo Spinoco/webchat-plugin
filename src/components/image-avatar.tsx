@@ -5,5 +5,5 @@ interface ImageAvatarProps {
 }
 
 export const ImageAvatar: React.FC<ImageAvatarProps> = ({ image }) => {
-    return <img src={image} />;
+    return <img src={image} alt="" />;
 };
