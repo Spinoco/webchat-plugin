@@ -1,4 +1,7 @@
 export interface HeaderInterface {
     padding?: string;
-    showTitle: boolean;
+    backgroundColor?: string;
+    showTitle?: boolean;
+    close?: boolean;
+    closeBase64?: string;
 }

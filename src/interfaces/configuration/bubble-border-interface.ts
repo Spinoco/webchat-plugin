@@ -3,5 +3,4 @@ export interface BubbleBorderInterface {
     radius?: number;
     style?: string;
     width?: number;
-    oneBorderOnly?: boolean;
 }

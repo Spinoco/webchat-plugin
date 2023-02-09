@@ -4,7 +4,9 @@ import { CSSProperties } from "react";
 export const createHeaderCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties: CSSProperties = {};
 
-    properties.backgroundColor = configuration.primaryColor;
+    properties.backgroundColor = configuration.header?.backgroundColor
+        ? configuration.header.backgroundColor
+        : configuration.primaryColor;
 
     if (configuration.header && configuration.header.padding) {
         properties.padding = configuration.header.padding;

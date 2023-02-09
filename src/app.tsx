@@ -10,6 +10,7 @@ import { createStyleOptions } from "./models/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
 import { createStyleFeaturesClasses } from "./models/create-style-feature-classes";
+import { createStyle } from "./models/create-style";
 
 const store = createStore();
 
@@ -38,9 +39,10 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
 
     const styleOptions = createStyleOptions(configuration, user);
     const classes = createStyleFeaturesClasses(configuration);
+    const style = createStyle(configuration);
 
     return (
-        <div className="swp-wrapper">
+        <div className="swp-wrapper" style={style}>
             {directLine ? (
                 <div className={`${opened ? "" : "swp-hidden"}`}>
                     <Header clientId={clientId} configuration={configuration} setOpened={setOpened} />
