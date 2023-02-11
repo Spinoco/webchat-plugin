@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { ConfigurationInterface } from "./interfaces/configuration-interface";
-import ReactWebChat, { createDirectLine } from "botframework-webchat";
+import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
 import { UserInterface } from "./interfaces/user-interface";
 import { getLocale } from "./utils/get-locale";
@@ -11,6 +11,8 @@ import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator
 import { Header } from "./components/header";
 import { createStyleFeaturesClasses } from "./models/create-style-feature-classes";
 import { createStyle } from "./models/create-style";
+import { createSpinocoDirectLine } from "./models/create-spinoco-direct-line";
+import { ConversationIdStorage } from "./services/conversation-id-storage";
 
 const store = createStore();
 
@@ -22,20 +24,41 @@ interface AppProps {
 
 const echoBotToken = import.meta.env.VITE_ECHO_BOT_TOKEN;
 
+const create = async (setDirectLine: React.Dispatch<DirectLine>) => {
+    if (echoBotToken.length > 0) {
+        setDirectLine(createSpinocoDirectLine(echoBotToken));
+    } else {
+        const mockBotUrl = "https://webchat-mockbot.azurewebsites.net/directline/token";
+        const res = await fetch(mockBotUrl, { method: "POST" });
+        const data = await res.json();
+        setDirectLine(createSpinocoDirectLine(data.token));
+    }
+};
+
 export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
     const [opened, setOpened] = useState(false);
     const [directLine, setDirectLine] = useState<DirectLine>();
 
+    console.log(directLine);
+
     useMemo(async () => {
-        if (echoBotToken.length > 0) {
-            setDirectLine(createDirectLine({ token: echoBotToken, watermark: "0" }));
-        } else {
-            const mockBotUrl = "https://webchat-mockbot.azurewebsites.net/directline/token";
-            const res = await fetch(mockBotUrl, { method: "POST" });
-            const data = await res.json();
-            setDirectLine(createDirectLine({ token: data.token, watermark: "0", conversationId: data.conversationId }));
-        }
+        create(setDirectLine);
     }, []);
+
+    window.addEventListener("error", (event) => {
+        // && event.filename == WEBCHAT_URI
+        if (
+            event.error &&
+            event.error.response &&
+            event.error.response.error &&
+            event.error.response.error.code == "BadArgument" &&
+            (event.error.response.error.message === "Conversation not found" ||
+                event.error.response.error.message === "Token not valid for this conversation")
+        ) {
+            ConversationIdStorage.remove();
+            create(setDirectLine);
+        }
+    });
 
     const styleOptions = createStyleOptions(configuration, user);
     const classes = createStyleFeaturesClasses(configuration);
