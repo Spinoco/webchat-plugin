@@ -1,5 +1,3 @@
-
 export const loadConversationId = () => {
-
-    localStorage.getItem('')
+    localStorage.getItem("");
 };

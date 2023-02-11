@@ -52,7 +52,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterfa
         if (user.avatarImage) {
             styleOptions.userAvatarImage = user.avatarImage;
         } else {
-            styleOptions.userAvatarImage = getBase64Prefix(configuration.logo); // REMOVE - TEST ONLY
+            // styleOptions.userAvatarImage = getBase64Prefix(configuration.logo); // REMOVE - TEST ONLY
         }
     }
 
