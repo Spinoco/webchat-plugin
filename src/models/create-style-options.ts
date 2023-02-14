@@ -3,6 +3,7 @@ import { UserInterface } from "../interfaces/user-interface";
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
 import { getInitials } from "../utils/get-initials";
 import { styleOptionsConfig } from "../config/style-options-config";
+import { config } from "../config/config";
 
 export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterface): StyleOptions => {
     let styleOptions: StyleOptions = {
@@ -72,7 +73,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterfa
     }
 
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
-    styleOptions.groupTimestamp = import.meta.env.VITE_GROUP_BY_SECONDS * 1000;
+    styleOptions.groupTimestamp = config.groupTimestamp * 1000;
 
     // user avatar
     if (user) {
