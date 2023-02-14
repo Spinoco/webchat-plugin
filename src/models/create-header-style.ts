@@ -12,5 +12,20 @@ export const createHeaderCSSProperties = (configuration: ConfigurationInterface)
         properties.padding = configuration.header.padding;
     }
 
+    if (configuration.root?.borderRadius) {
+        properties.borderTopLeftRadius = configuration.root.borderRadius + "px";
+        properties.borderTopRightRadius = configuration.root.borderRadius + "px";
+    }
+
+    return properties;
+};
+
+export const createHeaderTitleCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
+    const properties: CSSProperties = {};
+
+    if (configuration.header?.titleColor) {
+        properties.color = configuration.header.titleColor;
+    }
+
     return properties;
 };

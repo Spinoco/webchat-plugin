@@ -1,2 +1,3 @@
-export const SCROLLBAR = "swp-feature-scrollbar";
-export const BUBBLE_SINGLE_BORDER = "swp-feature-bubble-single-border";
+export const scrollbar = "swp-feature-scrollbar";
+export const bubbleSingleBorder = "swp-feature-bubble-single-border";
+export const sendBoxInputBorder = "swp-feature-sendbox-input-border";

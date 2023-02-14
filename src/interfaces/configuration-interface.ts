@@ -7,14 +7,15 @@ import { FeaturesInterface } from "./configuration/features-interface";
 
 export interface ConfigurationInterface {
     header?: HeaderInterface;
-    logoBase64?: string;
     primaryColor: string;
     primaryColorHover?: string;
     secondaryColor: string;
+    borderColor?: string;
     accent?: string;
     subtle?: string;
     root?: RootInterface;
     bubble?: BubbleInterface;
+    bubbleFromUser?: BubbleInterface;
     suggestedAction?: SuggestedActionInterface;
     sendBox?: SendBoxInterface;
     features?: FeaturesInterface;
