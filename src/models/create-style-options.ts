@@ -2,7 +2,7 @@ import { StyleOptions } from "botframework-webchat-api";
 import { UserInterface } from "../interfaces/user-interface";
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
 import { getInitials } from "../utils/get-initials";
-import { defaultStyleOptions } from "../constants/default-configuration";
+import { styleOptionsConfig } from "../config/style-options-config";
 
 export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterface): StyleOptions => {
     let styleOptions: StyleOptions = {
@@ -84,7 +84,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterfa
         }
     }
 
-    return { ...defaultStyleOptions, ...styleOptions };
+    return { ...styleOptionsConfig, ...styleOptions };
 };
 
 const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {

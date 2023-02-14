@@ -1,6 +1,6 @@
 import { StyleOptions } from "botframework-webchat-api";
 
-export const defaultStyleOptions: StyleOptions = {
+export const styleOptionsConfig: StyleOptions = {
     rootHeight: "500px",
     rootWidth: "400px",
     bubbleBackground: "#eeeeee",

@@ -1,1 +1,1 @@
-export const ConversationIdStorageKey = "spinocoWebchatConversationId";
+export const conversationIdStorageKey = "spinocoWebchatConversationId";

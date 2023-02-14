@@ -1,15 +1,15 @@
-import { ConversationIdStorageKey } from "../constants/conversation-id-storage-key";
+import { conversationIdStorageKey } from "../constants/conversation-id-storage-key";
 
 export class ConversationIdStorage {
     static get(): string | undefined {
-        return localStorage.getItem(ConversationIdStorageKey) ?? undefined;
+        return localStorage.getItem(conversationIdStorageKey) ?? undefined;
     }
 
     static set(conversationId: string): void {
-        localStorage.setItem(ConversationIdStorageKey, conversationId);
+        localStorage.setItem(conversationIdStorageKey, conversationId);
     }
 
     static remove(): void {
-        localStorage.removeItem(ConversationIdStorageKey);
+        localStorage.removeItem(conversationIdStorageKey);
     }
 }
