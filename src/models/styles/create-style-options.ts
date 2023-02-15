@@ -24,9 +24,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
             ? c.suggestedAction?.border.color.base
             : c.primaryColor,
         suggestedActionBorderWidth: c.suggestedAction?.border?.width?.base,
-        // bot avatar have to be defined in channelData
-        // botAvatarImage: "/bot-avatar.jpg",
-        // botAvatarInitials: "B",
+        botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
     };
 
     // ROOT
@@ -64,8 +62,6 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
             styleOptions.userAvatarImage = user.avatarUrl;
         }
     }
-
-    styleOptions.botAvatarInitials = config.chat.botAvatarInitials;
 
     return { ...styleOptionsConfig, ...styleOptions };
 };
