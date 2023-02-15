@@ -23,10 +23,7 @@ export class ConversationService {
         const directLine: DirectLine = createLine({ token, watermark: "0", conversationId });
 
         directLine.connectionStatus$.subscribe(() => {
-            // TODO: fix types
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            const conversationId = directLine.conversationId;
+            const conversationId = directLine["conversationId"];
             if (conversationId) {
                 this.chatStorage.setConversationId(conversationId);
             }
