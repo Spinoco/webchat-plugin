@@ -68,8 +68,8 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterfa
     // user avatar
     if (user) {
         styleOptions.userAvatarInitials = getInitials(user.name);
-        if (user.avatarImage) {
-            styleOptions.userAvatarImage = user.avatarImage;
+        if (user.avatarUrl) {
+            styleOptions.userAvatarImage = user.avatarUrl;
         } else {
             // styleOptions.userAvatarImage = c.logoBase64; // REMOVE - TEST ONLY
         }
