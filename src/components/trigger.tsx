@@ -1,4 +1,4 @@
-import { ConfigurationInterface } from "../models/interfaces/configuration-interface";
+import { ConfigurationInterface } from "../models/interfaces/configuration/configuration-interface";
 import React from "react";
 import { Comment } from "./icons";
 import { createTriggerCSSProperties } from "../models/styles/create-trigger-css-properties";

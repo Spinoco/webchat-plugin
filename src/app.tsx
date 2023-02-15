@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { ConfigurationInterface } from "./models/interfaces/configuration-interface";
+import React, { useEffect, useState } from "react";
+import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
 import { getLocale } from "./models/chat/get-locale";
@@ -9,12 +9,12 @@ import { createStyleOptions } from "./models/styles/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
 import { createWrapperCssVariables } from "./models/styles/create-wrapper-css-variables";
-import { createDirectLine } from "./models/chat/create-direct-line";
-import { ConversationIdStorage } from "./models/services/conversation-id-storage";
 import { Trigger } from "./components/trigger";
 import { config } from "./config/config";
 import { createChatClasses } from "./models/styles/create-chat-classes";
 import { UserDto } from "./models/dtos/user-dto";
+import ChatStorage from "./models/services/storage/chat-storage";
+import { ConversationService } from "./models/services/conversation/conversation-service";
 
 const store = createStore();
 
@@ -24,37 +24,19 @@ interface AppProps {
     clientId: string;
 }
 
-const echoBotToken = import.meta.env.VITE_ECHO_BOT_TOKEN;
+const directLineService = new ConversationService(ChatStorage.getInstance());
 
 export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
     const [opened, setOpened] = useState(false);
     const [directLine, setDirectLine] = useState<DirectLine>();
 
-    const create = async () => {
-        if (echoBotToken.length > 0) {
-            setDirectLine(createDirectLine(echoBotToken));
-        } else {
-            const mockBotUrl = "https://webchat-mockbot.azurewebsites.net/directline/token";
-            const res = await fetch(mockBotUrl, { method: "POST" });
-            const data = await res.json();
-            setDirectLine(createDirectLine(data.token));
-        }
+    directLineService.onConversationChange = (directLine) => {
+        setDirectLine(directLine);
     };
 
-    useMemo(async () => {
-        create();
+    useEffect(() => {
+        directLineService.startConversation();
     }, []);
-
-    window.addEventListener("error", (event) => {
-        if (
-            event.error?.response?.error?.code == "BadArgument" &&
-            (event.error?.response?.error?.message === "Conversation not found" ||
-                event.error?.response?.error?.message === "Token not valid for this conversation")
-        ) {
-            ConversationIdStorage.remove();
-            create();
-        }
-    });
 
     return (
         <div className={config.classes.chatWrapper} style={createWrapperCssVariables(configuration)}>

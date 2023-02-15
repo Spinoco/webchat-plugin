@@ -1,6 +1,5 @@
 import { StyleOptions } from "botframework-webchat-api";
-import { ConfigurationInterface } from "../interfaces/configuration-interface";
-import { getInitials } from "../chat/get-initials";
+import { ConfigurationInterface } from "../interfaces/configuration/configuration-interface";
 import { styleOptionsConfig } from "../../config/style-options-config";
 import { config } from "../../config/config";
 import { UserDto } from "../dtos/user-dto";
@@ -60,7 +59,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
 
     // user avatar
     if (user) {
-        styleOptions.userAvatarInitials = getInitials(user.name);
+        styleOptions.userAvatarInitials = user.initials;
         if (user.avatarUrl) {
             styleOptions.userAvatarImage = user.avatarUrl;
         }

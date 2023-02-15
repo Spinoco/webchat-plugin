@@ -1,4 +1,4 @@
-import { ConfigurationInterface } from "../models/interfaces/configuration-interface";
+import { ConfigurationInterface } from "../models/interfaces/configuration/configuration-interface";
 import React from "react";
 import { Close } from "./icons";
 import { createHeaderCSSProperties } from "../models/styles/create-header-css-properties";

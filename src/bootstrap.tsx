@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ConfigurationInterface } from "./models/interfaces/configuration-interface";
+import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import { App } from "./app";
 import { UserDto } from "./models/dtos/user-dto";
 import { config } from "./config/config";

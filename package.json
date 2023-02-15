@@ -7,6 +7,7 @@
         "dev": "NODE_ENV=production vite",
         "build": "NODE_ENV=production tsc && vite build",
         "preview": "vite preview",
+        "lint": "npm run eslint && npm run stylelint",
         "eslint": "eslint src --fix --max-warnings=0",
         "stylelint": "npx stylelint src/styles/**/*.scss"
     },

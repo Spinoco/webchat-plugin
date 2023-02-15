@@ -1,4 +1,4 @@
-import { ConfigurationInterface } from "../interfaces/configuration-interface";
+import { ConfigurationInterface } from "../interfaces/configuration/configuration-interface";
 import { CSSProperties } from "react";
 
 /**
