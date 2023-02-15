@@ -41,7 +41,7 @@ build:
     tags:
         - docker
     needs:
-        - eslint
+        - lint
     artifacts:
         name: "spinoco-webchat-plugin"
         paths:
