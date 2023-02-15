@@ -15,5 +15,8 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
         "--typing-indicator-background": configuration.typingIndicator?.background
             ? configuration.typingIndicator.background
             : "#F0F0F0",
+        "--typing-indicator-color": configuration.typingIndicator?.color
+            ? configuration.typingIndicator.color
+            : "#999999",
     } as React.CSSProperties;
 };

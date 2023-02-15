@@ -33,6 +33,10 @@
     "bubbleFromUser": {
         "background": "#0072bf"
     },
+    "typingIndicator": {
+        "background": "#51585d",
+        "color": "#FFFFFF"
+    },
     "suggestedAction": {
         "height": 26,
         "background": {

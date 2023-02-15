@@ -16,7 +16,7 @@
       height: 4px;
       margin-right: 2px;
 
-      background-color: #999999;
+      background-color: var(--typing-indicator-color);
       border-radius: 2px;
 
       animation: typingAnimation 1.5s infinite ease-in-out;

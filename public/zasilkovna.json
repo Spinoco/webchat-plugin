@@ -25,6 +25,10 @@
         },
         "color": "black"
     },
+    "typingIndicator": {
+        "background": "#FFFFFF",
+        "color": "#BA1B02"
+    },
     "suggestedAction": {
         "layout": "flow",
         "height": 32,
