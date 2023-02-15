@@ -38,5 +38,5 @@ export const avatarMiddleware: AvatarMiddleware = () => () => (props) => {
         return () => <InitialsAvatar initials={config.chat.botAvatarInitials} />;
     }
 
-    return () => <></>;
+    return false;
 };
