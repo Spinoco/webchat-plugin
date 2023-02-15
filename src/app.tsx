@@ -10,10 +10,12 @@ import { createStyleOptions } from "./models/styles/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
 import { createStyleFeaturesClasses } from "./models/styles/create-style-feature-classes";
-import { createStyle } from "./models/styles/create-style";
+import { createWrapperCssVariables } from "./models/styles/create-wrapper-css-variables";
 import { createSpinocoDirectLine } from "./models/chat/create-spinoco-direct-line";
 import { ConversationIdStorage } from "./models/services/conversation-id-storage";
 import { Trigger } from "./components/trigger";
+import { config } from "./config/config";
+import { createChatClasses } from "./models/styles/create-chat-classes";
 
 const store = createStore();
 
@@ -55,23 +57,19 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
         }
     });
 
-    const styleOptions = createStyleOptions(configuration, user);
-    const classes = createStyleFeaturesClasses(configuration);
-    const style = createStyle(configuration);
-
     return (
-        <div className="swp-wrapper" style={style}>
+        <div className={config.classes.chatWrapper} style={createWrapperCssVariables(configuration)}>
             {directLine ? (
-                <div className={`${opened ? "" : "swp-hidden"}`}>
+                <div className={`${opened ? "" : config.classes.hideWrapper}`}>
                     <Header clientId={clientId} configuration={configuration} setOpened={setOpened} />
                     <ReactWebChat
-                        className={classes}
+                        className={createChatClasses(configuration)}
                         avatarMiddleware={avatarMiddleware}
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
                         username={user?.name}
                         locale={getLocale()}
-                        styleOptions={styleOptions}
+                        styleOptions={createStyleOptions(configuration, user)}
                         directLine={directLine}
                         store={store}
                     />

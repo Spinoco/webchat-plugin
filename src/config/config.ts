@@ -6,8 +6,13 @@ export const config = {
         conversationId: "swp-conversation-id",
     },
     classes: {
-        scrollbar: "swp-feature-scrollbar",
-        bubbleSingleBorder: "swp-feature-bubble-single-border",
-        sendBoxInputBorder: "swp-feature-sendbox-input-border",
+        chatWrapper: "swp-chat-wrapper",
+        chat: "swp-chat",
+        features: {
+            scrollbar: "swp-feature-scrollbar",
+            bubbleSingleBorder: "swp-feature-bubble-single-border",
+            sendBoxInputBorder: "swp-feature-sendbox-input-border",
+        },
+        hideWrapper: "swp-hidden",
     },
 };

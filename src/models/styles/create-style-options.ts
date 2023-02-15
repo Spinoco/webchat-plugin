@@ -5,6 +5,9 @@ import { getInitials } from "../chat/get-initials";
 import { styleOptionsConfig } from "../../config/style-options-config";
 import { config } from "../../config/config";
 
+/**
+ * Vytvoří objekt pro nastylování chatu pomocí jeho interních vlastností.
+ */
 export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterface): StyleOptions => {
     let styleOptions: StyleOptions = {
         accent: c.accent,

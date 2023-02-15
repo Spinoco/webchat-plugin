@@ -1,6 +1,9 @@
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
 import { CSSProperties } from "react";
 
+/**
+ * Metoda slouží pro nastylování hlavičky chatu.
+ */
 export const createHeaderCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties: CSSProperties = {};
 

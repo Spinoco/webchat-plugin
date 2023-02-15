@@ -1,7 +1,10 @@
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
-import React from "react";
+import React, { CSSProperties } from "react";
 
-export const createStyle = (configuration: ConfigurationInterface): React.CSSProperties => {
+/**
+ * Vytváří proměnné pro celý plugin.
+ */
+export const createWrapperCssVariables = (configuration: ConfigurationInterface): CSSProperties => {
     return {
         "--color-primary": configuration.primaryColor,
         "--color-primary-hover": configuration.primaryColorHover
