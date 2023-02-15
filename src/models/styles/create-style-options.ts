@@ -52,18 +52,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
     styleOptions = createSuggestedActionStyleOptions(c, styleOptions);
 
     // SEND BOX
-
-    if (c.sendBox?.height) {
-        styleOptions.sendBoxHeight = c.sendBox.height;
-    }
-
-    if (c.sendBox?.button?.shadeInset) {
-        styleOptions.sendBoxButtonShadeInset = c.sendBox.button.shadeInset;
-    }
-
-    if (c.sendBox?.border?.top) {
-        styleOptions.sendBoxBorderTop = c.sendBox.border.top;
-    }
+    styleOptions = createSendBoxStyleOptions(c, styleOptions);
 
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
     styleOptions.groupTimestamp = config.chat.groupTimestamp * 1000;
@@ -128,6 +117,17 @@ const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: Style
         styleOptions.bubbleFromUserBorderRadius = c.bubble.border.radius;
     }
 
+    if (c.bubbleFromUser?.border?.style !== undefined) {
+        styleOptions.bubbleFromUserBorderStyle = c.bubbleFromUser.border.style;
+
+        if (c.bubble?.border?.style !== undefined) {
+            styleOptions.bubbleBorderStyle = c.bubble.border.style;
+        }
+    } else if (c.bubble?.border?.style !== undefined) {
+        styleOptions.bubbleBorderStyle = c.bubble.border.style;
+        styleOptions.bubbleFromUserBorderStyle = c.bubble.border.style;
+    }
+
     return styleOptions;
 };
 
@@ -150,6 +150,38 @@ const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptio
 
     if (c.suggestedAction?.border?.radius !== undefined) {
         styleOptions.suggestedActionBorderRadius = c.suggestedAction.border.radius;
+    }
+
+    if (c.suggestedAction?.border?.style?.base !== undefined) {
+        styleOptions.suggestedActionBorderStyle = c.suggestedAction.border.style.base;
+    }
+
+    return styleOptions;
+};
+
+const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+    if (c.sendBox?.height) {
+        styleOptions.sendBoxHeight = c.sendBox.height;
+    }
+
+    if (c.sendBox?.button?.shadeInset) {
+        styleOptions.sendBoxButtonShadeInset = c.sendBox.button.shadeInset;
+    }
+
+    if (c.sendBox?.border?.top) {
+        styleOptions.sendBoxBorderTop = c.sendBox.border.top;
+    }
+
+    if (c.sendBox?.border?.right) {
+        styleOptions.sendBoxBorderRight = c.sendBox.border.right;
+    }
+
+    if (c.sendBox?.border?.bottom) {
+        styleOptions.sendBoxBorderBottom = c.sendBox.border.bottom;
+    }
+
+    if (c.sendBox?.border?.left) {
+        styleOptions.sendBoxBorderLeft = c.sendBox.border.left;
     }
 
     return styleOptions;
