@@ -10,5 +10,6 @@ export const styleOptionsConfig: StyleOptions = {
     bubbleFromUserBorderWidth: 0,
     bubbleFromUserTextColor: "white",
     suggestedActionLayout: "stacked",
+    suggestedActionBorderRadius: 4,
     sendBoxButtonShadeInset: 0,
 };

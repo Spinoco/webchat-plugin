@@ -46,17 +46,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterfa
     styleOptions = createBubbleStyleOptions(c, styleOptions);
 
     // SUGGESTED ACTION
-    if (c.suggestedAction?.layout !== undefined) {
-        styleOptions.suggestedActionLayout = c.suggestedAction.layout;
-    }
-
-    if (c.suggestedAction?.imageHeight !== undefined) {
-        styleOptions.suggestedActionImageHeight = c.suggestedAction.imageHeight;
-    }
-
-    if (c.suggestedAction?.height !== undefined) {
-        styleOptions.suggestedActionHeight = c.suggestedAction.height;
-    }
+    styleOptions = createSuggestedActionStyleOptions(c, styleOptions);
 
     // SEND BOX
 
@@ -133,6 +123,30 @@ const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: Style
     } else if (c.bubble?.border?.radius !== undefined) {
         styleOptions.bubbleBorderRadius = c.bubble.border.radius;
         styleOptions.bubbleFromUserBorderRadius = c.bubble.border.radius;
+    }
+
+    return styleOptions;
+};
+
+const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+    if (c.suggestedAction?.layout !== undefined) {
+        styleOptions.suggestedActionLayout = c.suggestedAction.layout;
+    }
+
+    if (c.suggestedAction?.imageHeight !== undefined) {
+        styleOptions.suggestedActionImageHeight = c.suggestedAction.imageHeight;
+    }
+
+    if (c.suggestedAction?.height !== undefined) {
+        styleOptions.suggestedActionHeight = c.suggestedAction.height;
+    }
+
+    if (c.suggestedAction?.background?.base !== undefined) {
+        styleOptions.suggestedActionBackgroundColor = c.suggestedAction.background.base;
+    }
+
+    if (c.suggestedAction?.border?.radius !== undefined) {
+        styleOptions.suggestedActionBorderRadius = c.suggestedAction.border.radius;
     }
 
     return styleOptions;

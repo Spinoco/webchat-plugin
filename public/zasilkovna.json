@@ -27,6 +27,7 @@
         "layout": "flow",
         "height": 32,
         "border": {
+            "radius": 0,
             "width": {
                 "base": 1
             }

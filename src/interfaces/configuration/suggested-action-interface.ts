@@ -9,4 +9,5 @@ export interface SuggestedActionInterface {
 
     textColor?: StringEventInterface;
     border?: SuggestedActionBorderInterface;
+    background?: StringEventInterface;
 }

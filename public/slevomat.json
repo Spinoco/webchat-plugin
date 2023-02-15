@@ -3,6 +3,7 @@
     "secondaryColor": "#767676",
     "borderColor": "#51585c",
     "root": {
+        "height": 580,
         "width": 350,
         "background": "#363b3e",
         "borderRadius": 8
@@ -27,10 +28,21 @@
         "background": "#0072bf"
     },
     "sendBox": {
-        "height": 60,
         "color": "white",
         "border": {
             "top": "1px solid #51585d"
+        }
+    },
+    "suggestedAction": {
+        "height": 26,
+        "background": {
+            "base": "transparent"
+        },
+        "border": {
+            "radius": 8,
+            "width": {
+                "base": 1
+            }
         }
     },
     "features": {
