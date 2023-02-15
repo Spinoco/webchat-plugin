@@ -1,7 +1,10 @@
 export const config = {
     chat: {
+        apiUrl: import.meta.env.VITE_WEBCHAT_API_URL,
         groupTimestamp: 3, // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
+        id: "spinoco-webchat-plugin",
         attributes: {
+            clientId: "data-client-id",
             userName: "data-user-name",
             userEmail: "data-user-email",
             userAvatarUrl: "data-user-avatar-url",

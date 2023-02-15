@@ -2,33 +2,33 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigurationInterface } from "./models/interfaces/configuration-interface";
 import { App } from "./app";
-import "./styles/app.sass";
 import { UserDto } from "./models/dtos/user-dto";
-
-const WEBCHAT_PLUGIN_ID = "spinoco-webchat-plugin";
+import { config } from "./config/config";
+import "./styles/app.sass";
 
 // find wrapper element
-const wrapperElement = document.getElementById(WEBCHAT_PLUGIN_ID);
+const wrapperElement = document.getElementById(config.chat.id);
 if (!wrapperElement) {
     throw new Error('Spinoco webchat plugin: No div with "spinoco-webchat-plugin" id found.');
 }
 
 // get client identification
-const clientId = wrapperElement.getAttribute("data-client-id");
+const clientId = wrapperElement.getAttribute(config.chat.attributes.clientId);
 if (!clientId) {
     throw new Error(`Spinoco webchat plugin: Please set data-client-id on div with id "spinoco-webchat-plugin".`);
 }
 
-// create user from wrapper data
-const user = UserDto.createFromWrapperElement(wrapperElement);
-
 // fetch configuration from API
-fetch(`${import.meta.env.VITE_WEBCHAT_API_URL}/${clientId}.json`)
+fetch(`${config.chat.apiUrl}/${clientId}.json`)
     .then((response) => response.json())
     .then((configuration) => {
         ReactDOM.createRoot(wrapperElement).render(
             <React.StrictMode>
-                <App clientId={clientId} user={user} configuration={configuration as ConfigurationInterface} />
+                <App
+                    clientId={clientId}
+                    user={UserDto.createFromWrapperElement(wrapperElement)}
+                    configuration={configuration as ConfigurationInterface}
+                />
             </React.StrictMode>,
         );
         console.log("Spinoco webchat plugin: sucessfully initialized.");
