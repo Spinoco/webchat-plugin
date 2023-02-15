@@ -26,12 +26,14 @@ export const Header: React.FC<HeaderProps> = ({ clientId, configuration, setOpen
                     {clientId}
                 </div>
             )}
-            {configuration.header?.close && (
+            {(configuration.header?.hideClose === undefined || configuration.header?.hideClose === false) && (
                 <div className="swp-header-close">
                     {configuration.header?.closeBase64 ? (
                         <img src={configuration.header.closeBase64} alt={clientId} />
                     ) : (
-                        <Close />
+                        <Close
+                            color={configuration.header?.closeIconColor ? configuration.header.closeIconColor : "white"}
+                        />
                     )}
                 </div>
             )}

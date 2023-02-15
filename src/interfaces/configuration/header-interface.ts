@@ -5,7 +5,8 @@ export interface HeaderInterface {
     logoBase64?: string;
     hideTitle?: boolean;
     titleColor?: string;
-    close?: boolean;
+    hideClose?: boolean;
     closeHeight?: string;
     closeBase64?: string;
+    closeIconColor?: string;
 }

@@ -13,6 +13,7 @@ import { createStyleFeaturesClasses } from "./models/create-style-feature-classe
 import { createStyle } from "./models/create-style";
 import { createSpinocoDirectLine } from "./models/create-spinoco-direct-line";
 import { ConversationIdStorage } from "./services/conversation-id-storage";
+import { Trigger } from "./components/trigger";
 
 const store = createStore();
 
@@ -77,15 +78,7 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
                 </div>
             ) : null}
 
-            {!opened ? (
-                <div
-                    style={{ backgroundColor: configuration.primaryColor }}
-                    onClick={() => {
-                        setOpened(true);
-                    }}
-                    className="swp-trigger"
-                ></div>
-            ) : null}
+            {!opened ? <Trigger configuration={configuration} setOpened={setOpened} /> : null}
         </div>
     );
 };
