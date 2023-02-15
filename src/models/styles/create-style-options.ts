@@ -18,8 +18,6 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
         sendBoxBackground: c.sendBox?.background,
         sendBoxTextColor: c.sendBox?.color,
         sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
-        avatarSize: 20, // TODO avatar style
-        userAvatarBackgroundColor: c.primaryColor, // TODO avatar style
         suggestedActionTextColor: c.suggestedAction?.textColor?.base
             ? c.suggestedAction.textColor.base
             : c.primaryColor,
@@ -48,6 +46,9 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
     // BUBBLE
     styleOptions = createBubbleStyleOptions(c, styleOptions);
 
+    // AVATAR
+    styleOptions = createAvatarStyleOptions(c, styleOptions);
+
     // SUGGESTED ACTION
     styleOptions = createSuggestedActionStyleOptions(c, styleOptions);
 
@@ -62,8 +63,6 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
         styleOptions.userAvatarInitials = getInitials(user.name);
         if (user.avatarUrl) {
             styleOptions.userAvatarImage = user.avatarUrl;
-        } else {
-            // styleOptions.userAvatarImage = c.logoBase64; // REMOVE - TEST ONLY
         }
     }
 
@@ -126,6 +125,26 @@ const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: Style
     } else if (c.bubble?.border?.style !== undefined) {
         styleOptions.bubbleBorderStyle = c.bubble.border.style;
         styleOptions.bubbleFromUserBorderStyle = c.bubble.border.style;
+    }
+
+    return styleOptions;
+};
+
+const createAvatarStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+    if (c.avatar?.size !== undefined) {
+        styleOptions.avatarSize = c.avatar.size;
+    }
+
+    if (c.avatar?.borderRadius !== undefined) {
+        styleOptions.avatarBorderRadius = c.avatar.borderRadius;
+    }
+
+    if (c.avatar?.background !== undefined) {
+        styleOptions.userAvatarBackgroundColor = c.avatar.background;
+        styleOptions.botAvatarBackgroundColor = c.avatar.background;
+    } else {
+        styleOptions.userAvatarBackgroundColor = c.primaryColor;
+        styleOptions.botAvatarBackgroundColor = c.primaryColor;
     }
 
     return styleOptions;

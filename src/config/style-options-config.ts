@@ -9,6 +9,8 @@ export const styleOptionsConfig: StyleOptions = {
     bubbleFromUserBorderRadius: 4,
     bubbleFromUserBorderWidth: 0,
     bubbleFromUserTextColor: "white",
+    avatarBorderRadius: "100%",
+    avatarSize: 30,
     suggestedActionLayout: "stacked",
     suggestedActionBorderRadius: 4,
     sendBoxButtonShadeInset: 0,

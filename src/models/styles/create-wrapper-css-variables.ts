@@ -1,5 +1,6 @@
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
 import React, { CSSProperties } from "react";
+import { styleOptionsConfig } from "../../config/style-options-config";
 
 /**
  * Vytváří proměnné pro celý plugin.
@@ -18,5 +19,14 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
         "--typing-indicator-color": configuration.typingIndicator?.color
             ? configuration.typingIndicator.color
             : "#999999",
+        "--avatar-size":
+            (configuration.avatar?.size ? configuration.avatar.size : styleOptionsConfig.avatarSize) + "px",
+        "--avatar-border-radius": configuration.avatar?.borderRadius
+            ? configuration.avatar.borderRadius
+            : styleOptionsConfig.avatarBorderRadius,
+        "--avatar-background": configuration.avatar?.background
+            ? configuration.avatar.background
+            : configuration.primaryColor,
+        "--avatar-font-size": configuration.avatar?.fontSize ? configuration.avatar.fontSize : "12px",
     } as React.CSSProperties;
 };

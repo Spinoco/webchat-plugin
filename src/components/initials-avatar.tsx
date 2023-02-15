@@ -5,5 +5,5 @@ interface InitialsAvatarProps {
 }
 
 export const InitialsAvatar: React.FC<InitialsAvatarProps> = ({ initials }) => {
-    return <span>{initials}</span>;
+    return <div className="webchat__initialsAvatar__initials">{initials}</div>;
 };

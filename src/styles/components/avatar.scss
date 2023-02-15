@@ -1,0 +1,21 @@
+.webchat__stacked-layout__avatar-gutter {
+  img {
+    width: 100%;
+
+    border-radius: var(--avatar-border-radius);
+  }
+
+  .webchat__initialsAvatar__initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--avatar-size);
+
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: var(--avatar-font-size);
+
+    background-color: var(--avatar-background);
+    border-radius: var(--avatar-border-radius);
+  }
+}
