@@ -12,7 +12,7 @@ import { Header } from "./components/header";
 import { createStyleFeaturesClasses } from "./models/styles/create-style-feature-classes";
 import { createStyle } from "./models/styles/create-style";
 import { createSpinocoDirectLine } from "./models/chat/create-spinoco-direct-line";
-import { ConversationIdStorage } from "./services/conversation-id-storage";
+import { ConversationIdStorage } from "./models/services/conversation-id-storage";
 import { Trigger } from "./components/trigger";
 
 const store = createStore();

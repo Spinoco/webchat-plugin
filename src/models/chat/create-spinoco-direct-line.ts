@@ -1,5 +1,5 @@
 import { createDirectLine } from "botframework-webchat";
-import { ConversationIdStorage } from "../../services/conversation-id-storage";
+import { ConversationIdStorage } from "../services/conversation-id-storage";
 import { DirectLine } from "botframework-directlinejs";
 
 export const createSpinocoDirectLine = (token: string) => {
