@@ -65,6 +65,8 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
         }
     }
 
+    styleOptions.botAvatarInitials = config.chat.botAvatarInitials;
+
     return { ...styleOptionsConfig, ...styleOptions };
 };
 

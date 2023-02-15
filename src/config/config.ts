@@ -11,6 +11,8 @@ export const config = {
             userEmail: "data-user-email",
             userAvatarUrl: "data-user-avatar-url",
         },
+        botAvatarInitials: "BOT",
+        botAvatarImage: "",
     },
     classes: {
         chatWrapper: "swp-chat-wrapper",
