@@ -5,7 +5,9 @@ import { CSSProperties } from "react";
  * Vytvoří styly pro element na otevření chatu.
  */
 export const createTriggerCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
-    const properties: CSSProperties = {};
+    const properties = {
+        "--trigger-icon-height": configuration.trigger?.iconHeight ? configuration.trigger.iconHeight : "24px",
+    } as CSSProperties;
 
     if (configuration.trigger?.height) {
         properties.height = configuration.trigger.height;

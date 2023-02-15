@@ -11,9 +11,9 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
             ? configuration.primaryColorHover
             : configuration.primaryColor,
         "--border-color": configuration.borderColor ? configuration.borderColor : configuration.primaryColor,
-        "--trigger-icon-height": configuration.trigger?.iconHeight ? configuration.trigger.iconHeight : "24px",
-        "--header-logo-height": configuration.header?.logoHeight ? configuration.header.logoHeight : "20px",
-        "--header-close-height": configuration.header?.closeHeight ? configuration.header.closeHeight : "20px",
         "--wrapper-border-radius": configuration.root?.borderRadius ? configuration.root.borderRadius + "px" : "0px",
+        "--typing-indicator-background": configuration.typingIndicator?.background
+            ? configuration.typingIndicator.background
+            : "#F0F0F0",
     } as React.CSSProperties;
 };

@@ -7,7 +7,7 @@
         "width": 60,
         "background": "#51585d",
         "iconBase64": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik01MTIgNjRjMjgyLjc2OCAwIDUxMiAxODYuMjU2IDUxMiA0MTZTNzk0Ljc2OCA4OTYgNTEyIDg5NmE2MzIuMDQgNjMyLjA0IDAgMCAxLTc5LjgyNC01LjA0QzMyMi4xOTIgMTAwMC45NDQgMTkwLjkyOCAxMDIwLjY1NiA2NCAxMDIzLjU1MlY5OTYuNjRjNjguNTQ0LTMzLjU4NCAxMjgtOTQuNzM2IDEyOC0xNjQuNjQgMC05Ljc2LS43NTItMTkuMzI4LTIuMTYtMjguNzA0Qzc0LjA0OCA3MjcuMDI0IDAgNjEwLjU0NCAwIDQ4MCAwIDI1MC4yNTYgMjI5LjIzMiA2NCA1MTIgNjR6IiBmaWxsPSIjMDBiMmU1Ii8+PC9zdmc+",
-        "iconHeight": "24px"
+        "iconHeight": "28px"
     },
     "root": {
         "height": 580,

@@ -5,6 +5,7 @@ import { SendBoxInterface } from "./configuration/send-box-interface";
 import { SuggestedActionInterface } from "./configuration/suggested-action-interface";
 import { FeaturesInterface } from "./configuration/features-interface";
 import { TriggerInterface } from "./configuration/trigger-interface";
+import { TypingIndicatorInterface } from "./configuration/typing-indicator-interface";
 
 export interface ConfigurationInterface {
     primaryColor: string;
@@ -18,6 +19,7 @@ export interface ConfigurationInterface {
     header?: HeaderInterface;
     bubble?: BubbleInterface;
     bubbleFromUser?: BubbleInterface;
+    typingIndicator?: TypingIndicatorInterface;
     suggestedAction?: SuggestedActionInterface;
     sendBox?: SendBoxInterface;
     features?: FeaturesInterface;
