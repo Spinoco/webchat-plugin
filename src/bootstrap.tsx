@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ConfigurationInterface } from "./interfaces/configuration-interface";
-import { createUserFromWrapperData } from "./models/create-user-from-wrapper-data";
+import { ConfigurationInterface } from "./models/interfaces/configuration-interface";
+import { createUserFromWrapperData } from "./models/chat/create-user-from-wrapper-data";
 import { App } from "./app";
 import "./styles/app.sass";
 

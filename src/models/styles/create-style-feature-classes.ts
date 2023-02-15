@@ -1,5 +1,5 @@
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
-import { config } from "../config/config";
+import { config } from "../../config/config";
 
 export const createStyleFeaturesClasses = (configuration: ConfigurationInterface): string => {
     const classes: string[] = [];

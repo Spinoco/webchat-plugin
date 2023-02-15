@@ -19,13 +19,3 @@ export const createHeaderCSSProperties = (configuration: ConfigurationInterface)
 
     return properties;
 };
-
-export const createHeaderTitleCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
-    const properties: CSSProperties = {};
-
-    if (configuration.header?.titleColor) {
-        properties.color = configuration.header.titleColor;
-    }
-
-    return properties;
-};

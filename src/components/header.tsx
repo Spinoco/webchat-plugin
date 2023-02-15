@@ -1,7 +1,8 @@
-import { ConfigurationInterface } from "../interfaces/configuration-interface";
+import { ConfigurationInterface } from "../models/interfaces/configuration-interface";
 import React from "react";
-import { createHeaderCSSProperties, createHeaderTitleCSSProperties } from "../models/create-header-style";
 import { Close } from "./icons";
+import { createHeaderCSSProperties } from "../models/styles/create-header-css-properties";
+import { createHeaderTitleCSSProperties } from "../models/styles/create-header-title-css-properties";
 
 interface HeaderProps {
     clientId: string;

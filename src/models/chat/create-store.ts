@@ -1,6 +1,6 @@
 import { createStoreWithDevTools } from "botframework-webchat";
 import { Store } from "redux";
-import { getLocale } from "../utils/get-locale";
+import { getLocale } from "./get-locale";
 
 // const REDUX_STORE_KEY = "REDUX_STORE";
 

@@ -1,9 +1,9 @@
 import { StyleOptions } from "botframework-webchat-api";
 import { UserInterface } from "../interfaces/user-interface";
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
-import { getInitials } from "../utils/get-initials";
-import { styleOptionsConfig } from "../config/style-options-config";
-import { config } from "../config/config";
+import { getInitials } from "../chat/get-initials";
+import { styleOptionsConfig } from "../../config/style-options-config";
+import { config } from "../../config/config";
 
 export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterface): StyleOptions => {
     let styleOptions: StyleOptions = {

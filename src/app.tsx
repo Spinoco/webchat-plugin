@@ -1,17 +1,17 @@
 import React, { useMemo, useState } from "react";
-import { ConfigurationInterface } from "./interfaces/configuration-interface";
+import { ConfigurationInterface } from "./models/interfaces/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
-import { UserInterface } from "./interfaces/user-interface";
-import { getLocale } from "./utils/get-locale";
+import { UserInterface } from "./models/interfaces/user-interface";
+import { getLocale } from "./models/chat/get-locale";
 import { avatarMiddleware } from "./middlewares/avatar-middleware";
-import { createStore } from "./models/create-store";
-import { createStyleOptions } from "./models/create-style-options";
+import { createStore } from "./models/chat/create-store";
+import { createStyleOptions } from "./models/styles/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
-import { createStyleFeaturesClasses } from "./models/create-style-feature-classes";
-import { createStyle } from "./models/create-style";
-import { createSpinocoDirectLine } from "./models/create-spinoco-direct-line";
+import { createStyleFeaturesClasses } from "./models/styles/create-style-feature-classes";
+import { createStyle } from "./models/styles/create-style";
+import { createSpinocoDirectLine } from "./models/chat/create-spinoco-direct-line";
 import { ConversationIdStorage } from "./services/conversation-id-storage";
 import { Trigger } from "./components/trigger";
 
