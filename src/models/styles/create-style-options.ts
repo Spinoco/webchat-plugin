@@ -1,14 +1,14 @@
 import { StyleOptions } from "botframework-webchat-api";
-import { UserInterface } from "../interfaces/user-interface";
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
 import { getInitials } from "../chat/get-initials";
 import { styleOptionsConfig } from "../../config/style-options-config";
 import { config } from "../../config/config";
+import { UserDto } from "../dtos/user-dto";
 
 /**
  * Vytvoří objekt pro nastylování chatu pomocí jeho interních vlastností.
  */
-export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterface): StyleOptions => {
+export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): StyleOptions => {
     let styleOptions: StyleOptions = {
         accent: c.accent,
         subtle: c.subtle ? c.subtle : c.secondaryColor,

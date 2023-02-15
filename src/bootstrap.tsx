@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigurationInterface } from "./models/interfaces/configuration-interface";
-import { createUserFromWrapperData } from "./models/chat/create-user-from-wrapper-data";
 import { App } from "./app";
 import "./styles/app.sass";
+import { UserDto } from "./models/dtos/user-dto";
 
 const WEBCHAT_PLUGIN_ID = "spinoco-webchat-plugin";
 
@@ -20,7 +20,7 @@ if (!clientId) {
 }
 
 // create user from wrapper data
-const user = createUserFromWrapperData(wrapperElement);
+const user = UserDto.createFromWrapperElement(wrapperElement);
 
 // fetch configuration from API
 fetch(`${import.meta.env.VITE_WEBCHAT_API_URL}/${clientId}.json`)
