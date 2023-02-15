@@ -63,7 +63,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserInterfa
     }
 
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
-    styleOptions.groupTimestamp = config.groupTimestamp * 1000;
+    styleOptions.groupTimestamp = config.chat.groupTimestamp * 1000;
 
     // user avatar
     if (user) {

@@ -1,5 +1,5 @@
 import { ConfigurationInterface } from "../interfaces/configuration-interface";
-import { bubbleSingleBorder, scrollbar, sendBoxInputBorder } from "../constants/style-feature-classes";
+import { config } from "../config/config";
 
 export const createStyleFeaturesClasses = (configuration: ConfigurationInterface): string => {
     const classes: string[] = [];
@@ -7,15 +7,15 @@ export const createStyleFeaturesClasses = (configuration: ConfigurationInterface
     classes.push("swp-chat-wrapper");
 
     if (configuration.features?.bubbleSingleBorder) {
-        classes.push(bubbleSingleBorder);
+        classes.push(config.classes.bubbleSingleBorder);
     }
 
     if (configuration.features?.scrollbar) {
-        classes.push(scrollbar);
+        classes.push(config.classes.scrollbar);
     }
 
     if (configuration.features?.sendBoxInputBorder) {
-        classes.push(sendBoxInputBorder);
+        classes.push(config.classes.sendBoxInputBorder);
     }
 
     return classes.join(" ");
