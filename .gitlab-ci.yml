@@ -8,7 +8,7 @@ cache: &global_cache
 
 stages:
     - install
-    - eslint
+    - lint
     - build
 
 install:
@@ -19,11 +19,12 @@ install:
     tags:
         - docker
 
-eslint:
+lint:
     image: node:18.2.0-buster-slim
-    stage: eslint
+    stage: lint
     script:
         - npm run eslint
+        - npm run stylelint
     tags:
         - docker
     needs:
