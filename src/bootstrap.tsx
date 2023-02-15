@@ -4,7 +4,7 @@ import { ConfigurationInterface } from "./models/interfaces/configuration-interf
 import { App } from "./app";
 import { UserDto } from "./models/dtos/user-dto";
 import { config } from "./config/config";
-import "./styles/app.sass";
+import "./styles/app.scss";
 
 // find wrapper element
 const wrapperElement = document.getElementById(config.chat.id);

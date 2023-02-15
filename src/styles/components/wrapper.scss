@@ -1,0 +1,12 @@
+#spinoco-webchat-plugin {
+  .swp-chat-wrapper {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+
+    .swp-chat {
+      border-bottom-right-radius: var(--wrapper-border-radius);
+      border-bottom-left-radius: var(--wrapper-border-radius);
+    }
+  }
+}

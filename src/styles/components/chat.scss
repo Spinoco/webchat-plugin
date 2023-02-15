@@ -1,0 +1,27 @@
+.webchat__basic-transcript__focus-indicator {
+  border: 0 !important; // chat inner box - remove border on focus
+}
+
+.webchat__basic-transcript__activity-indicator {
+  border: 0 !important; // bubble - remove dashed border on focus
+}
+
+.webchat__suggested-actions__focus-indicator {
+  border: 0 !important; // suggested action wrapper - remove border on focus
+}
+
+.webchat__suggested-action {
+  cursor: pointer;
+}
+
+.webchat__send-box {
+  .webchat__upload-button {
+    border-bottom-left-radius: var(--wrapper-border-radius);
+  }
+
+  .webchat__send-button {
+    .webchat__icon-button__shade {
+      border-radius: 0 0 var(--wrapper-border-radius) 0 !important;
+    }
+  }
+}
