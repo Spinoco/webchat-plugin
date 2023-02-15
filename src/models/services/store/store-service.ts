@@ -1,32 +1,40 @@
 import { createStoreWithDevTools } from "botframework-webchat";
 import { Store } from "redux";
-import { getLocale } from "./get-locale";
+import { LocaleService } from "../locale/locale-service";
 
-// const REDUX_STORE_KEY = "REDUX_STORE";
+export class StoreService {
+    private localeService: LocaleService;
+    private readonly store: Store;
 
-export const createStore = (): Store => {
+    constructor(localeService: LocaleService) {
+        this.localeService = localeService;
+        this.store = createStoreWithDevTools(
+            {},
+            ({ dispatch }: { dispatch: (props: object) => void }) =>
+                (next: (action: unknown) => void) =>
+                (action: { type: string }) => {
+                    if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
+                        dispatch({
+                            type: "WEB_CHAT/SEND_EVENT",
+                            payload: {
+                                name: "webchat/join",
+                                value: { language: this.localeService.getLocale() },
+                            },
+                        });
+                    }
+
+                    return next(action);
+                },
+        );
+    }
+
+    getStore(): Store {
+        return this.store;
+    }
+
     // const localStorageData = localStorage.getItem(REDUX_STORE_KEY);
     // const restoreInitialState = localStorageData !== null;
     // const initialState = restoreInitialState ? JSON.parse(localStorageData) : {};
-
-    const store = createStoreWithDevTools(
-        {},
-        ({ dispatch }: { dispatch: (props: object) => void }) =>
-            (next: (action: unknown) => void) =>
-            (action: { type: string }) => {
-                if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
-                    dispatch({
-                        type: "WEB_CHAT/SEND_EVENT",
-                        payload: {
-                            name: "webchat/join",
-                            value: { language: getLocale() },
-                        },
-                    });
-                }
-
-                return next(action);
-            },
-    );
 
     // window.addEventListener("error", (event) => {
     //     //handle only error from webchat js file
@@ -63,6 +71,4 @@ export const createStore = (): Store => {
     //         store && console.log(store.getState());
     //     }
     // });
-
-    return store;
-};
+}

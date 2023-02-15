@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
-import { getLocale } from "./models/chat/get-locale";
 import { avatarMiddleware } from "./middlewares/avatar-middleware";
-import { createStore } from "./models/chat/create-store";
 import { createStyleOptions } from "./models/styles/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
@@ -15,8 +13,8 @@ import { createChatClasses } from "./models/styles/create-chat-classes";
 import { UserDto } from "./models/dtos/user-dto";
 import ChatStorage from "./models/services/storage/chat-storage";
 import { ConversationService } from "./models/services/conversation/conversation-service";
-
-const store = createStore();
+import { StoreService } from "./models/services/store/store-service";
+import { LocaleService } from "./models/services/locale/locale-service";
 
 interface AppProps {
     configuration: ConfigurationInterface;
@@ -25,6 +23,8 @@ interface AppProps {
 }
 
 const directLineService = new ConversationService(ChatStorage.getInstance());
+const localeService = new LocaleService();
+const storeService = new StoreService(localeService);
 
 export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
     const [opened, setOpened] = useState(false);
@@ -49,10 +49,10 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
                         username={user?.name}
-                        locale={getLocale()}
+                        locale={localeService.getLocale()}
                         styleOptions={createStyleOptions(configuration, user)}
                         directLine={directLine}
-                        store={store}
+                        store={storeService.getStore()}
                     />
                 </div>
             ) : null}
