@@ -12,6 +12,7 @@ export default defineConfig({
     plugins: [react()],
     mode: isProduction ? "production" : "development",
     publicDir: "public",
+    base: isProduction ? "https://spinoco.github.io/webchat-plugin" : undefined,
     build: {
         minify: "terser",
         manifest: false,
