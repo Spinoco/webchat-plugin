@@ -1,5 +1,9 @@
 name: Spinoco webchat plugin github actions
 on: [ push ]
+permissions:
+    contents: read
+    pages: write
+    id-token: write
 jobs:
     install:
         runs-on: ubuntu-latest
