@@ -2,17 +2,25 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dns from "dns";
 import path from "path";
+import { ViteEjsPlugin } from "vite-plugin-ejs";
 
 dns.setDefaultResultOrder("verbatim");
 
 const isProduction = process.env.NODE_ENV === "production";
+const basePath = isProduction ? "/webchat-plugin" : "";
 
 export default defineConfig({
     // { fastRefresh: false }
-    plugins: [react()],
+    plugins: [
+        ViteEjsPlugin((viteConfig) => ({
+            // viteConfig is the current Vite resolved config
+            basePath: basePath,
+        })),
+        react(),
+    ],
     mode: isProduction ? "production" : "development",
     publicDir: "public",
-    base: isProduction ? "https://spinoco.github.io/webchat-plugin" : undefined,
+    base: basePath,
     build: {
         minify: "terser",
         manifest: false,
@@ -26,6 +34,11 @@ export default defineConfig({
                 basic: path.resolve(__dirname, "examples/basic.html"),
                 slevomat: path.resolve(__dirname, "examples/slevomat.html"),
                 zasilkovna: path.resolve(__dirname, "examples/zasilkovna.html"),
+            },
+            output: {
+                entryFileNames: `assets/[name].js`,
+                chunkFileNames: `assets/[name].js`,
+                assetFileNames: `assets/[name].[ext]`,
             },
         },
     },
