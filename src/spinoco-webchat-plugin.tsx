@@ -10,7 +10,7 @@ const chatDomService = new ChatDomService(config.chat.id);
 const clientId = chatDomService.getClientId();
 
 // fetch configuration from API
-fetch(`${config.chat.apiUrl}/${clientId}.json`)
+fetch(`${config.chat.apiUrl}/${clientId}.json`, { mode: "cors" })
     .then((response) => response.json())
     .then((configuration) => {
         ReactDOM.createRoot(chatDomService.wrapperElement).render(
