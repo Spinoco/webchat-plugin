@@ -1,3 +1,9 @@
+$mobile-breakpoint: "768px";
+
+@mixin mobile {
+  @media (max-width: $mobile-breakpoint) { @content; }
+}
+
 @import "components/page";
 
 @import "components/base";

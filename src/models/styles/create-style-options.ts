@@ -14,9 +14,7 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
         rootZIndex: c.root && c.root.zIndex,
         bubbleBorderColor: c?.bubble?.border?.color ? c.bubble.border.color : c.primaryColor,
         bubbleFromUserBorderColor: c?.bubble?.border?.color ? c.bubble.border.color : c.primaryColor,
-        sendBoxBackground: c.sendBox?.background,
-        sendBoxTextColor: c.sendBox?.color,
-        sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
+        botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
         suggestedActionTextColor: c.suggestedAction?.textColor?.base
             ? c.suggestedAction.textColor.base
             : c.primaryColor,
@@ -24,7 +22,10 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
             ? c.suggestedAction?.border.color.base
             : c.primaryColor,
         suggestedActionBorderWidth: c.suggestedAction?.border?.width?.base,
-        botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
+        transcriptOverlayButtonBackground: c.primaryColor,
+        sendBoxBackground: c.sendBox?.background,
+        sendBoxTextColor: c.sendBox?.color,
+        sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
     };
 
     // ROOT

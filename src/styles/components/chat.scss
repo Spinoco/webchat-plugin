@@ -14,6 +14,33 @@
   cursor: pointer;
 }
 
+.webchat__scroll-to-end-button {
+  right: auto !important;
+  bottom: 0 !important;
+  left: 50%;
+
+  padding: 5px 8px !important;
+
+  font-weight: bold;
+
+  border-radius: 4px 4px 0 0 !important;
+  transform: translate(-50%, 0);
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    margin-right: 7px;
+    margin-bottom: 2px;
+    padding: 3px;
+
+    border: solid #FFFFFF;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+
+    content: '';
+  }
+}
+
 .webchat__send-box {
   .webchat__upload-button {
     border-bottom-left-radius: var(--wrapper-border-radius);
