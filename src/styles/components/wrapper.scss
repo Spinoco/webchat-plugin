@@ -1,8 +1,8 @@
 #spinoco-webchat-plugin {
   .swp-chat-wrapper {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    right: rem(20);
+    bottom: rem(20);
 
     @include mobile {
       position: absolute;

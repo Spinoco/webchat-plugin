@@ -19,22 +19,22 @@
   bottom: 0 !important;
   left: 50%;
 
-  padding: 5px 8px !important;
+  padding: rem(5) rem(8) !important;
 
   font-weight: bold;
 
-  border-radius: 4px 4px 0 0 !important;
+  border-radius: rem(4) rem(4) 0 0 !important;
   transform: translate(-50%, 0);
   cursor: pointer;
 
   &::before {
     display: inline-block;
-    margin-right: 7px;
-    margin-bottom: 2px;
-    padding: 3px;
+    margin-right: rem(7);
+    margin-bottom: rem(2);
+    padding: rem(3);
 
     border: solid #FFFFFF;
-    border-width: 0 3px 3px 0;
+    border-width: 0 rem(3) rem(3) 0;
     transform: rotate(45deg);
 
     content: '';

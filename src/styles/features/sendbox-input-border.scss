@@ -1,8 +1,8 @@
 .swp-feature-sendbox-input-border {
   .webchat__send-box-text-box__input {
-    margin: 9px 0;
-    padding: 0 8px !important;
+    margin: rem(9) 0;
+    padding: 0 rem(8) !important;
 
-    border: 1px solid var(--border-color) !important;
+    border: rem(1) solid var(--border-color) !important;
   }
 }

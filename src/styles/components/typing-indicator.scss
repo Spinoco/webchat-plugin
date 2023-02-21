@@ -1,23 +1,23 @@
 .webchat__typingIndicator {
   display: flex;
   align-items: center;
-  margin: 0 10px 10px;
+  margin: 0 rem(10) rem(10);
 
   .webchat__typingIndicator--dots {
     display: flex;
-    padding: 10px;
+    padding: rem(10);
 
     background-color: var(--typing-indicator-background);
-    border-radius: 10px;
+    border-radius: rem(10);
 
     .webchat__typingIndicator--dot {
       display: inline-block;
-      width: 4px;
-      height: 4px;
-      margin-right: 2px;
+      width: rem(4);
+      height: rem(4);
+      margin-right: rem(2);
 
       background-color: var(--typing-indicator-color);
-      border-radius: 2px;
+      border-radius: rem(2);
 
       animation: typingAnimation 1.5s infinite ease-in-out;
 
@@ -42,7 +42,7 @@
       }
 
       28% {
-        transform: translateY(-4px);
+        transform: translateY(rem(-4));
       }
 
       44% {

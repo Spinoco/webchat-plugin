@@ -1,7 +1,7 @@
 .swp-feature-scrollbar {
   .webchat__basic-transcript__scrollable {
     &::-webkit-scrollbar {
-      width: 4px;
+      width: rem(4);
     }
 
     &::-webkit-scrollbar-thumb {
