@@ -11,20 +11,12 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
     let styleOptions: StyleOptions = {
         accent: c.primaryColor,
         subtle: c.subtle ? c.subtle : c.secondaryColor,
-        rootZIndex: c.root && c.root.zIndex,
-        bubbleBorderColor: c?.bubble?.border?.color ? c.bubble.border.color : c.primaryColor,
-        bubbleFromUserBorderColor: c?.bubble?.border?.color ? c.bubble.border.color : c.primaryColor,
+        rootZIndex: c.root?.zIndex && c.root.zIndex,
         botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
-        suggestedActionTextColor: c.suggestedAction?.textColor?.base
-            ? c.suggestedAction.textColor.base
-            : c.primaryColor,
-        suggestedActionBorderColor: c.suggestedAction?.border?.color?.base
-            ? c.suggestedAction?.border.color.base
-            : c.primaryColor,
-        suggestedActionBorderWidth: c.suggestedAction?.border?.width?.base,
+        suggestedActionTextColor: c.suggestedAction?.textColor ? c.suggestedAction.textColor : c.primaryColor,
+        suggestedActionBorderColor: c.suggestedAction?.border?.color ? c.suggestedAction?.border.color : c.primaryColor,
+        suggestedActionBorderWidth: c.suggestedAction?.border?.width,
         transcriptOverlayButtonBackground: c.primaryColor,
-        sendBoxBackground: c.sendBox?.background,
-        sendBoxTextColor: c.sendBox?.color,
         sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
     };
 
@@ -87,6 +79,22 @@ const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: Style
     } else if (c.bubble?.color !== undefined) {
         styleOptions.bubbleTextColor = c.bubble.color;
         styleOptions.bubbleFromUserTextColor = c.bubble.color;
+    }
+
+    if (c.bubbleFromUser?.border?.color !== undefined) {
+        styleOptions.bubbleFromUserBorderColor = c.bubbleFromUser.border.color;
+
+        if (c.bubble?.border?.color !== undefined) {
+            styleOptions.bubbleBorderColor = c.bubble.border.color;
+        } else {
+            styleOptions.bubbleBorderColor = c.primaryColor;
+        }
+    } else if (c.bubble?.border?.color !== undefined) {
+        styleOptions.bubbleBorderColor = c.bubble.border.color;
+        styleOptions.bubbleFromUserBorderColor = c.bubble.border.color;
+    } else {
+        styleOptions.bubbleBorderColor = c.primaryColor;
+        styleOptions.bubbleFromUserBorderColor = c.primaryColor;
     }
 
     if (c.bubbleFromUser?.border?.width !== undefined) {
@@ -158,22 +166,30 @@ const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptio
         styleOptions.suggestedActionHeight = c.suggestedAction.height;
     }
 
-    if (c.suggestedAction?.background?.base !== undefined) {
-        styleOptions.suggestedActionBackgroundColor = c.suggestedAction.background.base;
+    if (c.suggestedAction?.background !== undefined) {
+        styleOptions.suggestedActionBackgroundColor = c.suggestedAction.background;
     }
 
     if (c.suggestedAction?.border?.radius !== undefined) {
         styleOptions.suggestedActionBorderRadius = c.suggestedAction.border.radius;
     }
 
-    if (c.suggestedAction?.border?.style?.base !== undefined) {
-        styleOptions.suggestedActionBorderStyle = c.suggestedAction.border.style.base;
+    if (c.suggestedAction?.border?.style !== undefined) {
+        styleOptions.suggestedActionBorderStyle = c.suggestedAction.border.style;
     }
 
     return styleOptions;
 };
 
 const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+    if (c.sendBox?.background) {
+        styleOptions.sendBoxBackground = c.sendBox.background;
+    }
+
+    if (c.sendBox?.color) {
+        styleOptions.sendBoxTextColor = c.sendBox.color;
+    }
+
     if (c.sendBox?.height) {
         styleOptions.sendBoxHeight = c.sendBox.height;
     }

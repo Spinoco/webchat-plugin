@@ -1,53 +1,53 @@
 .webchat__typingIndicator {
-  display: flex;
-  align-items: center;
-  margin: 0 rem(10) rem(10);
-
-  .webchat__typingIndicator--dots {
     display: flex;
-    padding: rem(10);
+    align-items: center;
+    margin: 0 rem(10) rem(10);
 
-    background-color: var(--typing-indicator-background);
-    border-radius: rem(10);
+    .webchat__typingIndicator--dots {
+        display: flex;
+        padding: rem(10);
 
-    .webchat__typingIndicator--dot {
-      display: inline-block;
-      width: rem(4);
-      height: rem(4);
-      margin-right: rem(2);
+        background-color: var(--typing-indicator-background);
+        border-radius: rem(10);
 
-      background-color: var(--typing-indicator-color);
-      border-radius: rem(2);
+        .webchat__typingIndicator--dot {
+            display: inline-block;
+            width: rem(4);
+            height: rem(4);
+            margin-right: rem(2);
 
-      animation: typingAnimation 1.5s infinite ease-in-out;
+            background-color: var(--typing-indicator-color);
+            border-radius: rem(2);
 
-      &:nth-child(1) {
-        animation-delay: 200ms;
-      }
+            animation: typingAnimation 1.5s infinite ease-in-out;
 
-      &:nth-child(2) {
-        animation-delay: 300ms;
-      }
+            &:nth-child(1) {
+                animation-delay: 200ms;
+            }
 
-      &:nth-child(3) {
-        margin-right: 0;
+            &:nth-child(2) {
+                animation-delay: 300ms;
+            }
 
-        animation-delay: 400ms;
-      }
+            &:nth-child(3) {
+                margin-right: 0;
+
+                animation-delay: 400ms;
+            }
+        }
+
+        @keyframes typingAnimation {
+            0% {
+                transform: translateY(0);
+            }
+
+            28% {
+                transform: translateY(rem(-4));
+            }
+
+            44% {
+                transform: translateY(0);
+            }
+        }
     }
-
-    @keyframes typingAnimation {
-      0% {
-        transform: translateY(0);
-      }
-
-      28% {
-        transform: translateY(rem(-4));
-      }
-
-      44% {
-        transform: translateY(0);
-      }
-    }
-  }
 }

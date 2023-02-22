@@ -1,21 +1,21 @@
 #spinoco-webchat-plugin {
-  .swp-trigger {
-    position: fixed;
-    right: rem(20);
-    bottom: rem(20);
+    .swp-trigger {
+        position: fixed;
+        right: rem(20);
+        bottom: rem(20);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: rem(50);
-    height: rem(50);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: rem(50);
+        height: rem(50);
 
-    border-radius: 100%;
-    cursor: pointer;
+        border-radius: 100%;
+        cursor: pointer;
 
-    img,
-    svg {
-      height: var(--trigger-icon-height);
+        img,
+        svg {
+            height: var(--trigger-icon-height) !important;
+        }
     }
-  }
 }

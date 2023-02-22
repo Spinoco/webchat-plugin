@@ -30,6 +30,7 @@
         "ignore": ["class"]
       }
     ],
-    "selector-max-id": 1
+    "selector-max-id": 1,
+    "indentation": 4
   }
 }

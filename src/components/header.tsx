@@ -20,8 +20,16 @@ export const Header: React.FC<HeaderProps> = ({ clientId, configuration, setOpen
                 setOpened(false);
             }}
         >
-            {configuration.header?.logo?.base64 && (
-                <img src={configuration.header.logo.base64} className="swp-header-logo" alt={clientId} />
+            {(configuration.header?.logo?.base64 !== undefined || configuration.header?.logo?.url !== undefined) && (
+                <img
+                    src={
+                        configuration.header.logo.base64
+                            ? configuration.header.logo.base64
+                            : configuration.header.logo.url
+                    }
+                    className="swp-header-logo"
+                    alt={clientId}
+                />
             )}
             {(configuration.header?.title?.hide === undefined || configuration.header?.title.hide === false) && (
                 <div className="swp-header-title" style={createHeaderTitleCSSProperties(configuration)}>
@@ -31,8 +39,16 @@ export const Header: React.FC<HeaderProps> = ({ clientId, configuration, setOpen
             {(configuration.header?.closeIcon?.hide === undefined ||
                 configuration.header?.closeIcon?.hide === false) && (
                 <div className="swp-header-close">
-                    {configuration.header?.closeIcon?.base64 ? (
-                        <img src={configuration.header.closeIcon.base64} alt={clientId} />
+                    {configuration.header?.closeIcon?.base64 !== undefined ||
+                    configuration.header?.closeIcon?.url !== undefined ? (
+                        <img
+                            src={
+                                configuration.header.closeIcon.base64
+                                    ? configuration.header.closeIcon.base64
+                                    : configuration.header.closeIcon.url
+                            }
+                            alt={clientId}
+                        />
                     ) : (
                         <Close
                             color={

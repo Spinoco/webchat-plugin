@@ -2,8 +2,8 @@ import { ConfigurationInterface } from "../models/interfaces/configuration/confi
 import React from "react";
 import { Comment } from "./icons";
 import { createTriggerCSSProperties } from "../models/styles/create-trigger-css-properties";
-import Lottie from "lottie-react";
 import { config } from "../config/config";
+import Lottie from "react-lottie-player";
 
 interface TriggerProps {
     configuration: ConfigurationInterface;
@@ -19,12 +19,26 @@ export const Trigger: React.FC<TriggerProps> = ({ configuration, setOpened }) =>
             }}
             className="swp-trigger"
         >
-            {configuration.trigger?.icon?.lottie !== undefined ? (
-                <Lottie animationData={configuration.trigger.icon.lottie} />
+            {configuration.trigger?.icon?.lottie?.data !== undefined ||
+            configuration.trigger?.icon?.lottie?.url !== undefined ? (
+                <Lottie
+                    path={configuration.trigger.icon.lottie.url}
+                    animationData={configuration.trigger.icon.lottie.data}
+                    play={true}
+                    loop={true}
+                />
             ) : (
                 <>
-                    {configuration.trigger?.icon?.base64 ? (
-                        <img src={configuration.trigger.icon.base64} alt="" />
+                    {configuration.trigger?.icon?.base64 !== undefined ||
+                    configuration.trigger?.icon?.url !== undefined ? (
+                        <img
+                            src={
+                                configuration.trigger.icon.base64
+                                    ? configuration.trigger.icon.base64
+                                    : configuration.trigger.icon.url
+                            }
+                            alt=""
+                        />
                     ) : (
                         <Comment
                             color={

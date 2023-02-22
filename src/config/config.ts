@@ -29,6 +29,9 @@ export const config = {
                 color: "#FFFFFF",
             },
         },
+        wrapper: {
+            borderRadius: "0px",
+        },
         header: {
             logo: {
                 height: "20px",
@@ -37,6 +40,13 @@ export const config = {
                 height: "20px",
                 color: "#FFFFFF",
             },
+        },
+        avatar: {
+            fontSize: "12px",
+        },
+        typingIndicator: {
+            background: "#F0F0F0",
+            color: "#999999",
         },
     },
 };

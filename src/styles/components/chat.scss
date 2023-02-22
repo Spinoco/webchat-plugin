@@ -1,66 +1,66 @@
 .webchat__basic-transcript__focus-indicator {
-  border: 0 !important; // chat inner box - remove border on focus
+    border: 0 !important; // chat inner box - remove border on focus
 }
 
 .webchat__basic-transcript__activity-indicator {
-  border: 0 !important; // bubble - remove dashed border on focus
+    border: 0 !important; // bubble - remove dashed border on focus
 }
 
 .webchat__suggested-actions__focus-indicator {
-  border: 0 !important; // suggested action wrapper - remove border on focus
+    border: 0 !important; // suggested action wrapper - remove border on focus
 }
 
 .webchat__suggested-action {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .webchat__adaptive-card-renderer {
-  .ac-pushButton {
-    border-color: var(--color-primary) !important;
-    border-radius: rem(4);
-    cursor: pointer;
+    .ac-pushButton {
+        border-color: var(--color-primary) !important;
+        border-radius: rem(4);
+        cursor: pointer;
 
-    &[aria-pressed='true'] {
-      background-color: var(--color-primary) !important;
+        &[aria-pressed='true'] {
+            background-color: var(--color-primary) !important;
+        }
     }
-  }
 }
 
 .webchat__scroll-to-end-button {
-  right: auto !important;
-  bottom: 0 !important;
-  left: 50%;
+    right: auto !important;
+    bottom: 0 !important;
+    left: 50%;
 
-  padding: rem(5) rem(8) !important;
+    padding: rem(5) rem(8) !important;
 
-  font-weight: bold;
+    font-weight: bold;
 
-  border-radius: rem(4) rem(4) 0 0 !important;
-  transform: translate(-50%, 0);
-  cursor: pointer;
+    border-radius: rem(4) rem(4) 0 0 !important;
+    transform: translate(-50%, 0);
+    cursor: pointer;
 
-  &::before {
-    display: inline-block;
-    margin-right: rem(7);
-    margin-bottom: rem(2);
-    padding: rem(3);
+    &::before {
+        display: inline-block;
+        margin-right: rem(7);
+        margin-bottom: rem(2);
+        padding: rem(3);
 
-    border: solid #FFFFFF;
-    border-width: 0 rem(3) rem(3) 0;
-    transform: rotate(45deg);
+        border: solid #FFFFFF;
+        border-width: 0 rem(3) rem(3) 0;
+        transform: rotate(45deg);
 
-    content: '';
-  }
+        content: '';
+    }
 }
 
 .webchat__send-box {
-  .webchat__upload-button {
-    border-bottom-left-radius: var(--wrapper-border-radius);
-  }
-
-  .webchat__send-button {
-    .webchat__icon-button__shade {
-      border-radius: 0 0 var(--wrapper-border-radius) 0 !important;
+    .webchat__upload-button {
+        border-bottom-left-radius: var(--wrapper-border-radius);
     }
-  }
+
+    .webchat__send-button {
+        .webchat__icon-button__shade {
+            border-radius: 0 0 var(--wrapper-border-radius) 0 !important;
+        }
+    }
 }

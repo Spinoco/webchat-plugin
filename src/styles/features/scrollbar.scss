@@ -1,19 +1,19 @@
 .swp-feature-scrollbar {
-  .webchat__basic-transcript__scrollable {
-    &::-webkit-scrollbar {
-      width: rem(4);
-    }
+    .webchat__basic-transcript__scrollable {
+        &::-webkit-scrollbar {
+            width: rem(4);
+        }
 
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--color-primary);
-    }
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--color-primary);
+        }
 
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: var(--color-primary-hover);
-    }
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-primary-hover);
+        }
 
-    &::-webkit-scrollbar-track {
-      background-color: #FFFFFF;
+        &::-webkit-scrollbar-track {
+            background-color: #FFFFFF;
+        }
     }
-  }
 }
