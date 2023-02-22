@@ -1,28 +1,28 @@
 #spinoco-webchat-plugin {
-  .swp-header {
-    display: flex;
-    align-items: center;
-    padding: rem(8);
+    .swp-header {
+        display: flex;
+        align-items: center;
+        padding: rem(8);
 
-    color: #FFFFFF !important;
+        color: #FFFFFF !important;
 
-    cursor: pointer;
+        cursor: pointer;
 
-    .swp-header-logo {
-      height: var(--header-logo-height);
+        .swp-header-logo {
+            height: var(--header-logo-height);
+        }
+
+        .swp-header-close {
+            margin-left: auto;
+
+            color: #FFFFFF;
+            font-size: rem(24);
+            line-height: rem(16);
+
+            img,
+            svg {
+                height: var(--header-close-height);
+            }
+        }
     }
-
-    .swp-header-close {
-      margin-left: auto;
-
-      color: #FFFFFF;
-      font-size: rem(24);
-      line-height: rem(16);
-
-      img,
-      svg {
-        height: var(--header-close-height);
-      }
-    }
-  }
 }

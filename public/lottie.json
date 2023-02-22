@@ -1,0 +1,26 @@
+{
+    "directLine": {
+        "secret": "pyNBGiN_07E.dmABqUqbXp-XcY45Q3MW0tjelJDX-duh53gZQ67XqfU"
+    },
+    "primaryColor": "#00C1A2",
+    "secondaryColor": "#666666",
+    "trigger": {
+        "height": "100px",
+        "width": "100px",
+        "background": "transparent",
+        "icon": {
+            "height": "100px",
+            "lottie": {
+                "url": "https://assets3.lottiefiles.com/private_files/lf30_z588h1j0.json"
+            }
+        }
+    },
+    "header": {
+        "logo": {
+            "url": "https://static5.lottiefiles.com/images/logo/lottiefiles-logo.svg"
+        },
+        "title": {
+            "hide": true
+        }
+    }
+}

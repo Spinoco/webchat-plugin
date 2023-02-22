@@ -2,20 +2,20 @@
     "directLine": {
         "secret": "pyNBGiN_07E.dmABqUqbXp-XcY45Q3MW0tjelJDX-duh53gZQ67XqfU"
     },
-    "primaryColor": "#00b2e5",
+    "primaryColor": "#00B2E5",
     "secondaryColor": "#767676",
-    "borderColor": "#51585c",
+    "borderColor": "#51585C",
     "trigger": {
         "height": 60,
         "width": 60,
-        "background": "#51585d",
+        "background": "#51585D",
         "icon": {
             "base64": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik01MTIgNjRjMjgyLjc2OCAwIDUxMiAxODYuMjU2IDUxMiA0MTZTNzk0Ljc2OCA4OTYgNTEyIDg5NmE2MzIuMDQgNjMyLjA0IDAgMCAxLTc5LjgyNC01LjA0QzMyMi4xOTIgMTAwMC45NDQgMTkwLjkyOCAxMDIwLjY1NiA2NCAxMDIzLjU1MlY5OTYuNjRjNjguNTQ0LTMzLjU4NCAxMjgtOTQuNzM2IDEyOC0xNjQuNjQgMC05Ljc2LS43NTItMTkuMzI4LTIuMTYtMjguNzA0Qzc0LjA0OCA3MjcuMDI0IDAgNjEwLjU0NCAwIDQ4MCAwIDI1MC4yNTYgMjI5LjIzMiA2NCA1MTIgNjR6IiBmaWxsPSIjMDBiMmU1Ii8+PC9zdmc+",
             "height": "28px"
         }
     },
     "header": {
-        "backgroundColor": "black",
+        "backgroundColor": "#000000",
         "padding": "12px 16px",
         "logo": {
             "height": "24px",
@@ -31,39 +31,35 @@
     "root": {
         "height": 580,
         "width": 350,
-        "background": "#363b3e",
+        "background": "#363B3E",
         "borderRadius": 8
     },
     "bubble": {
-        "background": "#51585d",
-        "color": "white",
+        "background": "#51585D",
+        "color": "#FFFFFF",
         "border": {
             "radius": 8
         }
     },
     "bubbleFromUser": {
-        "background": "#0072bf"
+        "background": "#0072BF"
     },
     "typingIndicator": {
-        "background": "#51585d",
+        "background": "#51585D",
         "color": "#FFFFFF"
     },
     "suggestedAction": {
         "height": 26,
-        "background": {
-            "base": "transparent"
-        },
+        "background": "transparent",
         "border": {
             "radius": 8,
-            "width": {
-                "base": 1
-            }
+            "width": 1
         }
     },
     "sendBox": {
-        "color": "white",
+        "color": "#FFFFFF",
         "border": {
-            "top": "1px solid #51585d"
+            "top": "1px solid #51585D"
         }
     },
     "features": {

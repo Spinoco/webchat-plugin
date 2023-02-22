@@ -1,38 +1,38 @@
 #spinoco-webchat-plugin {
-  font-size: rem(16);
-  font-family: Calibri, 'Helvetica Neue', Arial, 'sans-serif';
+    font-size: rem(16);
+    font-family: Calibri, 'Helvetica Neue', Arial, 'sans-serif';
 
-  code {
-    color: var(--color-primary);
-    font-size: rem(14);
-    word-wrap: break-word;
-  }
-
-  h1 {
-    font-size: rem(32);
-  }
-
-  pre {
-    padding: rem(5) rem(7);
-
-    background-color: #EBEBEB;
-  }
-
-  table {
-    width: 100%;
-
-    border-collapse: collapse;
-
-    tr,
-    th,
-    td {
-      border: rem(1) solid #BBBBBB;
+    code {
+        color: var(--color-primary);
+        font-size: rem(14);
+        word-wrap: break-word;
     }
 
-    th,
-    td {
-      padding: rem(8);
+    h1 {
+        font-size: rem(32);
     }
-  }
+
+    pre {
+        padding: rem(5) rem(7);
+
+        background-color: #EBEBEB;
+    }
+
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        tr,
+        th,
+        td {
+            border: rem(1) solid #BBBBBB;
+        }
+
+        th,
+        td {
+            padding: rem(8);
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
