@@ -16,15 +16,14 @@ export class StoreService {
             ({ dispatch }: { dispatch: (props: object) => void }) =>
                 (next: (action: unknown) => void) =>
                 (action: { type: string }) => {
-                    console.log(action);
                     if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
-                        // dispatch({
-                        //     type: "WEB_CHAT/SEND_EVENT",
-                        //     payload: {
-                        //         name: "webchat/join",
-                        //         value: { language: this.localeService.getLocale() },
-                        //     },
-                        // });
+                        dispatch({
+                            type: "WEB_CHAT/SEND_EVENT",
+                            payload: {
+                                name: "webchat/join",
+                                value: { language: this.localeService.getLocale() },
+                            },
+                        });
 
                         setTimeout(() => {
                             if (this.onConversationLoaded) {
