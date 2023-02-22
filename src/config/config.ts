@@ -26,4 +26,21 @@ export const config = {
             sendBoxInputBorder: "swp-feature-sendbox-input-border",
         },
     },
+    styleProperties: {
+        trigger: {
+            icon: {
+                height: "24px",
+                color: "#FFFFFF",
+            },
+        },
+        header: {
+            logo: {
+                height: "20px",
+            },
+            closeIcon: {
+                height: "20px",
+                color: "#FFFFFF",
+            },
+        },
+    },
 };

@@ -9,7 +9,7 @@ import { UserDto } from "../dtos/user-dto";
  */
 export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): StyleOptions => {
     let styleOptions: StyleOptions = {
-        accent: c.accent,
+        accent: c.primaryColor,
         subtle: c.subtle ? c.subtle : c.secondaryColor,
         rootZIndex: c.root && c.root.zIndex,
         bubbleBorderColor: c?.bubble?.border?.color ? c.bubble.border.color : c.primaryColor,

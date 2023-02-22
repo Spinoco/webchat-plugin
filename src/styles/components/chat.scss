@@ -14,6 +14,18 @@
   cursor: pointer;
 }
 
+.webchat__adaptive-card-renderer {
+  .ac-pushButton {
+    border-color: var(--color-primary) !important;
+    border-radius: rem(4);
+    cursor: pointer;
+
+    &[aria-pressed='true'] {
+      background-color: var(--color-primary) !important;
+    }
+  }
+}
+
 .webchat__scroll-to-end-button {
   right: auto !important;
   bottom: 0 !important;
