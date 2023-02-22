@@ -7,8 +7,10 @@ import { FeaturesInterface } from "./features-interface";
 import { TriggerInterface } from "./trigger-interface";
 import { TypingIndicatorInterface } from "./typing-indicator-interface";
 import { AvatarInterface } from "./avatar-interface";
+import { DirectLineInterface } from "./direct-line-interface";
 
 export interface ConfigurationInterface {
+    directLine: DirectLineInterface;
     primaryColor: string;
     secondaryColor: string;
     primaryColorHover?: string;

@@ -2,7 +2,6 @@ export const config = {
     chat: {
         mockbotTokenApiUrl: "https://webchat-mockbot.azurewebsites.net/directline/token",
         apiUrl: import.meta.env.VITE_WEBCHAT_API_URL,
-        token: import.meta.env.VITE_BOT_TOKEN,
         groupTimestamp: 3, // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
         id: "spinoco-webchat-plugin",
         attributes: {

@@ -11,7 +11,6 @@ import { Trigger } from "./components/trigger";
 import { config } from "./config/config";
 import { createChatClasses } from "./models/styles/create-chat-classes";
 import { UserDto } from "./models/dtos/user-dto";
-import ChatStorage from "./models/services/storage/chat-storage";
 import { ConversationService } from "./models/services/conversation/conversation-service";
 import { StoreService } from "./models/services/store/store-service";
 import { LocaleService } from "./models/services/locale/locale-service";
@@ -20,26 +19,25 @@ interface AppProps {
     configuration: ConfigurationInterface;
     user?: UserDto;
     clientId: string;
+    conversationService: ConversationService;
+    localeService: LocaleService;
+    storeService: StoreService;
 }
 
-const directLineService = new ConversationService(ChatStorage.getInstance());
-const localeService = new LocaleService();
-const storeService = new StoreService(localeService);
-
-export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
+export const App: React.FC<AppProps> = (props) => {
     const [opened, setOpened] = useState(false);
     const [directLine, setDirectLine] = useState<DirectLine>();
 
-    directLineService.onConversationChange = (directLine) => {
+    props.conversationService.onConversationChange = (directLine) => {
         setDirectLine(directLine);
     };
 
     useEffect(() => {
-        directLineService.startConversation();
+        props.conversationService.startConversation();
     }, []);
 
     return (
-        <div className={config.classes.chatWrapper} style={createWrapperCssVariables(configuration)}>
+        <div className={config.classes.chatWrapper} style={createWrapperCssVariables(props.configuration)}>
             {directLine ? (
                 <div
                     className={
@@ -47,22 +45,22 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
                         ` ${opened ? config.classes.openedWrapper : config.classes.hiddenWrapper}`
                     }
                 >
-                    <Header clientId={clientId} configuration={configuration} setOpened={setOpened} />
+                    <Header clientId={props.clientId} configuration={props.configuration} setOpened={setOpened} />
                     <ReactWebChat
-                        className={createChatClasses(configuration)}
+                        className={createChatClasses(props.configuration)}
                         avatarMiddleware={avatarMiddleware}
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
-                        username={user?.name}
-                        locale={localeService.getLocale()}
-                        styleOptions={createStyleOptions(configuration, user)}
+                        username={props.user?.name}
+                        locale={props.localeService.getLocale()}
+                        styleOptions={createStyleOptions(props.configuration, props.user)}
                         directLine={directLine}
-                        store={storeService.getStore()}
+                        store={props.storeService.getStore()}
                     />
                 </div>
             ) : null}
 
-            {!opened ? <Trigger configuration={configuration} setOpened={setOpened} /> : null}
+            {!opened ? <Trigger configuration={props.configuration} setOpened={setOpened} /> : null}
         </div>
     );
 };
