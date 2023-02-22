@@ -10,10 +10,9 @@ export class ChatDomService extends DomService {
     getUserDto(): UserDto | undefined {
         const userName = this.getDataAttribute(config.chat.attributes.userName);
         const userEmail = this.getDataAttribute(config.chat.attributes.userEmail);
-        const userAvatarUrl = this.getDataAttribute(config.chat.attributes.userAvatarUrl);
 
         if (userName && userName.length && userEmail && userEmail.length) {
-            return new UserDto(userName, userEmail, userAvatarUrl);
+            return new UserDto(userName, userEmail);
         }
 
         return undefined;

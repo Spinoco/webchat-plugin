@@ -59,9 +59,6 @@ export const createStyleOptions = (c: ConfigurationInterface, user?: UserDto): S
     // user avatar
     if (user) {
         styleOptions.userAvatarInitials = user.initials;
-        if (user.avatarUrl) {
-            styleOptions.userAvatarImage = user.avatarUrl;
-        }
     }
 
     return { ...styleOptionsConfig, ...styleOptions };

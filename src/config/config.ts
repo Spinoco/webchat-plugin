@@ -8,7 +8,6 @@ export const config = {
             clientId: "data-client-id",
             userName: "data-user-name",
             userEmail: "data-user-email",
-            userAvatarUrl: "data-user-avatar-url",
         },
         botAvatarInitials: "BOT",
         botAvatarImage: "",

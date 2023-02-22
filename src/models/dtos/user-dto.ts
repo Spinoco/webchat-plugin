@@ -1,14 +1,11 @@
 export class UserDto {
-    avatarUrl: string | null;
+    name: string;
 
     email: string;
 
-    name: string;
-
-    constructor(name: string, email: string, avatarUrl: string | null) {
+    constructor(name: string, email: string) {
         this.name = name;
         this.email = email;
-        this.avatarUrl = avatarUrl;
     }
 
     get initials() {
