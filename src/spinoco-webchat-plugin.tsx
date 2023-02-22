@@ -19,6 +19,10 @@ const storeService = new StoreService(localeService);
 fetch(`${config.chat.apiUrl}/${clientId}.json`)
     .then((response) => response.json())
     .then((configuration: ConfigurationInterface) => {
+        const directLineSecret = configuration.directLine.secret;
+        if (!directLineSecret) {
+            throw new Error("Spinoco webchat plugin: Failed to load directLine secret.");
+        }
         const conversationService = new ConversationService(ChatStorage.getInstance(), configuration.directLine.secret);
 
         ReactDOM.createRoot(chatDomService.wrapperElement).render(
