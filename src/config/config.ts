@@ -16,12 +16,31 @@ export const config = {
     },
     classes: {
         chatWrapper: "swp-chat-wrapper",
+        chatBoxWrapper: "swp-chat-box",
+        openedWrapper: "swp-opened",
+        hiddenWrapper: "swp-hidden",
         chat: "swp-chat",
         features: {
             scrollbar: "swp-feature-scrollbar",
             bubbleSingleBorder: "swp-feature-bubble-single-border",
             sendBoxInputBorder: "swp-feature-sendbox-input-border",
         },
-        hideWrapper: "swp-hidden",
+    },
+    styleProperties: {
+        trigger: {
+            icon: {
+                height: "24px",
+                color: "#FFFFFF",
+            },
+        },
+        header: {
+            logo: {
+                height: "20px",
+            },
+            closeIcon: {
+                height: "20px",
+                color: "#FFFFFF",
+            },
+        },
     },
 };

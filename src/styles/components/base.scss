@@ -1,19 +1,19 @@
 #spinoco-webchat-plugin {
-  font-size: 1rem;
+  font-size: rem(16);
   font-family: Calibri, 'Helvetica Neue', Arial, 'sans-serif';
 
   code {
     color: var(--color-primary);
-    font-size: .875rem;
+    font-size: rem(14);
     word-wrap: break-word;
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: rem(32);
   }
 
   pre {
-    padding: 5px 7px;
+    padding: rem(5) rem(7);
 
     background-color: #EBEBEB;
   }
@@ -26,12 +26,12 @@
     tr,
     th,
     td {
-      border: 1px solid #BBBBBB;
+      border: rem(1) solid #BBBBBB;
     }
 
     th,
     td {
-      padding: .5rem;
+      padding: rem(8);
     }
   }
 }

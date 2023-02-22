@@ -14,6 +14,45 @@
   cursor: pointer;
 }
 
+.webchat__adaptive-card-renderer {
+  .ac-pushButton {
+    border-color: var(--color-primary) !important;
+    border-radius: rem(4);
+    cursor: pointer;
+
+    &[aria-pressed='true'] {
+      background-color: var(--color-primary) !important;
+    }
+  }
+}
+
+.webchat__scroll-to-end-button {
+  right: auto !important;
+  bottom: 0 !important;
+  left: 50%;
+
+  padding: rem(5) rem(8) !important;
+
+  font-weight: bold;
+
+  border-radius: rem(4) rem(4) 0 0 !important;
+  transform: translate(-50%, 0);
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    margin-right: rem(7);
+    margin-bottom: rem(2);
+    padding: rem(3);
+
+    border: solid #FFFFFF;
+    border-width: 0 rem(3) rem(3) 0;
+    transform: rotate(45deg);
+
+    content: '';
+  }
+}
+
 .webchat__send-box {
   .webchat__upload-button {
     border-bottom-left-radius: var(--wrapper-border-radius);

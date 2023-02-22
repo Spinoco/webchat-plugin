@@ -10,14 +10,13 @@ import { AvatarInterface } from "./avatar-interface";
 
 export interface ConfigurationInterface {
     primaryColor: string;
-    primaryColorHover?: string;
     secondaryColor: string;
+    primaryColorHover?: string;
     borderColor?: string;
-    accent?: string;
     subtle?: string;
     trigger?: TriggerInterface;
-    root?: RootInterface;
     header?: HeaderInterface;
+    root?: RootInterface;
     bubble?: BubbleInterface;
     bubbleFromUser?: BubbleInterface;
     avatar?: AvatarInterface;

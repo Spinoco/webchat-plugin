@@ -1,3 +1,5 @@
+import { TriggerIconInterface } from "./trigger-icon-interface";
+
 export interface TriggerInterface {
     height?: number | string;
     width?: number | string;
@@ -5,7 +7,5 @@ export interface TriggerInterface {
     background?: string;
     border?: string;
     borderRadius?: string;
-    iconBase64?: string;
-    iconColor?: string;
-    iconHeight?: string;
+    icon?: TriggerIconInterface;
 }

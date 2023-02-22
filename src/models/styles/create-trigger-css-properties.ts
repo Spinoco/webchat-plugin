@@ -1,12 +1,15 @@
 import { ConfigurationInterface } from "../interfaces/configuration/configuration-interface";
 import { CSSProperties } from "react";
+import { config } from "../../config/config";
 
 /**
  * Vytvoří styly pro element na otevření chatu.
  */
 export const createTriggerCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties = {
-        "--trigger-icon-height": configuration.trigger?.iconHeight ? configuration.trigger.iconHeight : "24px",
+        "--trigger-icon-height": configuration.trigger?.icon?.height
+            ? configuration.trigger.icon.height
+            : config.styleProperties.trigger.icon.height,
     } as CSSProperties;
 
     if (configuration.trigger?.height) {

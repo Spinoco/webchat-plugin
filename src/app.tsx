@@ -41,7 +41,12 @@ export const App: React.FC<AppProps> = ({ clientId, configuration, user }) => {
     return (
         <div className={config.classes.chatWrapper} style={createWrapperCssVariables(configuration)}>
             {directLine ? (
-                <div className={`${opened ? "" : config.classes.hideWrapper}`}>
+                <div
+                    className={
+                        config.classes.chatBoxWrapper +
+                        ` ${opened ? config.classes.openedWrapper : config.classes.hiddenWrapper}`
+                    }
+                >
                     <Header clientId={clientId} configuration={configuration} setOpened={setOpened} />
                     <ReactWebChat
                         className={createChatClasses(configuration)}

@@ -7,8 +7,8 @@ import { CSSProperties } from "react";
 export const createHeaderTitleCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties: CSSProperties = {};
 
-    if (configuration.header?.titleColor) {
-        properties.color = configuration.header.titleColor;
+    if (configuration.header?.title?.color) {
+        properties.color = configuration.header.title.color;
     }
 
     return properties;
