@@ -28,7 +28,8 @@ fetch(`${config.chat.apiUrl}/${clientId}.json`)
                     localeService={localeService}
                     conversationService={conversationService}
                     clientId={clientId}
-                    user={chatDomService.getUserDto()}
+                    customer={chatDomService.getCustomerDto()}
+                    bot={chatDomService.getBotDto()}
                     configuration={configuration}
                 />
             </React.StrictMode>,
