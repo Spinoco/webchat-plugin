@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
@@ -14,6 +14,7 @@ import { UserDto } from "./models/dtos/user-dto";
 import { ConversationService } from "./models/services/conversation/conversation-service";
 import { StoreService } from "./models/services/store/store-service";
 import { LocaleService } from "./models/services/locale/locale-service";
+import { createChatBoxWrapperCssVariables } from "./models/styles/create-chat-box-wrapper-css-variables";
 
 interface AppProps {
     configuration: ConfigurationInterface;
@@ -27,23 +28,28 @@ interface AppProps {
 export const App: React.FC<AppProps> = (props) => {
     const [opened, setOpened] = useState(false);
     const [directLine, setDirectLine] = useState<DirectLine>();
+    const [isConversationLoaded, setIsConversationLoaded] = useState(false);
 
     props.conversationService.onConversationChange = (directLine) => {
         setDirectLine(directLine);
+    };
+
+    props.storeService.onConversationLoaded = () => {
+        setIsConversationLoaded(true);
     };
 
     useEffect(() => {
         props.conversationService.startConversation();
     }, []);
 
+    const showTriggerButton = isConversationLoaded && opened === false;
+
     return (
         <div className={config.classes.chatWrapper} style={createWrapperCssVariables(props.configuration)}>
             {directLine ? (
                 <div
-                    className={
-                        config.classes.chatBoxWrapper +
-                        ` ${opened ? config.classes.openedWrapper : config.classes.hiddenWrapper}`
-                    }
+                    className={config.classes.chatBoxWrapper}
+                    style={createChatBoxWrapperCssVariables(opened && isConversationLoaded)}
                 >
                     <Header clientId={props.clientId} configuration={props.configuration} setOpened={setOpened} />
                     <ReactWebChat
@@ -60,7 +66,7 @@ export const App: React.FC<AppProps> = (props) => {
                 </div>
             ) : null}
 
-            {!opened ? <Trigger configuration={props.configuration} setOpened={setOpened} /> : null}
+            {showTriggerButton ? <Trigger configuration={props.configuration} setOpened={setOpened} /> : null}
         </div>
     );
 };

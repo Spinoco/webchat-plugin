@@ -1,12 +1,4 @@
 #spinoco-webchat-plugin {
-  .swp-chat-wrapper {
-    .swp-chat-box {
-      &.swp-hidden {
-        display: none;
-      }
-    }
-  }
-
   .swp-trigger {
     position: fixed;
     right: rem(20);

@@ -15,8 +15,6 @@ export const config = {
     classes: {
         chatWrapper: "swp-chat-wrapper",
         chatBoxWrapper: "swp-chat-box",
-        openedWrapper: "swp-opened",
-        hiddenWrapper: "swp-hidden",
         chat: "swp-chat",
         features: {
             scrollbar: "swp-feature-scrollbar",

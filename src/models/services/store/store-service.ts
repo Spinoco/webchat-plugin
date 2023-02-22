@@ -2,9 +2,12 @@ import { createStoreWithDevTools } from "botframework-webchat";
 import { Store } from "redux";
 import { LocaleService } from "../locale/locale-service";
 
+const SCROLL_ANIMATION_DELAY = 850;
+
 export class StoreService {
     private localeService: LocaleService;
     private readonly store: Store;
+    public onConversationLoaded?: () => void = undefined;
 
     constructor(localeService: LocaleService) {
         this.localeService = localeService;
@@ -13,14 +16,21 @@ export class StoreService {
             ({ dispatch }: { dispatch: (props: object) => void }) =>
                 (next: (action: unknown) => void) =>
                 (action: { type: string }) => {
+                    console.log(action);
                     if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
-                        dispatch({
-                            type: "WEB_CHAT/SEND_EVENT",
-                            payload: {
-                                name: "webchat/join",
-                                value: { language: this.localeService.getLocale() },
-                            },
-                        });
+                        // dispatch({
+                        //     type: "WEB_CHAT/SEND_EVENT",
+                        //     payload: {
+                        //         name: "webchat/join",
+                        //         value: { language: this.localeService.getLocale() },
+                        //     },
+                        // });
+
+                        setTimeout(() => {
+                            if (this.onConversationLoaded) {
+                                this.onConversationLoaded();
+                            }
+                        }, SCROLL_ANIMATION_DELAY);
                     }
 
                     return next(action);
