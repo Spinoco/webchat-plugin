@@ -1,29 +1,8 @@
-# start dev environment
+## Spinoco webchat plugin
 
-```shell
-cp docker-compose.example.yml docker-compose.yml
-cp .env.local.example .env.local
-docker-compose up -d
-docker-compose exec app bash
-npm i
-npm run dev
-```
+Information about spinoco webchat plugin.
 
-# start eslint
-```shell
-npm run eslint
-```
-
-# create production build & preview
-```shell
-npm run build
-npm run preview
-```
-
-# webchat shortcuts
-
-**Show bot typing indicator:**
-```shell
-typing
-typing 3
-```
+### Documentation
+- Lear how to [use](readme/usage.md) webchat plugin
+- Lear how to [configure](readme/configuration.md) webchat plugin
+- Lear how to [develop](readme/development.md) features for webchat plugin
