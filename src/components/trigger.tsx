@@ -3,7 +3,7 @@ import React from "react";
 import { Comment } from "./icons";
 import { createTriggerCSSProperties } from "../models/styles/create-trigger-css-properties";
 import { config } from "../config/config";
-import Lottie from "react-lottie-player";
+const LottieTrigger = React.lazy(() => import("./trigger/lottie-trigger"));
 
 interface TriggerProps {
     configuration: ConfigurationInterface;
@@ -21,11 +21,9 @@ export const Trigger: React.FC<TriggerProps> = ({ configuration, setOpened }) =>
         >
             {configuration.trigger?.icon?.lottie?.data !== undefined ||
             configuration.trigger?.icon?.lottie?.url !== undefined ? (
-                <Lottie
-                    path={configuration.trigger.icon.lottie.url}
-                    animationData={configuration.trigger.icon.lottie.data}
-                    play={true}
-                    loop={true}
+                <LottieTrigger
+                    url={configuration.trigger.icon.lottie.url}
+                    data={configuration.trigger.icon.lottie.data}
                 />
             ) : (
                 <>
