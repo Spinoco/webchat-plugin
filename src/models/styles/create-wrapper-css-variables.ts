@@ -4,7 +4,7 @@ import { styleOptionsConfig } from "../../config/style-options-config";
 import { config } from "../../config/config";
 
 /**
- * Vytváří proměnné pro celý plugin.
+ * Creates CSS variables for the entire plugin.
  */
 export const createWrapperCssVariables = (configuration: ConfigurationInterface): CSSProperties => {
     return {

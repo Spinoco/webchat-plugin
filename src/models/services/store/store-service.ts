@@ -1,4 +1,4 @@
-import { createStore, createStoreWithDevTools } from "botframework-webchat";
+import { createStore } from "botframework-webchat";
 import { Store } from "redux";
 import { LocaleService } from "../locale/locale-service";
 

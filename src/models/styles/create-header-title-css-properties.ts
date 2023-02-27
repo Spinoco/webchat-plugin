@@ -2,7 +2,7 @@ import { ConfigurationInterface } from "../interfaces/configuration/configuratio
 import { CSSProperties } from "react";
 
 /**
- * Metoda slouží pro nastylování nadpisu hlavičky chatu.
+ * Creates styles for the header title element.
  */
 export const createHeaderTitleCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties: CSSProperties = {};

@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 /**
- * Vytvoří styly pro wrapper nad oknem s chatem. Slouží především pro show hide.
+ * Creates styles for the wrapper above the chat window. It is used for show or hide chat.
  */
 export const createChatBoxWrapperCssVariables = (isVisible: boolean): CSSProperties => {
     let chatBoxWrapperStyles: CSSProperties = {};
