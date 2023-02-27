@@ -1,15 +1,17 @@
 import ChatStorage from "../storage/chat-storage";
 import { DirectLine } from "botframework-directlinejs";
 import { createDirectLine as createLine } from "botframework-webchat";
+import { DirectLineInterface } from "../../interfaces/configuration/direct-line-interface";
+import { config } from "../../../config/config";
 
 export class ConversationService {
     private chatStorage: ChatStorage;
-    private readonly directLineSecret: string;
+    private readonly directLine: DirectLineInterface;
     public onConversationChange?: (directLine: DirectLine) => void = undefined;
 
-    public constructor(chatStorage: ChatStorage, directLineSecret: string) {
+    public constructor(chatStorage: ChatStorage, directLine: DirectLineInterface) {
         this.chatStorage = chatStorage;
-        this.directLineSecret = directLineSecret;
+        this.directLine = directLine;
         this.attachEvents();
     }
 
@@ -18,11 +20,12 @@ export class ConversationService {
      */
     public async startConversation(): Promise<void> {
         const conversationId = this.chatStorage.getConversationId();
-        const directLine: DirectLine = createLine({ secret: this.directLineSecret, watermark: "0", conversationId });
+        const secret = this.directLine.useMockbot ? await this.getTokenFromMockbot() : this.directLine.secret;
+        const directLine: DirectLine = createLine({ secret, watermark: "0", conversationId });
 
         directLine.connectionStatus$.subscribe(() => {
             const conversationId = directLine["conversationId"];
-            if (conversationId) {
+            if (conversationId && !this.directLine.useMockbot) {
                 this.chatStorage.setConversationId(conversationId);
             }
         });
@@ -32,14 +35,14 @@ export class ConversationService {
         }
     }
 
-    // /**
-    //  * Load token from mocbok api.
-    //  */
-    // private async getTokenFromMockbot(): Promise<string> {
-    //     const res = await fetch(config.chat.mockbotTokenApiUrl, { method: "POST" });
-    //     const data = await res.json();
-    //     return data.token;
-    // }
+    /**
+     * Load token from mocbok api.
+     */
+    private async getTokenFromMockbot(): Promise<string> {
+        const res = await fetch(config.chat.mockbotTokenApiUrl, { method: "POST" });
+        const data = await res.json();
+        return data.token;
+    }
 
     /**
      * Při neexistující konverzaci vytvoříme novou konverzaci.

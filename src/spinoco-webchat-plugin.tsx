@@ -21,9 +21,9 @@ fetch(`${config.chat.apiUrl}/${clientId}.json`)
     .then((configuration: ConfigurationInterface) => {
         const directLineSecret = configuration.directLine.secret;
         if (!directLineSecret) {
-            throw new Error("Spinoco webchat plugin: Failed to load directLine secret.");
+            configuration.directLine.useMockbot = true;
         }
-        const conversationService = new ConversationService(ChatStorage.getInstance(), configuration.directLine.secret);
+        const conversationService = new ConversationService(ChatStorage.getInstance(), configuration.directLine);
 
         ReactDOM.createRoot(chatDomService.wrapperElement).render(
             <React.StrictMode>
@@ -40,6 +40,7 @@ fetch(`${config.chat.apiUrl}/${clientId}.json`)
         );
         console.log("Spinoco webchat plugin: sucessfully initialized.");
     })
-    .catch(() => {
+    .catch((e) => {
+        console.error(e);
         throw new Error(`Spinoco webchat plugin: Failed to load configuration for clientId "${clientId}".`);
     });

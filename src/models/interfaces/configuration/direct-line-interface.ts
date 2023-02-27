@@ -1,3 +1,5 @@
 export interface DirectLineInterface {
-    secret: string;
+    secret?: string;
+
+    useMockbot?: boolean;
 }

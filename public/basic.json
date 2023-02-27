@@ -1,6 +1,6 @@
 {
     "directLine": {
-        "secret": "pyNBGiN_07E.dmABqUqbXp-XcY45Q3MW0tjelJDX-duh53gZQ67XqfU"
+        "useMockbot": true
     },
     "primaryColor": "#24BD5E",
     "secondaryColor": "#999999"
