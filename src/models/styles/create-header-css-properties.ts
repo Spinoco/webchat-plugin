@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 import { config } from "../../config/config";
 
 /**
- * Metoda slouží pro nastylování hlavičky chatu.
+ * Creates styles for the header element.
  */
 export const createHeaderCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties = {

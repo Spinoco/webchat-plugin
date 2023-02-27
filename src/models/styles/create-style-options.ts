@@ -5,7 +5,7 @@ import { config } from "../../config/config";
 import { CustomerDto } from "../dtos/customer-dto";
 
 /**
- * Vytvoří objekt pro nastylování chatu pomocí jeho interních vlastností.
+ * Creates an object to style the chat using its internal properties.
  */
 export const createStyleOptions = (c: ConfigurationInterface, customer?: CustomerDto): StyleOptions => {
     let styleOptions: StyleOptions = {
@@ -56,6 +56,9 @@ export const createStyleOptions = (c: ConfigurationInterface, customer?: Custome
     return { ...styleOptionsConfig, ...styleOptions };
 };
 
+/**
+ * Sets style properties for bubble component.
+ */
 const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
     if (c.bubbleFromUser?.background !== undefined) {
         styleOptions.bubbleFromUserBackground = c.bubbleFromUser.background;
@@ -133,6 +136,9 @@ const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: Style
     return styleOptions;
 };
 
+/**
+ * Sets style properties for avatar component.
+ */
 const createAvatarStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
     if (c.avatar?.size !== undefined) {
         styleOptions.avatarSize = c.avatar.size;
@@ -153,6 +159,9 @@ const createAvatarStyleOptions = (c: ConfigurationInterface, styleOptions: Style
     return styleOptions;
 };
 
+/**
+ * Sets style properties for suggested action component.
+ */
 const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
     if (c.suggestedAction?.layout !== undefined) {
         styleOptions.suggestedActionLayout = c.suggestedAction.layout;
@@ -181,6 +190,9 @@ const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptio
     return styleOptions;
 };
 
+/**
+ * Sets style properties for send box component.
+ */
 const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
     if (c.sendBox?.background) {
         styleOptions.sendBoxBackground = c.sendBox.background;

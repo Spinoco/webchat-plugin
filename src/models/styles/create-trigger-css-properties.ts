@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 import { config } from "../../config/config";
 
 /**
- * Vytvoří styly pro element na otevření chatu.
+ * Creates styles for the chat opening element.
  */
 export const createTriggerCSSProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties = {

@@ -2,9 +2,9 @@ import { ConfigurationInterface } from "../interfaces/configuration/configuratio
 import { config } from "../../config/config";
 
 /**
- * Vytvoří třídy pro <ReactChat>, které slouží pro:
- * 1) přidání custom features
- * 2) pro nastylování okna chatu
+ * Creates classes for <ReactWebChat> that are used to:
+ * 1) styling the chat window
+ * 2) adding custom features
  */
 export const createChatClasses = (configuration: ConfigurationInterface): string => {
     const classes: string[] = [];
