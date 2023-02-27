@@ -122,7 +122,7 @@ List of all configuration properties.
 
 | Property          | Type           | Default           | Description |
 |-------------------|----------------|-------------------|-------------|
-| background        | string         | #FFFFFF           |             |
+| background        | string         | transparent       |             |
 | color             | string         | #000000           |             |
 | height            | number, string | 40                |             |
 | button.color      | string         | `primaryColor`    |             |

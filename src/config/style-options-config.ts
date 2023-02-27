@@ -14,5 +14,6 @@ export const styleOptionsConfig: StyleOptions = {
     avatarSize: 30,
     suggestedActionLayout: "stacked",
     suggestedActionBorderRadius: 4,
+    sendBoxBackground: "transparent",
     sendBoxButtonShadeInset: 0,
 };
