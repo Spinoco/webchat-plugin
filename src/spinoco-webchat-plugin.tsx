@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import { App } from "./app";
-import { config } from "./config/config";
+import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import { ChatDomService } from "./models/services/dom/chat-dom-service";
-import "./styles/app.scss";
 import { ConversationService } from "./models/services/conversation/conversation-service";
-import ChatStorage from "./models/services/storage/chat-storage";
+import { ChatStorage } from "./models/services/storage/chat-storage";
 import { LocaleService } from "./models/services/locale/locale-service";
 import { StoreService } from "./models/services/store/store-service";
+import { FailedToLoadConfigurationError } from "./models/error/failed-to-load-configuration-error";
+import { config } from "./config/config";
+import "./styles/app.scss";
 
 const chatDomService = new ChatDomService(config.chat.id);
 const clientId = chatDomService.getClientId();
@@ -38,9 +39,7 @@ fetch(`${config.chat.apiUrl}/${clientId}.json`)
                 />
             </React.StrictMode>,
         );
-        console.log("Spinoco webchat plugin: sucessfully initialized.");
     })
     .catch((e) => {
-        console.error(e);
-        throw new Error(`Spinoco webchat plugin: Failed to load configuration for clientId "${clientId}".`);
+        throw new FailedToLoadConfigurationError(e.message);
     });

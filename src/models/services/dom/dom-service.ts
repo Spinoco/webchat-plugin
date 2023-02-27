@@ -1,3 +1,6 @@
+import { NoWrapperElementError } from "../../error/no-wrapper-element-error";
+import { DataAttributeNotFoundError } from "../../error/data-attribute-not-found-error";
+
 export class DomService {
     public readonly id: string;
 
@@ -9,7 +12,7 @@ export class DomService {
         // find wrapper element
         const wrapperElement = document.getElementById(this.id);
         if (!wrapperElement) {
-            throw new Error('Spinoco webchat plugin: No div with "spinoco-webchat-plugin" id found.');
+            throw new NoWrapperElementError(this.id);
         }
 
         this.wrapperElement = wrapperElement;
@@ -18,7 +21,7 @@ export class DomService {
     getRequiredDataAttribute(name: string): string {
         const value = this.wrapperElement.getAttribute(name);
         if (!value) {
-            throw new Error(`Spinoco webchat plugin: Data attribute ${name} not found!`);
+            throw new DataAttributeNotFoundError(name);
         }
         return value;
     }

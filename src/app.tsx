@@ -63,7 +63,7 @@ export const App: React.FC<AppProps> = (props) => {
                         locale={props.localeService.getLocale()}
                         styleOptions={createStyleOptions(props.configuration, props.customer)}
                         directLine={directLine}
-                        store={props.storeService.getStore()}
+                        store={props.storeService.store}
                     />
                 </div>
             ) : null}

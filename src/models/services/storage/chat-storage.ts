@@ -1,7 +1,7 @@
 import { ChatStorageKeys } from "../../enums/storage/chat-storage-keys";
 import { Storage } from "./storage";
 
-export default class ChatStorage extends Storage<ChatStorageKeys> {
+export class ChatStorage extends Storage<ChatStorageKeys> {
     private static instance?: ChatStorage;
 
     private constructor() {

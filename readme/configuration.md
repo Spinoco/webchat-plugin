@@ -4,6 +4,14 @@ List of all configuration properties.
 
 ## Configuration elements
 
+### DirectLine properties
+
+| Property          | Type    | Default   | Description                          |
+|-------------------|---------|-----------|--------------------------------------|
+| **secret**        | string  | undefined |                                      |
+| **useMockbot**    | boolean | true      |                                      |
+
+
 ### Base properties
 
 | Property           | Type   | Default          | Description                          |
