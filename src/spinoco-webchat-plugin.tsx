@@ -11,7 +11,7 @@ import { FailedToLoadConfigurationError } from "./models/error/failed-to-load-co
 import { config } from "./config/config";
 import "./styles/app.scss";
 
-const chatDomService = new ChatDomService(config.chat.id);
+const chatDomService = new ChatDomService(config.chat.wrapperElementHtmlId);
 const clientId = chatDomService.getClientId();
 
 const localeService = new LocaleService();

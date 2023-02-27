@@ -1,4 +1,4 @@
-import ChatStorage from "../storage/chat-storage";
+import { ChatStorage } from "../storage/chat-storage";
 import { DirectLine } from "botframework-directlinejs";
 import { createDirectLine as createLine } from "botframework-webchat";
 import { DirectLineInterface } from "../../interfaces/configuration/direct-line-interface";
@@ -16,7 +16,7 @@ export class ConversationService {
     }
 
     /**
-     * Vytvoří novou konverzaci nebo původní konverzaci dle uloženého identifikátoru ve storage.
+     * Load conversation from storage or create new one.
      */
     public async startConversation(): Promise<void> {
         const conversationId = this.chatStorage.getConversationId();
@@ -36,7 +36,7 @@ export class ConversationService {
     }
 
     /**
-     * Load token from mocbok api.
+     * Load token from mockbot api.
      */
     private async getTokenFromMockbot(): Promise<string> {
         const res = await fetch(config.chat.mockbotTokenApiUrl, { method: "POST" });
@@ -45,7 +45,7 @@ export class ConversationService {
     }
 
     /**
-     * Při neexistující konverzaci vytvoříme novou konverzaci.
+     * Reset conversation if old one can't be loaded.
      */
     private attachEvents() {
         window.addEventListener("error", async (event) => {
@@ -60,7 +60,7 @@ export class ConversationService {
     }
 
     /**
-     * Smaže uloženou konverzaci ve storage a vytvoří novou.
+     * Removes stored conversation and starts new one.
      */
     private async resetConversation(): Promise<void> {
         this.chatStorage.clear();

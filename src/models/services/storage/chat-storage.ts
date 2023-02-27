@@ -4,10 +4,6 @@ import { Storage } from "./storage";
 export class ChatStorage extends Storage<ChatStorageKeys> {
     private static instance?: ChatStorage;
 
-    private constructor() {
-        super();
-    }
-
     public static getInstance() {
         if (!this.instance) {
             this.instance = new ChatStorage();

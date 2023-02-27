@@ -8,6 +8,9 @@ export class ChatDomService extends DomService {
         return this.getRequiredDataAttribute(config.chat.attributes.clientId);
     }
 
+    /**
+     * Creates information about customer.
+     */
     getCustomerDto(): CustomerDto | undefined {
         const customerName = this.getDataAttribute(config.chat.attributes.customerName);
         const customerEmail = this.getDataAttribute(config.chat.attributes.customerEmail);
@@ -19,6 +22,9 @@ export class ChatDomService extends DomService {
         return undefined;
     }
 
+    /**
+     * Creates information about bot and user (operator).
+     */
     getBotDto(): BotDto {
         const botDto = new BotDto();
 

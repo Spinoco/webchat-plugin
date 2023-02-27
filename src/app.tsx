@@ -60,7 +60,7 @@ export const App: React.FC<AppProps> = (props) => {
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
                         username={props.customer?.name}
-                        locale={props.localeService.getLocale()}
+                        locale={props.localeService.locale}
                         styleOptions={createStyleOptions(props.configuration, props.customer)}
                         directLine={directLine}
                         store={props.storeService.store}

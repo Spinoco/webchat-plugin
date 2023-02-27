@@ -1,4 +1,4 @@
-import { createStoreWithDevTools } from "botframework-webchat";
+import { createStore, createStoreWithDevTools } from "botframework-webchat";
 import { Store } from "redux";
 import { LocaleService } from "../locale/locale-service";
 
@@ -9,9 +9,14 @@ export class StoreService {
     public readonly store: Store;
     public onConversationLoaded?: () => void = undefined;
 
+    /**
+     * When connection is fulfilled:
+     * - triggers welcome message
+     * - triggers conversation loaded event (serve to hide initial scrolling)
+     */
     constructor(localeService: LocaleService) {
         this.localeService = localeService;
-        this.store = createStoreWithDevTools(
+        this.store = createStore(
             {},
             ({ dispatch }: { dispatch: (props: object) => void }) =>
                 (next: (action: unknown) => void) =>
@@ -21,7 +26,7 @@ export class StoreService {
                             type: "WEB_CHAT/SEND_EVENT",
                             payload: {
                                 name: "webchat/join",
-                                value: { language: this.localeService.getLocale() },
+                                value: { language: this.localeService.locale },
                             },
                         });
 

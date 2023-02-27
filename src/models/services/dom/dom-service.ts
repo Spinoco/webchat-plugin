@@ -2,19 +2,13 @@ import { NoWrapperElementError } from "../../error/no-wrapper-element-error";
 import { DataAttributeNotFoundError } from "../../error/data-attribute-not-found-error";
 
 export class DomService {
-    public readonly id: string;
-
     public readonly wrapperElement: HTMLElement;
 
-    constructor(id: string) {
-        this.id = id;
-
-        // find wrapper element
-        const wrapperElement = document.getElementById(this.id);
+    constructor(htmlId: string) {
+        const wrapperElement = document.getElementById(htmlId);
         if (!wrapperElement) {
-            throw new NoWrapperElementError(this.id);
+            throw new NoWrapperElementError(htmlId);
         }
-
         this.wrapperElement = wrapperElement;
     }
 
