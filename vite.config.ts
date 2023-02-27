@@ -32,8 +32,10 @@ export default defineConfig({
             input: {
                 index: path.resolve(__dirname, "index.html"),
                 basic: path.resolve(__dirname, "examples/basic.html"),
+                lottie: path.resolve(__dirname, "examples/lottie.html"),
                 slevomat: path.resolve(__dirname, "examples/slevomat.html"),
                 zasilkovna: path.resolve(__dirname, "examples/zasilkovna.html"),
+                zasilkovna_minified: path.resolve(__dirname, "examples/zasilkovna-minified.html"),
             },
             output: {
                 entryFileNames: `assets/[name].js`,
