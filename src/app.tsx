@@ -8,7 +8,7 @@ import { Header } from "./components/header";
 import { createWrapperCssVariables } from "./models/styles/create-wrapper-css-variables";
 import { Trigger } from "./components/trigger";
 import { config } from "./config/config";
-import { createChatClasses } from "./models/styles/create-chat-classes";
+import { createChatBoxWrapperClasses } from "./models/styles/create-chat-box-wrapper-classes";
 import { CustomerDto } from "./models/dtos/customer-dto";
 import { ConversationService } from "./models/services/conversation/conversation-service";
 import { StoreService } from "./models/services/store/store-service";
@@ -47,7 +47,10 @@ export const App: React.FC<AppProps> = (props) => {
     const showTriggerButton = isConversationLoaded && !opened;
 
     return (
-        <div className={config.classes.chatWrapper} style={createWrapperCssVariables(props.configuration)}>
+        <div
+            className={createChatBoxWrapperClasses(props.configuration)}
+            style={createWrapperCssVariables(props.configuration)}
+        >
             {directLine ? (
                 <div
                     className={config.classes.chatBoxWrapper}
@@ -55,7 +58,7 @@ export const App: React.FC<AppProps> = (props) => {
                 >
                     <Header clientId={props.clientId} configuration={props.configuration} setOpened={setOpened} />
                     <ReactWebChat
-                        className={createChatClasses(props.configuration)}
+                        className={config.classes.chat}
                         avatarMiddleware={createAvatarMiddleware(props.bot)}
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}

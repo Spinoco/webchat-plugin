@@ -2,14 +2,14 @@ import { ConfigurationInterface } from "../interfaces/configuration/configuratio
 import { config } from "../../config/config";
 
 /**
- * Creates classes for <ReactWebChat> that are used to:
- * 1) styling the chat window
+ * Creates classes for chat box wrapper that are used to:
+ * 1) styling the chat box wrapper
  * 2) adding custom features
  */
-export const createChatClasses = (configuration: ConfigurationInterface): string => {
+export const createChatBoxWrapperClasses = (configuration: ConfigurationInterface): string => {
     const classes: string[] = [];
 
-    classes.push(config.classes.chat);
+    classes.push(config.classes.chatWrapper);
 
     if (configuration.features?.bubbleSingleBorder) {
         classes.push(config.classes.features.bubbleSingleBorder);
@@ -21,6 +21,10 @@ export const createChatClasses = (configuration: ConfigurationInterface): string
 
     if (configuration.features?.sendBoxInputBorder) {
         classes.push(config.classes.features.sendBoxInputBorder);
+    }
+
+    if (configuration.features?.boxShadow) {
+        classes.push(config.classes.features.boxShadow);
     }
 
     return classes.join(" ");

@@ -25,6 +25,7 @@ export const config = {
             scrollbar: "swp-feature-scrollbar",
             bubbleSingleBorder: "swp-feature-bubble-single-border",
             sendBoxInputBorder: "swp-feature-sendbox-input-border",
+            boxShadow: "swp-feature-box-shadow",
         },
     },
     styleProperties: {

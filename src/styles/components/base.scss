@@ -2,20 +2,43 @@
     font-size: rem(16);
     font-family: Calibri, 'Helvetica Neue', Arial, 'sans-serif';
 
+    a {
+        font-weight: initial;
+    }
+
     code {
+        padding: 0;
+
         color: var(--color-primary);
         font-size: rem(14);
         word-wrap: break-word;
+
+        background-color: transparent;
+    }
+
+    em {
+        font-style: italic;
     }
 
     h1 {
         font-size: rem(32);
     }
 
+    input[type=text] {
+        &:focus {
+            border: 0;
+            box-shadow: none;
+        }
+    }
+
     pre {
         padding: rem(5) rem(7);
 
         background-color: #EBEBEB;
+    }
+
+    strong {
+        font-weight: bolder;
     }
 
     table {

@@ -27,7 +27,7 @@
     "selector-no-qualifying-type": [
       true,
       {
-        "ignore": ["class"]
+        "ignore": ["attribute", "class"]
       }
     ],
     "selector-max-id": 1,

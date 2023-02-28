@@ -15,7 +15,15 @@
 }
 
 .webchat__adaptive-card-renderer {
+    .ac-textBlock {
+        font-size: rem(16) !important;
+    }
+
     .ac-pushButton {
+        padding: rem(8) rem(10) !important;
+
+        font-size: rem(13);
+
         border-color: var(--color-primary) !important;
         border-radius: rem(4);
         cursor: pointer;

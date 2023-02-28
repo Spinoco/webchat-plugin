@@ -10,8 +10,6 @@ $mobile-breakpoint: "768px";
     @return $remValue;
 }
 
-@import "components/page";
-
 @import "components/base";
 
 @import "components/avatar";
@@ -21,6 +19,7 @@ $mobile-breakpoint: "768px";
 @import "components/typing-indicator";
 @import "components/wrapper";
 
+@import "features/box-shadow";
 @import "features/bubble-single-border";
 @import "features/scrollbar";
 @import "features/sendbox-input-border";

@@ -15,7 +15,6 @@ export const createStyleOptions = (c: ConfigurationInterface, customer?: Custome
         botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
         suggestedActionTextColor: c.suggestedAction?.textColor ? c.suggestedAction.textColor : c.primaryColor,
         suggestedActionBorderColor: c.suggestedAction?.border?.color ? c.suggestedAction?.border.color : c.primaryColor,
-        suggestedActionBorderWidth: c.suggestedAction?.border?.width,
         transcriptOverlayButtonBackground: c.primaryColor,
         sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
     };
@@ -185,6 +184,10 @@ const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptio
 
     if (c.suggestedAction?.border?.style !== undefined) {
         styleOptions.suggestedActionBorderStyle = c.suggestedAction.border.style;
+    }
+
+    if (c.suggestedAction?.border?.width !== undefined) {
+        styleOptions.suggestedActionBorderWidth = c.suggestedAction.border.width;
     }
 
     return styleOptions;
