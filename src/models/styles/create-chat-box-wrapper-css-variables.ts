@@ -7,8 +7,9 @@ export const createChatBoxWrapperCssVariables = (isVisible: boolean): CSSPropert
     let chatBoxWrapperStyles: CSSProperties = {};
     if (!isVisible) {
         chatBoxWrapperStyles = {
-            position: "absolute",
-            right: -5000,
+            visibility: "hidden",
+            width: 0,
+            height: 0,
         };
     }
 
