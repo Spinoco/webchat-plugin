@@ -22,5 +22,8 @@
         "title": {
             "hide": true
         }
+    },
+    "features": {
+        "boxShadow": true
     }
 }
