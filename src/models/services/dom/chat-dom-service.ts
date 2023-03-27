@@ -54,10 +54,10 @@ export class ChatDomService extends DomService {
      * Creates information about popover.
      */
     getPopoverDto(): PopoverDto {
-        const popoverLabel = this.getDataAttribute(config.popover.attributes.label) ?? undefined;
-        const popoverButtonLabel = this.getDataAttribute(config.popover.attributes.buttonLabel) ?? undefined;
-        const popoverDelay = parseInt(this.getDataAttribute(config.popover.attributes.showDelay) as string);
+        const label = this.getDataAttribute(config.popover.attributes.label) ?? undefined;
+        const buttonLabel = this.getDataAttribute(config.popover.attributes.buttonLabel) ?? undefined;
+        const delay = parseInt(this.getDataAttribute(config.popover.attributes.delay) as string);
 
-        return new PopoverDto(popoverLabel, popoverButtonLabel, popoverDelay);
+        return new PopoverDto(label, buttonLabel, delay);
     }
 }

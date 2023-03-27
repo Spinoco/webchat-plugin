@@ -19,9 +19,9 @@ export const config = {
     },
     popover: {
         attributes: {
-            showDelay: "data-popover-show-delay",
             label: "data-popover-label",
             buttonLabel: "data-popover-button-label",
+            delay: "data-popover-delay",
         },
     },
     classes: {
