@@ -9,13 +9,21 @@ import { LocaleService } from "./models/services/locale/locale-service";
 import { StoreService } from "./models/services/store/store-service";
 import { FailedToLoadConfigurationError } from "./models/error/failed-to-load-configuration-error";
 import { config } from "./config/config";
+import { GlobalEventService } from "./models/services/global-event-service/global-event-service";
 import "./styles/app.scss";
+
+declare global {
+    interface Window {
+        spinocoWebchatPlugin: GlobalEventService;
+    }
+}
 
 const chatDomService = new ChatDomService(config.chat.wrapperElementHtmlId);
 const clientId = chatDomService.getClientId();
 
 const localeService = new LocaleService();
 const storeService = new StoreService(localeService);
+const globalEventService = (window.spinocoWebchatPlugin = new GlobalEventService());
 
 fetch(`${config.chat.apiUrl}/${clientId}.json`)
     .then((response) => response.json())
@@ -35,7 +43,9 @@ fetch(`${config.chat.apiUrl}/${clientId}.json`)
                     clientId={clientId}
                     customer={chatDomService.getCustomerDto()}
                     bot={chatDomService.getBotDto()}
+                    popover={chatDomService.getPopoverDto()}
                     configuration={configuration}
+                    globalEventService={globalEventService}
                 />
             </React.StrictMode>,
         );

@@ -56,6 +56,22 @@ List of all configuration properties.
 | closeIcon.url    | string  |                |             |
 | closeIcon.color  | string  | #FFFFFF        |             |
 
+### Popover
+
+| Property                    | Type           | Default | Description |
+|-----------------------------|----------------|---------|-------------|
+| borderRadius                | number, string | 16px    |             |
+| head.logo.base64            | string         |         |             |
+| head.logo.url               | string         |         |             |
+| head.borderColor            | string         | #51585D |             |
+| head.backgroundColor        | string         | #FFFFFF |             |
+| head.closeBtnColor          | string         | #000000 |             |
+| body.titleColor             | string         | #000000 |             |
+| body.button.backgroundColor | string         | #0072BF |             |
+| body.button.color           | string         | #FFFFFF |             |
+| body.button.iconColor       | string         | #FFFFFF |             |
+| body.backgroundColor        | string         | #FFFFFF |             |
+
 ### Root
 
 | Property     | Type           | Default | Description                       |
