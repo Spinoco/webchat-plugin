@@ -19,6 +19,9 @@ import { BotDto } from "./models/dtos/bot-dto";
 import { createAvatarMiddleware } from "./middlewares/create-avatar-middleware";
 import { GlobalEventService } from "./models/services/global-event-service/global-event-service";
 import { Popover } from "./components/popover";
+import { FeedbackConfigurationInterface } from "./models/interfaces/configuration/feedback-configuration-interface";
+import { FeedbackForm } from "./components/feedback-form/feedback-form";
+import { AppState } from "./models/enums/app-state";
 
 interface AppProps {
     configuration: ConfigurationInterface;
@@ -38,18 +41,29 @@ interface PopoverInterface {
 }
 
 export const App: React.FC<AppProps> = (props) => {
-    const [opened, setOpened] = useState(false);
+    const [state, setState] = useState<AppState>(AppState.Loading);
     const [directLine, setDirectLine] = useState<DirectLine>();
-    const [isConversationLoaded, setIsConversationLoaded] = useState(false);
-    const [showPopover, setShowPopover] = useState(false);
     const [popover, setPopover] = useState<PopoverInterface>();
+    const [feedbackConfiguration, setFeedbackConfiguration] = useState<FeedbackConfigurationInterface>();
 
     props.conversationService.onConversationChange = (directLine) => {
         setDirectLine(directLine);
     };
 
     props.storeService.onConversationLoaded = () => {
-        setIsConversationLoaded(true);
+        setState(AppState.Loaded);
+    };
+
+    const fetchFeedbackConfiguration = async (feedbackInstanceId: string) => {
+        const feedbackConfiguration: FeedbackConfigurationInterface = await fetch(
+            `${config.feedbackApiUrl}${feedbackInstanceId}`,
+        ).then((res) => res.json());
+        setFeedbackConfiguration(feedbackConfiguration);
+        setState(AppState.Feedback);
+    };
+
+    props.storeService.onFeedback = (feedbackInstanceId) => {
+        fetchFeedbackConfiguration(feedbackInstanceId);
     };
 
     props.globalEventService.onShowPopover = (label, buttonLabel, delay) => {
@@ -57,12 +71,11 @@ export const App: React.FC<AppProps> = (props) => {
             label,
             buttonLabel,
         });
-        setTimeout(() => setShowPopover(true), delay ? delay * 1000 : 0);
+        setTimeout(() => setState(AppState.Popover), delay ? delay * 1000 : 0);
     };
 
-    const handlePopoverClick = () => {
-        setOpened(true);
-        setShowPopover(false);
+    props.globalEventService.onShowFeedback = () => {
+        fetchFeedbackConfiguration("demo-feedback-instance-id.json");
     };
 
     useEffect(() => {
@@ -76,19 +89,34 @@ export const App: React.FC<AppProps> = (props) => {
         }
     }, []);
 
-    const showTriggerButton = isConversationLoaded && !opened;
-
     return (
         <div
             className={createChatBoxWrapperClasses(props.configuration)}
             style={createWrapperCssVariables(props.configuration)}
         >
-            {directLine ? (
-                <div
-                    className={config.classes.chatBoxWrapper}
-                    style={createChatBoxWrapperCssVariables(opened && isConversationLoaded)}
-                >
-                    <Header clientId={props.clientId} configuration={props.configuration} setOpened={setOpened} />
+            {(state === "loaded" || state === "popover") && (
+                <Trigger configuration={props.configuration} setOpened={() => setState(AppState.Chat)} />
+            )}
+
+            {state === "popover" && (
+                <Popover
+                    clientId={props.clientId}
+                    label={popover?.label ?? ""}
+                    configuration={props.configuration}
+                    buttonLabel={popover?.buttonLabel}
+                    onClose={() => setState(AppState.Loaded)}
+                    onClick={() => setState(AppState.Chat)}
+                />
+            )}
+
+            <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(state === "chat")}>
+                <Header
+                    clientId={props.clientId}
+                    configuration={props.configuration}
+                    onClose={() => setState(AppState.Loaded)}
+                />
+
+                {directLine && (
                     <ReactWebChat
                         className={config.classes.chat}
                         avatarMiddleware={createAvatarMiddleware(props.bot)}
@@ -100,19 +128,15 @@ export const App: React.FC<AppProps> = (props) => {
                         directLine={directLine}
                         store={props.storeService.store}
                     />
-                </div>
-            ) : null}
+                )}
+            </div>
 
-            {showTriggerButton ? <Trigger configuration={props.configuration} setOpened={setOpened} /> : null}
-
-            {showPopover && (
-                <Popover
-                    clientId={props.clientId}
-                    label={popover?.label ?? ""}
+            {state === "feedback" && feedbackConfiguration && (
+                <FeedbackForm
                     configuration={props.configuration}
-                    buttonLabel={popover?.buttonLabel}
-                    onClose={() => setShowPopover(false)}
-                    onClick={handlePopoverClick}
+                    feedbackConfiguration={feedbackConfiguration}
+                    clientId={props.clientId}
+                    onClose={() => setState(AppState.Chat)}
                 />
             )}
         </div>

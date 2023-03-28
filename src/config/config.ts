@@ -24,6 +24,7 @@ export const config = {
             delay: "data-popover-delay",
         },
     },
+    feedbackApiUrl: import.meta.env.VITE_FEEDBACK_API_URL,
     classes: {
         chatWrapper: "swp-chat-wrapper",
         chatBoxWrapper: "swp-chat-box",
