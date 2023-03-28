@@ -8,6 +8,7 @@ export class StoreService {
     private localeService: LocaleService;
     public readonly store: Store;
     public onConversationLoaded?: () => void = undefined;
+    public onFeedback?: (feedbackInstanceId: string) => void = undefined;
 
     /**
      * When connection is fulfilled:
@@ -35,6 +36,13 @@ export class StoreService {
                                 this.onConversationLoaded();
                             }
                         }, SCROLL_ANIMATION_DELAY);
+                    }
+
+                    if (action.type === "WEB_CHAT/FEEDBACK") {
+                        if (this.onFeedback) {
+                            const feedbackInstanceId = "demo-feedback-instance-id"; // TODO: get feedbackInstanceId from action object
+                            this.onFeedback(feedbackInstanceId);
+                        }
                     }
 
                     return next(action);

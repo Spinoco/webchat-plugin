@@ -8,16 +8,16 @@ import { config } from "../config/config";
 interface HeaderProps {
     clientId: string;
     configuration: ConfigurationInterface;
-    setOpened: (e: boolean) => void;
+    onClose: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ clientId, configuration, setOpened }) => {
+export const Header: React.FC<HeaderProps> = ({ clientId, configuration, onClose }) => {
     return (
         <div
             className="swp-header"
             style={createHeaderCSSProperties(configuration)}
             onClick={() => {
-                setOpened(false);
+                onClose();
             }}
         >
             {(configuration.header?.logo?.base64 !== undefined || configuration.header?.logo?.url !== undefined) && (

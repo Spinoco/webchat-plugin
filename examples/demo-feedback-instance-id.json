@@ -1,0 +1,27 @@
+{
+    "question": {
+        "question": "Do you have any further remarks?",
+        "placeholder": "Please leave your remarks here"
+    },
+    "colors": {
+        "primaryColor": "16A461"
+    },
+    "ratings": [
+        {
+            "text": "Overall Rating",
+            "id": "overall"
+        },
+        {
+            "text": "Speed of Response",
+            "id": "speed"
+        },
+        {
+            "text": "Success of Resolution",
+            "id": "resolution"
+        },
+        {
+            "text": "Would you Recommend Us To a Colleague",
+            "id": "recommend"
+        }
+    ]
+}
