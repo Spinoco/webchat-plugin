@@ -50,7 +50,6 @@ export class ConversationService {
     private attachEvents() {
         window.addEventListener("error", async (event) => {
             if (
-                event.error?.response?.error?.code == "BadArgument" &&
                 (event.error?.response?.error?.message === "Conversation not found" ||
                     event.error?.response?.error?.message === "Token not valid for this conversation")
             ) {
