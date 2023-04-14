@@ -10,6 +10,10 @@ cp .env.local.example .env.local
 docker-compose up -d
 docker-compose exec app bash
 ```
+### install latest npm
+```shell
+npm install -g npm@latest
+```
 
 ### start dev server
 ```shell
