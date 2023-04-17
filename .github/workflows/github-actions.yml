@@ -68,7 +68,7 @@ jobs:
                     path: dist
 
     deploy-main:
-        needs: [ build ]
+        needs: [ build-main ]
         if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
         steps:
@@ -83,7 +83,7 @@ jobs:
             -   uses: actions/deploy-pages@main
 
     deploy-staging:
-        needs: [ build ]
+        needs: [ build-staging ]
         if: github.ref == 'refs/heads/staging'
         runs-on: ubuntu-latest
         steps:
