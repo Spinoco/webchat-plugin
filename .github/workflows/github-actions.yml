@@ -31,8 +31,9 @@ jobs:
                     restore-keys: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             -   run: npm run eslint
 
-    build:
+    build-main:
         needs: [ lint ]
+        if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
         steps:
             -   uses: docker://node:18.2.0-buster-slim
@@ -45,20 +46,53 @@ jobs:
             -   run: npm run build
             -   uses: actions/upload-artifact@v3
                 with:
-                    name: pages
+                    name: pages-main
                     path: dist
 
-    deploy:
+    build-staging:
+        needs: [ lint ]
+        if: github.ref == 'refs/heads/staging'
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: docker://node:18.2.0-buster-slim
+            -   uses: actions/checkout@v3
+            -   uses: actions/cache@v3
+                with:
+                    path: node_modules
+                    key: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                    restore-keys: ${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            -   run: npm run build
+            -   uses: actions/upload-artifact@v3
+                with:
+                    name: pages-staging
+                    path: dist
+
+    deploy-main:
         needs: [ build ]
+        if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/download-artifact@v3
                 with:
-                    name: pages
+                    name: pages-main
                     path: .
             -   uses: actions/configure-pages@v1
             -   uses: actions/upload-pages-artifact@v1
                 with:
                     path: .
-            -   id: deployment
-                uses: actions/deploy-pages@main
+            -   uses: actions/deploy-pages@main
+
+    deploy-staging:
+        needs: [ build ]
+        if: github.ref == 'refs/heads/staging'
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/download-artifact@v3
+                with:
+                    name: pages-staging
+                    path: .
+            -   uses: actions/configure-pages@v1
+            -   uses: actions/upload-pages-artifact@v1
+                with:
+                    path: .
+            -   uses: actions/deploy-pages@staging
