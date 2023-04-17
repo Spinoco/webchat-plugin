@@ -71,6 +71,7 @@ jobs:
         needs: [ build-main ]
         if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
+        environment: main
         steps:
             -   uses: actions/download-artifact@v3
                 with:
@@ -86,6 +87,7 @@ jobs:
         needs: [ build-staging ]
         if: github.ref == 'refs/heads/staging'
         runs-on: ubuntu-latest
+        environment: staging
         steps:
             -   uses: actions/download-artifact@v3
                 with:
