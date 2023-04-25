@@ -40,12 +40,6 @@ export const App: React.FC<AppProps> = (props) => {
         setIsConversationLoaded(true);
     };
 
-    useEffect(() => {
-        props.conversationService.startConversation();
-    }, []);
-
-    const showTriggerButton = isConversationLoaded && !opened;
-
     return (
         <div
             className={createChatBoxWrapperClasses(props.configuration)}
@@ -70,8 +64,13 @@ export const App: React.FC<AppProps> = (props) => {
                     />
                 </div>
             ) : null}
-
-            {showTriggerButton ? <Trigger configuration={props.configuration} setOpened={setOpened} /> : null}
+            {!opened && (
+                <Trigger
+                    configuration={props.configuration}
+                    conversationService={props.conversationService}
+                    setOpened={setOpened}
+                />
+            )}
         </div>
     );
 };
