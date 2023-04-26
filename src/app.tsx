@@ -16,6 +16,7 @@ import { LocaleService } from "./models/services/locale/locale-service";
 import { createChatBoxWrapperCssVariables } from "./models/styles/create-chat-box-wrapper-css-variables";
 import { BotDto } from "./models/dtos/bot-dto";
 import { createAvatarMiddleware } from "./middlewares/create-avatar-middleware";
+import { createChatBoxLoaderProperties } from "./models/styles/create-chat-box-loader-properties";
 
 interface AppProps {
     configuration: ConfigurationInterface;
@@ -34,6 +35,7 @@ export const App: React.FC<AppProps> = (props) => {
 
     props.conversationService.onConversationChange = (directLine) => {
         setDirectLine(directLine);
+        console.log("directline set");
     };
 
     props.storeService.onConversationLoaded = () => {
@@ -46,10 +48,7 @@ export const App: React.FC<AppProps> = (props) => {
             style={createWrapperCssVariables(props.configuration)}
         >
             {directLine ? (
-                <div
-                    className={config.classes.chatBoxWrapper}
-                    style={createChatBoxWrapperCssVariables(opened && isConversationLoaded)}
-                >
+                <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(opened)}>
                     <Header clientId={props.clientId} configuration={props.configuration} setOpened={setOpened} />
                     <ReactWebChat
                         className={config.classes.chat}
@@ -62,9 +61,21 @@ export const App: React.FC<AppProps> = (props) => {
                         directLine={directLine}
                         store={props.storeService.store}
                     />
+
+                    {opened && !isConversationLoaded && (
+                        <div className={config.classes.chatBoxLoaderWrapper}>
+                            <div className={config.classes.chatBoxLoader}>
+                                <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                                <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                                <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                                <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             ) : null}
-            {!opened && (
+
+            {!opened && !isConversationLoaded && (
                 <Trigger
                     configuration={props.configuration}
                     conversationService={props.conversationService}
