@@ -18,8 +18,9 @@
         .swp-chat-box {
             display: flex;
             flex-direction: column;
-            width: 400px;
-            height: 540px;
+            
+            width: inherit;
+            height: inherit;
 
             @include mobile {
                 height: 100%;
