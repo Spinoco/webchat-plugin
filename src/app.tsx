@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
@@ -35,7 +35,6 @@ export const App: React.FC<AppProps> = (props) => {
 
     props.conversationService.onConversationChange = (directLine) => {
         setDirectLine(directLine);
-        console.log("directline set");
     };
 
     props.storeService.onConversationLoaded = () => {

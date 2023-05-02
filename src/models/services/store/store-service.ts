@@ -2,7 +2,7 @@ import { createStore } from "botframework-webchat";
 import { Store } from "redux";
 import { LocaleService } from "../locale/locale-service";
 
-const SCROLL_ANIMATION_DELAY = 850;
+const SCROLL_ANIMATION_DELAY = 6000;
 
 export class StoreService {
     private localeService: LocaleService;
