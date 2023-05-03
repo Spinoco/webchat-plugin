@@ -1,4 +1,9 @@
-$mobile-breakpoint: "768px";
+$tablet-breakpoint: "768px";
+$mobile-breakpoint: "384px";
+
+@mixin tablet {
+    @media (max-width: $tablet-breakpoint) { @content; }
+}
 
 @mixin mobile {
     @media (max-width: $mobile-breakpoint) { @content; }
@@ -14,10 +19,12 @@ $mobile-breakpoint: "768px";
 
 @import "components/avatar";
 @import "components/chat";
+@import "components/feedback-form";
 @import "components/header";
 @import "components/trigger";
 @import "components/typing-indicator";
 @import "components/wrapper";
+@import "components/popover";
 
 @import "features/box-shadow";
 @import "features/bubble-single-border";

@@ -9,6 +9,7 @@ import { TypingIndicatorInterface } from "./typing-indicator-interface";
 import { AvatarInterface } from "./avatar-interface";
 import { DirectLineInterface } from "./direct-line-interface";
 import { LoaderInterface } from "./loader-interface";
+import { PopoverInterface } from "./popover/popover-interface";
 
 export interface ConfigurationInterface {
     directLine: DirectLineInterface;
@@ -28,4 +29,5 @@ export interface ConfigurationInterface {
     sendBox?: SendBoxInterface;
     features?: FeaturesInterface;
     loader?: LoaderInterface;
+    popover?: PopoverInterface;
 }

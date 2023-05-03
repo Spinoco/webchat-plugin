@@ -3,5 +3,22 @@
         "secret": "pyNBGiN_07E.dmABqUqbXp-XcY45Q3MW0tjelJDX-duh53gZQ67XqfU"
     },
     "primaryColor": "#13A361",
-    "secondaryColor": "#999999"
+    "secondaryColor": "#999999",
+
+    "popover": {
+        "borderRadius": "16px",
+        "head": {
+            "borderColor": "#51585D"
+        },
+        "body": {
+            "titleColor": "#000000",
+            "backgroundColor": "#ffffff",
+            "descriptionColor": "#cccccc",
+            "button": {
+                "backgroundColor": "#0072BF",
+                "color": "#ffffff",
+                "iconColor": "#ffffff"
+            }
+        }
+    }
 }

@@ -1,0 +1,85 @@
+#spinoco-webchat-plugin {
+    .swp-popover {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 100px;
+        z-index: -1;
+
+        width: 330px;
+
+        box-shadow: rgba(100, 100, 111, .2) 0 .7rem 2.9rem 0;
+
+        @include mobile {
+            width: calc(100% - 2.5rem);
+        }
+
+        &-head {
+            position: relative;
+
+            padding: 15px;
+
+            border-bottom: 2px solid transparent;
+
+            img {
+                width: 70px;
+            }
+
+            .close-btn {
+                position: absolute;
+
+                top: 50%;
+
+                right: 15px;
+
+                display: flex;
+
+                align-items: center;
+
+                width: 15px;
+
+                height: 15px;
+
+                transform: translateY(-50%);
+
+                cursor: pointer;
+
+            }
+        }
+
+        &-body {
+            padding: 15px;
+
+            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 16px;
+
+            button {
+                margin-top: 15px;
+
+                font-weight: 700;
+
+                @include mobile {
+                    width: 100%;
+                }
+
+                &.full-width {
+                    width: 100%;
+                }
+
+                svg {
+                    width: 15px;
+                    height: 15px;
+                }
+
+                .sw-popover-button-label {
+                    margin-left: 10px;
+
+                    font-weight: 700 !important;
+                }
+
+                &:hover {
+                    background-color: #CCCCCC !important;
+                }
+            }
+        }
+    }
+}

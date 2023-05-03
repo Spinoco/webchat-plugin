@@ -2,6 +2,7 @@ import { config } from "../../../config/config";
 import { DomService } from "./dom-service";
 import { CustomerDto } from "../../dtos/customer-dto";
 import { BotDto } from "../../dtos/bot-dto";
+import { PopoverDto } from "../../dtos/popover-dto";
 
 export class ChatDomService extends DomService {
     getClientId(): string {
@@ -47,5 +48,16 @@ export class ChatDomService extends DomService {
         }
 
         return botDto;
+    }
+
+    /**
+     * Creates information about popover.
+     */
+    getPopoverDto(): PopoverDto {
+        const label = this.getDataAttribute(config.popover.attributes.label) ?? undefined;
+        const buttonLabel = this.getDataAttribute(config.popover.attributes.buttonLabel) ?? undefined;
+        const delay = parseInt(this.getDataAttribute(config.popover.attributes.delay) as string);
+
+        return new PopoverDto(label, buttonLabel, delay);
     }
 }
