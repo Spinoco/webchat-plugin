@@ -3,19 +3,22 @@ import React from "react";
 import { Comment } from "./icons";
 import { createTriggerCSSProperties } from "../models/styles/create-trigger-css-properties";
 import { config } from "../config/config";
+import { ConversationService } from "../models/services/conversation/conversation-service";
 const LottieTrigger = React.lazy(() => import("./trigger/lottie-trigger"));
 
 interface TriggerProps {
     configuration: ConfigurationInterface;
+    conversationService: ConversationService;
     setOpened: (e: boolean) => void;
 }
 
-export const Trigger: React.FC<TriggerProps> = ({ configuration, setOpened }) => {
+export const Trigger: React.FC<TriggerProps> = ({ configuration, conversationService, setOpened }) => {
     return (
         <div
             style={createTriggerCSSProperties(configuration)}
             onClick={() => {
                 setOpened(true);
+                conversationService.startConversation();
             }}
             className="swp-trigger"
         >

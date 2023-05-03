@@ -8,6 +8,7 @@ import { TriggerInterface } from "./trigger-interface";
 import { TypingIndicatorInterface } from "./typing-indicator-interface";
 import { AvatarInterface } from "./avatar-interface";
 import { DirectLineInterface } from "./direct-line-interface";
+import { LoaderInterface } from "./loader-interface";
 import { PopoverInterface } from "./popover/popover-interface";
 
 export interface ConfigurationInterface {
@@ -27,5 +28,6 @@ export interface ConfigurationInterface {
     suggestedAction?: SuggestedActionInterface;
     sendBox?: SendBoxInterface;
     features?: FeaturesInterface;
+    loader?: LoaderInterface;
     popover?: PopoverInterface;
 }

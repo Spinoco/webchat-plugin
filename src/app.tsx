@@ -17,6 +17,7 @@ import { LocaleService } from "./models/services/locale/locale-service";
 import { createChatBoxWrapperCssVariables } from "./models/styles/create-chat-box-wrapper-css-variables";
 import { BotDto } from "./models/dtos/bot-dto";
 import { createAvatarMiddleware } from "./middlewares/create-avatar-middleware";
+import { createChatBoxLoaderProperties } from "./models/styles/create-chat-box-loader-properties";
 import { GlobalEventService } from "./models/services/global-event-service/global-event-service";
 import { Popover } from "./components/popover";
 import { FeedbackConfigurationInterface } from "./models/interfaces/configuration/feedback-configuration-interface";
@@ -79,7 +80,6 @@ export const App: React.FC<AppProps> = (props) => {
     };
 
     useEffect(() => {
-        props.conversationService.startConversation();
         if (props.popover.shouldShowPopover()) {
             props.globalEventService.showPopover(
                 props.popover.label as string,
@@ -94,9 +94,11 @@ export const App: React.FC<AppProps> = (props) => {
             className={createChatBoxWrapperClasses(props.configuration)}
             style={createWrapperCssVariables(props.configuration)}
         >
-            {(state === "loaded" || state === "popover") && (
-                <Trigger configuration={props.configuration} setOpened={() => setState(AppState.Chat)} />
-            )}
+            <Trigger
+                configuration={props.configuration}
+                setOpened={() => setState(AppState.ChatOpen)}
+                conversationService={props.conversationService}
+            />
 
             {state === "popover" && (
                 <Popover
@@ -105,15 +107,20 @@ export const App: React.FC<AppProps> = (props) => {
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
                     onClose={() => setState(AppState.Loaded)}
-                    onClick={() => setState(AppState.Chat)}
+                    onClick={() => setState(AppState.ChatOpen)}
                 />
             )}
 
-            <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(state === "chat")}>
+            <div
+                className={config.classes.chatBoxWrapper}
+                style={createChatBoxWrapperCssVariables(state === "chatOpen" || state === "loaded")}
+            >
                 <Header
                     clientId={props.clientId}
                     configuration={props.configuration}
-                    onClose={() => setState(AppState.Loaded)}
+                    onClose={() => {
+                        setState(AppState.ChatClosed);
+                    }}
                 />
 
                 {directLine && (
@@ -129,6 +136,17 @@ export const App: React.FC<AppProps> = (props) => {
                         store={props.storeService.store}
                     />
                 )}
+
+                {state === "chatOpen" && (
+                    <div className={config.classes.chatBoxLoaderWrapper}>
+                        <div className={config.classes.chatBoxLoader}>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {state === "feedback" && feedbackConfiguration && (
@@ -136,7 +154,7 @@ export const App: React.FC<AppProps> = (props) => {
                     configuration={props.configuration}
                     feedbackConfiguration={feedbackConfiguration}
                     clientId={props.clientId}
-                    onClose={() => setState(AppState.Chat)}
+                    onClose={() => setState(AppState.ChatOpen)}
                 />
             )}
         </div>

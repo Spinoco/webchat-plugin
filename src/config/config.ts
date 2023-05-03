@@ -28,6 +28,8 @@ export const config = {
     classes: {
         chatWrapper: "swp-chat-wrapper",
         chatBoxWrapper: "swp-chat-box",
+        chatBoxLoaderWrapper: "swp-chat-box-loader-wrapper",
+        chatBoxLoader: "swp-chat-box-loader",
         chat: "swp-chat",
         features: {
             scrollbar: "swp-feature-scrollbar",
@@ -81,6 +83,9 @@ export const config = {
         },
         typingIndicator: {
             background: "#F0F0F0",
+            color: "#999999",
+        },
+        loader: {
             color: "#999999",
         },
     },
