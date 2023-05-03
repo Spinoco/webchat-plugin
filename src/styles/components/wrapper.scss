@@ -17,14 +17,20 @@
         }
 
         .swp-chat-box {
+            position: relative;
+            z-index: 4;
+
             display: flex;
             flex-direction: column;
 
             width: inherit;
             height: inherit;
 
-            @include mobile {
             @include tablet {
+                height: 100%;
+            }
+
+            @include mobile {
                 height: 100%;
             }
 

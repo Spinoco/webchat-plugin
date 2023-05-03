@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
@@ -79,9 +79,7 @@ export const App: React.FC<AppProps> = (props) => {
         fetchFeedbackConfiguration("demo-feedback-instance-id.json");
     };
 
-
     useEffect(() => {
-        props.conversationService.startConversation();
         if (props.popover.shouldShowPopover()) {
             props.globalEventService.showPopover(
                 props.popover.label as string,
@@ -96,10 +94,11 @@ export const App: React.FC<AppProps> = (props) => {
             className={createChatBoxWrapperClasses(props.configuration)}
             style={createWrapperCssVariables(props.configuration)}
         >
-
-            {(state === "loaded" || state === "popover") && (
-                <Trigger configuration={props.configuration} setOpened={() => setState(AppState.Chat)} />
-            )}
+            <Trigger
+                configuration={props.configuration}
+                setOpened={() => setState(AppState.ChatOpen)}
+                conversationService={props.conversationService}
+            />
 
             {state === "popover" && (
                 <Popover
@@ -108,15 +107,20 @@ export const App: React.FC<AppProps> = (props) => {
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
                     onClose={() => setState(AppState.Loaded)}
-                    onClick={() => setState(AppState.Chat)}
+                    onClick={() => setState(AppState.ChatOpen)}
                 />
             )}
 
-            <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(state === "chat")}>
+            <div
+                className={config.classes.chatBoxWrapper}
+                style={createChatBoxWrapperCssVariables(state === "chatOpen" || state === "loaded")}
+            >
                 <Header
                     clientId={props.clientId}
                     configuration={props.configuration}
-                    onClose={() => setState(AppState.Loaded)}
+                    onClose={() => {
+                        setState(AppState.ChatClosed);
+                    }}
                 />
 
                 {directLine && (
@@ -133,17 +137,16 @@ export const App: React.FC<AppProps> = (props) => {
                     />
                 )}
 
-                {state != "loaded" &&  (
+                {state === "chatOpen" && (
                     <div className={config.classes.chatBoxLoaderWrapper}>
                         <div className={config.classes.chatBoxLoader}>
-                        <div style={createChatBoxLoaderProperties(props.configuration)}></div>
-                        <div style={createChatBoxLoaderProperties(props.configuration)}></div>
-                        <div style={createChatBoxLoaderProperties(props.configuration)}></div>
-                        <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
+                            <div style={createChatBoxLoaderProperties(props.configuration)}></div>
                         </div>
                     </div>
                 )}
-
             </div>
 
             {state === "feedback" && feedbackConfiguration && (
@@ -151,7 +154,7 @@ export const App: React.FC<AppProps> = (props) => {
                     configuration={props.configuration}
                     feedbackConfiguration={feedbackConfiguration}
                     clientId={props.clientId}
-                    onClose={() => setState(AppState.Chat)}
+                    onClose={() => setState(AppState.ChatOpen)}
                 />
             )}
         </div>
