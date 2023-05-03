@@ -74,7 +74,7 @@ export const App: React.FC<AppProps> = (props) => {
                 </div>
             ) : null}
 
-            {!opened && !isConversationLoaded && (
+            {!opened && (
                 <Trigger
                     configuration={props.configuration}
                     conversationService={props.conversationService}
