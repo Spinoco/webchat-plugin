@@ -23,6 +23,7 @@ import { Popover } from "./components/popover";
 import { FeedbackConfigurationInterface } from "./models/interfaces/configuration/feedback-configuration-interface";
 import { FeedbackForm } from "./components/feedback-form/feedback-form";
 import { AppState } from "./models/enums/app-state";
+import { ChatState } from "./models/enums/chat-state";
 
 interface AppProps {
     configuration: ConfigurationInterface;
@@ -42,17 +43,32 @@ interface PopoverInterface {
 }
 
 export const App: React.FC<AppProps> = (props) => {
-    const [state, setState] = useState<AppState>(AppState.Loading);
+    const [appState, setAppState] = useState<AppState>(AppState.Loading);
+    const [chatState, setChatState] = useState<ChatState>(ChatState.Closed);
+
     const [directLine, setDirectLine] = useState<DirectLine>();
     const [popover, setPopover] = useState<PopoverInterface>();
+
+    const [hasConversationStarted, setHasConversationStarted] = useState<boolean>(false);
     const [feedbackConfiguration, setFeedbackConfiguration] = useState<FeedbackConfigurationInterface>();
 
     props.conversationService.onConversationChange = (directLine) => {
-        setDirectLine(directLine);
+        if (!hasConversationStarted) {
+            setDirectLine(directLine);
+        } else setChatState(ChatState.Opened);
     };
 
     props.storeService.onConversationLoaded = () => {
-        setState(AppState.Loaded);
+        setAppState(AppState.Loaded);
+        setChatState(ChatState.Opened);
+    };
+
+    const openChat = () => {
+        if (!hasConversationStarted) {
+            setHasConversationStarted(true);
+        }
+        setChatState(ChatState.Loading);
+        props.conversationService.startConversation();
     };
 
     const fetchFeedbackConfiguration = async (feedbackInstanceId: string) => {
@@ -60,7 +76,7 @@ export const App: React.FC<AppProps> = (props) => {
             `${config.feedbackApiUrl}${feedbackInstanceId}`,
         ).then((res) => res.json());
         setFeedbackConfiguration(feedbackConfiguration);
-        setState(AppState.Feedback);
+        setAppState(AppState.Feedback);
     };
 
     props.storeService.onFeedback = (feedbackInstanceId) => {
@@ -72,7 +88,12 @@ export const App: React.FC<AppProps> = (props) => {
             label,
             buttonLabel,
         });
-        setTimeout(() => setState(AppState.Popover), delay ? delay * 1000 : 0);
+        setTimeout(
+            () => {
+                if (!hasConversationStarted) setAppState(AppState.Popover);
+            },
+            delay ? delay * 1000 : 0,
+        );
     };
 
     props.globalEventService.onShowFeedback = () => {
@@ -96,30 +117,32 @@ export const App: React.FC<AppProps> = (props) => {
         >
             <Trigger
                 configuration={props.configuration}
-                setOpened={() => setState(AppState.ChatOpen)}
+                setOpened={() => openChat()}
                 conversationService={props.conversationService}
             />
 
-            {state === "popover" && (
+            {appState === AppState.Popover && !hasConversationStarted && (
                 <Popover
                     clientId={props.clientId}
                     label={popover?.label ?? ""}
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
-                    onClose={() => setState(AppState.Loaded)}
-                    onClick={() => setState(AppState.ChatOpen)}
+                    onClose={() => setChatState(ChatState.Closed)}
+                    onClick={() => openChat()}
                 />
             )}
 
             <div
                 className={config.classes.chatBoxWrapper}
-                style={createChatBoxWrapperCssVariables(state === "chatOpen" || state === "loaded")}
+                style={createChatBoxWrapperCssVariables(
+                    chatState === ChatState.Opened || chatState === ChatState.Loading,
+                )}
             >
                 <Header
                     clientId={props.clientId}
                     configuration={props.configuration}
                     onClose={() => {
-                        setState(AppState.ChatClosed);
+                        setChatState(ChatState.Closed);
                     }}
                 />
 
@@ -137,7 +160,7 @@ export const App: React.FC<AppProps> = (props) => {
                     />
                 )}
 
-                {state === "chatOpen" && (
+                {chatState === ChatState.Loading && (
                     <div className={config.classes.chatBoxLoaderWrapper}>
                         <div className={config.classes.chatBoxLoader}>
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>
@@ -149,12 +172,15 @@ export const App: React.FC<AppProps> = (props) => {
                 )}
             </div>
 
-            {state === "feedback" && feedbackConfiguration && (
+            {appState === AppState.Feedback && feedbackConfiguration && (
                 <FeedbackForm
                     configuration={props.configuration}
                     feedbackConfiguration={feedbackConfiguration}
                     clientId={props.clientId}
-                    onClose={() => setState(AppState.ChatOpen)}
+                    onClose={() => {
+                        setChatState(ChatState.Closed);
+                        setAppState(AppState.Loaded);
+                    }}
                 />
             )}
         </div>

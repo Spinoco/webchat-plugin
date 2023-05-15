@@ -4,7 +4,6 @@ export class GlobalEventService {
     public onShowFeedback?: () => void = undefined;
 
     showPopover(label: string, buttonLabel?: string, delay?: number): void {
-        console.log("here");
         if (this.onShowPopover) {
             this.onShowPopover(label, buttonLabel, delay);
         }

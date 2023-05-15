@@ -12,13 +12,12 @@ interface TriggerProps {
     setOpened: (e: boolean) => void;
 }
 
-export const Trigger: React.FC<TriggerProps> = ({ configuration, conversationService, setOpened }) => {
+export const Trigger: React.FC<TriggerProps> = ({ configuration, setOpened }) => {
     return (
         <div
             style={createTriggerCSSProperties(configuration)}
             onClick={() => {
                 setOpened(true);
-                conversationService.startConversation();
             }}
             className="swp-trigger"
         >
