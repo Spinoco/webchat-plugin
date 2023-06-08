@@ -2,12 +2,11 @@ import { StyleOptions } from "botframework-webchat-api";
 import { ConfigurationInterface } from "../interfaces/configuration/configuration-interface";
 import { styleOptionsConfig } from "../../config/style-options-config";
 import { config } from "../../config/config";
-import { CustomerDto } from "../dtos/customer-dto";
 
 /**
  * Creates an object to style the chat using its internal properties.
  */
-export const createStyleOptions = (c: ConfigurationInterface, customer?: CustomerDto): StyleOptions => {
+export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
     let styleOptions: StyleOptions = {
         accent: c.primaryColor,
         subtle: c.subtle ? c.subtle : c.secondaryColor,
@@ -47,11 +46,11 @@ export const createStyleOptions = (c: ConfigurationInterface, customer?: Custome
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
     styleOptions.groupTimestamp = config.chat.groupTimestamp * 1000;
 
-    //todo: do we want/need this?
+    //todo: do we want/need this? (, customer?: CustomerDto)
     // customer avatar
-//     if (customer) {
-//         styleOptions.userAvatarInitials = customer.initials;
-//     }
+    //     if (customer) {
+    //         styleOptions.userAvatarInitials = customer.initials;
+    //     }
 
     return { ...styleOptionsConfig, ...styleOptions };
 };

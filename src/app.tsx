@@ -154,7 +154,7 @@ export const App: React.FC<AppProps> = (props) => {
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
                         username={props.customer?.name}
                         locale={props.localeService.locale}
-                        styleOptions={createStyleOptions(props.configuration, props.customer)}
+                        styleOptions={createStyleOptions(props.configuration)}
                         directLine={directLine}
                         store={props.storeService.store}
                     />

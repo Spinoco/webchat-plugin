@@ -38,8 +38,9 @@ export const createAvatarMiddleware: (bot: BotDto) => AvatarMiddleware = (bot: B
             } else if (props.activity.channelData.role === AvatarRoleInterface.Bot && bot.getBotAvatar()) {
                 return () => <ImageAvatar image={bot.getBotAvatar() as string} />;
             }
-        } else if (bot.getBotAvatar()) { //fallback to bot avatar
-          return () => <ImageAvatar image={bot.getBotAvatar() as string} />;
+        } else if (bot.getBotAvatar()) {
+            //fallback to bot avatar
+            return () => <ImageAvatar image={bot.getBotAvatar() as string} />;
         }
 
         return false;
