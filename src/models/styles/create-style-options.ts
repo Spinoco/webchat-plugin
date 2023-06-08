@@ -47,10 +47,11 @@ export const createStyleOptions = (c: ConfigurationInterface, customer?: Custome
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
     styleOptions.groupTimestamp = config.chat.groupTimestamp * 1000;
 
+    //todo: do we want/need this?
     // customer avatar
-    if (customer) {
-        styleOptions.userAvatarInitials = customer.initials;
-    }
+//     if (customer) {
+//         styleOptions.userAvatarInitials = customer.initials;
+//     }
 
     return { ...styleOptionsConfig, ...styleOptions };
 };
