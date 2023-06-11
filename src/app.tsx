@@ -127,7 +127,10 @@ export const App: React.FC<AppProps> = (props) => {
                     label={popover?.label ?? ""}
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
-                    onClose={() => setChatState(ChatState.Closed)}
+                    onClose={() => {
+                        setChatState(ChatState.Closed);
+                        setAppState(AppState.Loaded);
+                    }}
                     onClick={() => openChat()}
                 />
             )}
