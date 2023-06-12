@@ -58,6 +58,9 @@
     },
     "sendBox": {
         "color": "#FFFFFF",
+        "button": {
+            "shadeColorOnHover": "#005067"
+        },
         "border": {
             "top": "1px solid #51585D"
         }
