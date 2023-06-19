@@ -7,6 +7,7 @@ import { CustomerDto } from "../dtos/customer-dto";
 /**
  * Creates an object to style the chat using its internal properties.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createStyleOptions = (c: ConfigurationInterface, customer?: CustomerDto): StyleOptions => {
     let styleOptions: StyleOptions = {
         accent: c.primaryColor,
@@ -49,9 +50,9 @@ export const createStyleOptions = (c: ConfigurationInterface, customer?: Custome
 
     //todo: do we want/need this?
     // customer avatar
-//     if (customer) {
-//         styleOptions.userAvatarInitials = customer.initials;
-//     }
+    //     if (customer) {
+    //         styleOptions.userAvatarInitials = customer.initials;
+    //     }
 
     return { ...styleOptionsConfig, ...styleOptions };
 };

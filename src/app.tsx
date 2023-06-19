@@ -63,12 +63,12 @@ export const App: React.FC<AppProps> = (props) => {
         setChatState(ChatState.Opened);
     };
 
-    const openChat = () => {
+    const openChat = async () => {
         if (!hasConversationStarted) {
             setHasConversationStarted(true);
         }
         setChatState(ChatState.Loading);
-        props.conversationService.startConversation();
+        await props.conversationService.startConversation();
     };
 
     const fetchFeedbackConfiguration = async (feedbackInstanceId: string) => {
@@ -79,8 +79,8 @@ export const App: React.FC<AppProps> = (props) => {
         setAppState(AppState.Feedback);
     };
 
-    props.storeService.onFeedback = (feedbackInstanceId) => {
-        fetchFeedbackConfiguration(feedbackInstanceId);
+    props.storeService.onFeedback = async (feedbackInstanceId) => {
+        await fetchFeedbackConfiguration(feedbackInstanceId);
     };
 
     props.globalEventService.onShowPopover = (label, buttonLabel, delay) => {
@@ -90,14 +90,16 @@ export const App: React.FC<AppProps> = (props) => {
         });
         setTimeout(
             () => {
-                if (!hasConversationStarted) setAppState(AppState.Popover);
+                if (!hasConversationStarted) {
+                    setAppState(AppState.Popover);
+                }
             },
             delay ? delay * 1000 : 0,
         );
     };
 
-    props.globalEventService.onShowFeedback = () => {
-        fetchFeedbackConfiguration("demo-feedback-instance-id.json");
+    props.globalEventService.onShowFeedback = async () => {
+        await fetchFeedbackConfiguration("demo-feedback-instance-id.json");
     };
 
     useEffect(() => {
