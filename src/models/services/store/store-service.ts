@@ -58,7 +58,7 @@ export class StoreService {
         if (action.payload.activity.type === "message") {
             action.payload.activity.channelData = {
                 ...action.payload.activity.channelData,
-                url: window.location.href,
+                webPageUri: window.location.href,
             };
         }
         console.log(action);
