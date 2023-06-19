@@ -24,6 +24,7 @@ import { FeedbackConfigurationInterface } from "./models/interfaces/configuratio
 import { FeedbackForm } from "./components/feedback-form/feedback-form";
 import { AppState } from "./models/enums/app-state";
 import { ChatState } from "./models/enums/chat-state";
+import { createChatBoxLoaderWrapperCssVariables } from "./models/styles/create-chat-box-loader-wrapper-css-variables";
 
 interface AppProps {
     configuration: ConfigurationInterface;
@@ -167,7 +168,10 @@ export const App: React.FC<AppProps> = (props) => {
                 )}
 
                 {chatState === ChatState.Loading && (
-                    <div className={config.classes.chatBoxLoaderWrapper}>
+                    <div
+                        style={createChatBoxLoaderWrapperCssVariables(props.configuration.root)}
+                        className={config.classes.chatBoxLoaderWrapper}
+                    >
                         <div className={config.classes.chatBoxLoader}>
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>
