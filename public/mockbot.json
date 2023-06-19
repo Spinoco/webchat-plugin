@@ -1,0 +1,24 @@
+{
+    "directLine": {
+        "useMockbot": true
+    },
+    "primaryColor": "#13A361",
+    "secondaryColor": "#999999",
+
+    "popover": {
+        "borderRadius": "16px",
+        "head": {
+            "borderColor": "#51585D"
+        },
+        "body": {
+            "titleColor": "#000000",
+            "backgroundColor": "#ffffff",
+            "descriptionColor": "#cccccc",
+            "button": {
+                "backgroundColor": "#0072BF",
+                "color": "#ffffff",
+                "iconColor": "#ffffff"
+            }
+        }
+    }
+}

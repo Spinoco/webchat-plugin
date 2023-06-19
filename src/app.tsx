@@ -52,10 +52,12 @@ export const App: React.FC<AppProps> = (props) => {
     const [hasConversationStarted, setHasConversationStarted] = useState<boolean>(false);
     const [feedbackConfiguration, setFeedbackConfiguration] = useState<FeedbackConfigurationInterface>();
 
-    props.conversationService.onConversationChange = (directLine) => {
+    props.conversationService.onDirectLineCreated = (directLine) => {
         if (!hasConversationStarted) {
             setDirectLine(directLine);
-        } else setChatState(ChatState.Opened);
+        } else {
+            setChatState(ChatState.Opened);
+        }
     };
 
     props.storeService.onConversationLoaded = () => {
@@ -129,7 +131,9 @@ export const App: React.FC<AppProps> = (props) => {
                     label={popover?.label ?? ""}
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
-                    onClose={() => setChatState(ChatState.Closed)}
+                    onClose={() => {
+                        setAppState(AppState.Loaded);
+                    }}
                     onClick={() => openChat()}
                 />
             )}

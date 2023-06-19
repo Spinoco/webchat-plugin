@@ -61,6 +61,5 @@ export class StoreService {
                 webPageUri: window.location.href,
             };
         }
-        console.log(action);
     }
 }
