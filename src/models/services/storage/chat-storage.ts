@@ -1,6 +1,5 @@
 import { ChatStorageKeys } from "../../enums/storage/chat-storage-keys";
 import { Storage } from "./storage";
-import { AppState } from "../../enums/app-state";
 import { ChatState } from "../../enums/chat-state";
 
 export class ChatStorage extends Storage<ChatStorageKeys> {

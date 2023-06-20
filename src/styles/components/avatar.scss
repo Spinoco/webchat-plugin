@@ -22,7 +22,7 @@
     &:empty {
         display: none !important;
 
-        & + .webchat__stacked-layout__content {
+        + .webchat__stacked-layout__content {
             .webchat__bubble__nub-pad {
                 display: none;
             }
