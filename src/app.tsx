@@ -67,11 +67,9 @@ export const App: React.FC<AppProps> = (props) => {
     };
 
     const openChat = async () => {
-        if (!hasConversationStarted) {
-            setHasConversationStarted(true);
-        }
         setChatState(ChatState.Loading);
         await props.conversationService.startConversation();
+        setHasConversationStarted(true);
     };
 
     const fetchFeedbackConfiguration = async (feedbackInstanceId: string) => {
@@ -169,7 +167,10 @@ export const App: React.FC<AppProps> = (props) => {
 
                 {chatState === ChatState.Loading && (
                     <div
-                        style={createChatBoxLoaderWrapperCssVariables(props.configuration.root)}
+                        style={createChatBoxLoaderWrapperCssVariables(
+                            !directLine && props.configuration.directLine.useMockbot,
+                            props.configuration.root,
+                        )}
                         className={config.classes.chatBoxLoaderWrapper}
                     >
                         <div className={config.classes.chatBoxLoader}>
