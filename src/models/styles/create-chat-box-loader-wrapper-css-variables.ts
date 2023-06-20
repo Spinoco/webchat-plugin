@@ -13,8 +13,8 @@ export const createChatBoxLoaderWrapperCssVariables = (useMockbot?: boolean, roo
         chatBoxLoaderWrapperStyles.bottom = 0;
     } else {
         chatBoxLoaderWrapperStyles.background = "#FFFFFF";
-        chatBoxLoaderWrapperStyles.width = root?.width || "100%";
-        chatBoxLoaderWrapperStyles.height = root?.height || "100%";
+        chatBoxLoaderWrapperStyles.width = "100%";
+        chatBoxLoaderWrapperStyles.height = "100%";
     }
 
     return chatBoxLoaderWrapperStyles;
