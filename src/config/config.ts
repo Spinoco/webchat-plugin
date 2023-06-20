@@ -39,6 +39,12 @@ export const config = {
         },
     },
     styleProperties: {
+        sendBox: {
+            button: {
+                shadeColorOnHover: "#F3F2F1",
+                shadeColor: "transparent",
+            },
+        },
         trigger: {
             icon: {
                 height: "24px",
