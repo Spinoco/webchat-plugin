@@ -18,4 +18,14 @@
         background-color: var(--avatar-background);
         border-radius: var(--avatar-border-radius);
     }
+
+    &:empty {
+        display: none !important;
+
+        & + .webchat__stacked-layout__content {
+            .webchat__bubble__nub-pad {
+                display: none;
+            }
+        }
+    }
 }
