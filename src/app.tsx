@@ -25,8 +25,10 @@ import { FeedbackForm } from "./components/feedback-form/feedback-form";
 import { AppState } from "./models/enums/app-state";
 import { ChatState } from "./models/enums/chat-state";
 import { createChatBoxLoaderWrapperCssVariables } from "./models/styles/create-chat-box-loader-wrapper-css-variables";
+import { ChatStorage } from "./models/services/storage/chat-storage";
 
 interface AppProps {
+    chatStorage: ChatStorage;
     configuration: ConfigurationInterface;
     customer?: CustomerDto;
     bot: BotDto;
@@ -104,6 +106,10 @@ export const App: React.FC<AppProps> = (props) => {
     };
 
     useEffect(() => {
+        if (props.chatStorage.getChatState() == ChatState.Opened) {
+            openChat();
+        }
+
         if (props.popover.shouldShowPopover()) {
             props.globalEventService.showPopover(
                 props.popover.label as string,
@@ -112,6 +118,10 @@ export const App: React.FC<AppProps> = (props) => {
             );
         }
     }, []);
+
+    useEffect(() => {
+        props.chatStorage.setChatState(chatState);
+    }, [appState, chatState]);
 
     return (
         <div
