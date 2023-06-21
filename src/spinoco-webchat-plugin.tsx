@@ -32,11 +32,13 @@ fetch(`${config.chat.apiUrl}/${clientId}.json`)
         if (!directLineSecret) {
             configuration.directLine.useMockbot = true;
         }
-        const conversationService = new ConversationService(ChatStorage.getInstance(), configuration.directLine);
+        const chatStorage = ChatStorage.getInstance();
+        const conversationService = new ConversationService(chatStorage, configuration.directLine);
 
         ReactDOM.createRoot(chatDomService.wrapperElement).render(
             <React.StrictMode>
                 <App
+                    chatStorage={chatStorage}
                     storeService={storeService}
                     localeService={localeService}
                     conversationService={conversationService}

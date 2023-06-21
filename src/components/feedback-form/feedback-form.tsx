@@ -54,11 +54,6 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
             setShowValidationErrorMessage(true);
             return;
         }
-
-        console.log("submit values", {
-            ratings,
-            furtherRemarks,
-        });
         onClose();
     };
 

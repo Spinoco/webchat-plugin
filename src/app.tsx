@@ -24,8 +24,11 @@ import { FeedbackConfigurationInterface } from "./models/interfaces/configuratio
 import { FeedbackForm } from "./components/feedback-form/feedback-form";
 import { AppState } from "./models/enums/app-state";
 import { ChatState } from "./models/enums/chat-state";
+import { createChatBoxLoaderWrapperCssVariables } from "./models/styles/create-chat-box-loader-wrapper-css-variables";
+import { ChatStorage } from "./models/services/storage/chat-storage";
 
 interface AppProps {
+    chatStorage: ChatStorage;
     configuration: ConfigurationInterface;
     customer?: CustomerDto;
     bot: BotDto;
@@ -52,10 +55,12 @@ export const App: React.FC<AppProps> = (props) => {
     const [hasConversationStarted, setHasConversationStarted] = useState<boolean>(false);
     const [feedbackConfiguration, setFeedbackConfiguration] = useState<FeedbackConfigurationInterface>();
 
-    props.conversationService.onConversationChange = (directLine) => {
+    props.conversationService.onDirectLineCreated = (directLine) => {
         if (!hasConversationStarted) {
             setDirectLine(directLine);
-        } else setChatState(ChatState.Opened);
+        } else {
+            setChatState(ChatState.Opened);
+        }
     };
 
     props.storeService.onConversationLoaded = () => {
@@ -63,12 +68,10 @@ export const App: React.FC<AppProps> = (props) => {
         setChatState(ChatState.Opened);
     };
 
-    const openChat = () => {
-        if (!hasConversationStarted) {
-            setHasConversationStarted(true);
-        }
+    const openChat = async () => {
         setChatState(ChatState.Loading);
-        props.conversationService.startConversation();
+        await props.conversationService.startConversation();
+        setHasConversationStarted(true);
     };
 
     const fetchFeedbackConfiguration = async (feedbackInstanceId: string) => {
@@ -79,8 +82,8 @@ export const App: React.FC<AppProps> = (props) => {
         setAppState(AppState.Feedback);
     };
 
-    props.storeService.onFeedback = (feedbackInstanceId) => {
-        fetchFeedbackConfiguration(feedbackInstanceId);
+    props.storeService.onFeedback = async (feedbackInstanceId) => {
+        await fetchFeedbackConfiguration(feedbackInstanceId);
     };
 
     props.globalEventService.onShowPopover = (label, buttonLabel, delay) => {
@@ -90,17 +93,23 @@ export const App: React.FC<AppProps> = (props) => {
         });
         setTimeout(
             () => {
-                if (!hasConversationStarted) setAppState(AppState.Popover);
+                if (!hasConversationStarted) {
+                    setAppState(AppState.Popover);
+                }
             },
             delay ? delay * 1000 : 0,
         );
     };
 
-    props.globalEventService.onShowFeedback = () => {
-        fetchFeedbackConfiguration("demo-feedback-instance-id.json");
+    props.globalEventService.onShowFeedback = async () => {
+        await fetchFeedbackConfiguration("demo-feedback-instance-id.json");
     };
 
     useEffect(() => {
+        if (props.chatStorage.getChatState() == ChatState.Opened) {
+            openChat();
+        }
+
         if (props.popover.shouldShowPopover()) {
             props.globalEventService.showPopover(
                 props.popover.label as string,
@@ -109,6 +118,10 @@ export const App: React.FC<AppProps> = (props) => {
             );
         }
     }, []);
+
+    useEffect(() => {
+        props.chatStorage.setChatState(chatState);
+    }, [appState, chatState]);
 
     return (
         <div
@@ -127,7 +140,10 @@ export const App: React.FC<AppProps> = (props) => {
                     label={popover?.label ?? ""}
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
-                    onClose={() => setChatState(ChatState.Closed)}
+                    onClose={() => {
+                        setChatState(ChatState.Closed);
+                        setAppState(AppState.Loaded);
+                    }}
                     onClick={() => openChat()}
                 />
             )}
@@ -152,7 +168,7 @@ export const App: React.FC<AppProps> = (props) => {
                         avatarMiddleware={createAvatarMiddleware(props.bot)}
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
-                        username={props.customer?.name}
+                        username={props.customer?.username}
                         locale={props.localeService.locale}
                         styleOptions={createStyleOptions(props.configuration)}
                         directLine={directLine}
@@ -161,7 +177,13 @@ export const App: React.FC<AppProps> = (props) => {
                 )}
 
                 {chatState === ChatState.Loading && (
-                    <div className={config.classes.chatBoxLoaderWrapper}>
+                    <div
+                        style={createChatBoxLoaderWrapperCssVariables(
+                            !directLine && props.configuration.directLine.useMockbot,
+                            props.configuration.root,
+                        )}
+                        className={config.classes.chatBoxLoaderWrapper}
+                    >
                         <div className={config.classes.chatBoxLoader}>
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>

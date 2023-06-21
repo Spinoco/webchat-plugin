@@ -16,6 +16,9 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
         suggestedActionBorderColor: c.suggestedAction?.border?.color ? c.suggestedAction?.border.color : c.primaryColor,
         transcriptOverlayButtonBackground: c.primaryColor,
         sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
+        sendBoxButtonShadeColor: c.sendBox?.button?.shadeColor ?? config.styleProperties.sendBox.button.shadeColor,
+        sendBoxButtonShadeColorOnHover:
+            c.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
     };
 
     // ROOT

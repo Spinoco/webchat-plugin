@@ -34,7 +34,7 @@
     <div class="bg-gray-200 p-4 rounded-md text-sm mb-6">
         <code class="text-black">
             &lt;div id=&quot;spinoco-webchat-plugin&quot; data-client-id=&quot;fillme&quot; data-customer-name=&quot;fillme&quot; data-customer-email=&quot;fillme&quot; data-avatar-user-url=&quot;fillme&quot; data-avatar-bot-url=&quot;fillme&quot;&gt;&lt;/div&gt; <br>
-            &lt;script src=&quot;https://spinoco.github.io/webchat-plugin/assets/spinoco-webchat-plugin.js&quot;&gt;&lt;/script&gt;
+            &lt;script type=&quot;module&quot; src=&quot;https://spinoco.github.io/webchat-plugin/assets/spinoco-webchat-plugin.js&quot;&gt;&lt;/script&gt;
         </code>
     </div>
 
@@ -48,6 +48,17 @@
             </div>
             <div class="flex flex-1 md:justify-end mt-2 md:mt-0">
                 <a href="<%= basePath %>/examples/basic.html" class="text-sm inline-flex items-center justify-center px-3 py-1 font-bold leading-6 text-white bg-primary rounded-full md:w-auto hover:bg-gray-800">
+                    <span>Show example</span>
+                </a>
+            </div>
+        </div>
+        <div class="md:flex items-center justify-between p-4">
+            <div class="flex-1">
+                <h3 class="font-bold text-gray-900">Mockbot</h3>
+                <p class="text-sm text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt.</p>
+            </div>
+            <div class="flex flex-1 md:justify-end mt-2 md:mt-0">
+                <a href="<%= basePath %>/examples/mockbot.html" class="text-sm inline-flex items-center justify-center px-3 py-1 font-bold leading-6 text-white bg-primary rounded-full md:w-auto hover:bg-gray-800">
                     <span>Show example</span>
                 </a>
             </div>
@@ -98,6 +109,7 @@
         <a href="https://spinoco.com/" target="_blank">Spinoco.com</a>
     </p>
 </main>
+<script type="module" src="src/spinoco-webchat-plugin.tsx"></script>
 <script type="module" src="src/spinoco-examples.tsx"></script>
 </body>
 

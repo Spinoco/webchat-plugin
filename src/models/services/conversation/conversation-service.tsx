@@ -7,7 +7,7 @@ import { config } from "../../../config/config";
 export class ConversationService {
     private chatStorage: ChatStorage;
     private readonly directLine: DirectLineInterface;
-    public onConversationChange?: (directLine: DirectLine) => void = undefined;
+    public onDirectLineCreated?: (directLine: DirectLine) => void = undefined;
 
     public constructor(chatStorage: ChatStorage, directLine: DirectLineInterface) {
         this.chatStorage = chatStorage;
@@ -19,7 +19,7 @@ export class ConversationService {
      * Load conversation from storage or create new one.
      */
     public async startConversation(): Promise<void> {
-        const conversationId = this.chatStorage.getConversationId();
+        const conversationId = this.directLine.useMockbot ? undefined : this.chatStorage.getConversationId();
         const secret = this.directLine.useMockbot ? await this.getTokenFromMockbot() : this.directLine.secret;
         const directLine: DirectLine = createLine({ secret, watermark: "0", conversationId });
 
@@ -30,8 +30,8 @@ export class ConversationService {
             }
         });
 
-        if (this.onConversationChange) {
-            this.onConversationChange(directLine);
+        if (this.onDirectLineCreated) {
+            this.onDirectLineCreated(directLine);
         }
     }
 

@@ -21,3 +21,16 @@ Insert this snippet before the ```</body>``` tag.
 - ```data-user-avatar-url``` user avatar image url, optional
 - ```data-bot-avatar-base64``` bot avatar image in base64, optional
 - ```data-user-avatar-base64``` user avatar image in base64, optional
+
+### How to open popover
+
+- Call method bellow from javascript. You can test it from browser console.
+
+```shell
+spinocoWebchatPlugin.showPopover("label", "buttonLabel", 1);
+```
+
+- ```label``` popover label
+- ```buttonLabel``` button label (button opens chat)
+- ```delay``` delay in seconds before popover is opened
+
