@@ -33,7 +33,6 @@ interface AppProps {
     customer?: CustomerDto;
     bot: BotDto;
     popover: PopoverDto;
-    clientId: string;
     conversationService: ConversationService;
     localeService: LocaleService;
     storeService: StoreService;
@@ -136,7 +135,6 @@ export const App: React.FC<AppProps> = (props) => {
 
             {appState === AppState.Popover && !hasConversationStarted && (
                 <Popover
-                    clientId={props.clientId}
                     label={popover?.label ?? ""}
                     configuration={props.configuration}
                     buttonLabel={popover?.buttonLabel}
@@ -155,7 +153,6 @@ export const App: React.FC<AppProps> = (props) => {
                 )}
             >
                 <Header
-                    clientId={props.clientId}
                     configuration={props.configuration}
                     onClose={() => {
                         setChatState(ChatState.Closed);
@@ -198,7 +195,6 @@ export const App: React.FC<AppProps> = (props) => {
                 <FeedbackForm
                     configuration={props.configuration}
                     feedbackConfiguration={feedbackConfiguration}
-                    clientId={props.clientId}
                     onClose={() => {
                         setChatState(ChatState.Closed);
                         setAppState(AppState.Loaded);

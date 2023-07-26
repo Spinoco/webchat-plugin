@@ -15,16 +15,10 @@ interface Rating extends RatingInterface {
 interface FeedbackFormProps {
     configuration: ConfigurationInterface;
     feedbackConfiguration: FeedbackConfigurationInterface;
-    clientId: string;
     onClose: () => void;
 }
 
-export const FeedbackForm: React.FC<FeedbackFormProps> = ({
-    configuration,
-    feedbackConfiguration,
-    clientId,
-    onClose,
-}) => {
+export const FeedbackForm: React.FC<FeedbackFormProps> = ({ configuration, feedbackConfiguration, onClose }) => {
     const [ratings, setRatings] = useState<Rating[]>(() => {
         return (
             feedbackConfiguration.ratings?.map((rating) => ({
@@ -59,11 +53,11 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
 
     return (
         <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(true)}>
-            <Header clientId={clientId} configuration={configuration} onClose={onClose} />
+            <Header configuration={configuration} onClose={onClose} />
             <div className="feedback-form-wrapper">
                 {logoSrc && (
                     <div className="img-logo-wrapper">
-                        <img src={logoSrc} alt={clientId} />
+                        <img src={logoSrc} alt="" />
                     </div>
                 )}
                 {ratings.map((ratingItem) => (

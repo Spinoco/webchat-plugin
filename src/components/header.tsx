@@ -6,12 +6,11 @@ import { createHeaderTitleCSSProperties } from "../models/styles/create-header-t
 import { config } from "../config/config";
 
 interface HeaderProps {
-    clientId: string;
     configuration: ConfigurationInterface;
     onClose: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ clientId, configuration, onClose }) => {
+export const Header: React.FC<HeaderProps> = ({ configuration, onClose }) => {
     return (
         <div
             className="swp-header"
@@ -28,13 +27,11 @@ export const Header: React.FC<HeaderProps> = ({ clientId, configuration, onClose
                             : configuration.header.logo.url
                     }
                     className="swp-header-logo"
-                    alt={clientId}
+                    alt=""
                 />
             )}
             {(configuration.header?.title?.hide === undefined || configuration.header?.title.hide === false) && (
-                <div className="swp-header-title" style={createHeaderTitleCSSProperties(configuration)}>
-                    {clientId}
-                </div>
+                <div className="swp-header-title" style={createHeaderTitleCSSProperties(configuration)}></div>
             )}
             {(configuration.header?.closeIcon?.hide === undefined ||
                 configuration.header?.closeIcon?.hide === false) && (
@@ -47,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ clientId, configuration, onClose
                                     ? configuration.header.closeIcon.base64
                                     : configuration.header.closeIcon.url
                             }
-                            alt={clientId}
+                            alt=""
                         />
                     ) : (
                         <Close

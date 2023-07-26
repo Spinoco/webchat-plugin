@@ -7,6 +7,7 @@ export const config = {
         wrapperElementHtmlId: "spinoco-webchat-plugin",
         attributes: {
             clientId: "data-client-id",
+            configUrl: "data-config-url",
             customerName: "data-customer-name",
             customerEmail: "data-customer-email",
             avatarUserUrl: "data-avatar-user-url",

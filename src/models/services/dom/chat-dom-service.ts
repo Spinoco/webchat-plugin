@@ -5,8 +5,12 @@ import { BotDto } from "../../dtos/bot-dto";
 import { PopoverDto } from "../../dtos/popover-dto";
 
 export class ChatDomService extends DomService {
-    getClientId(): string {
-        return this.getRequiredDataAttribute(config.chat.attributes.clientId);
+    getClientId(): string | null {
+        return this.getDataAttribute(config.chat.attributes.clientId);
+    }
+
+    getConfigUrl(): string | null {
+        return this.getDataAttribute(config.chat.attributes.configUrl);
     }
 
     /**

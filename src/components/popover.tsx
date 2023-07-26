@@ -9,21 +9,20 @@ import { createPopoverTitleCssProperties } from "../models/styles/popover/create
 import { config } from "../config/config";
 
 interface PopoverProps {
-    clientId: string;
     label: string;
     buttonLabel?: string;
     onClose?: () => void;
     onClick?: () => void;
     configuration: ConfigurationInterface;
 }
-export const Popover: React.FC<PopoverProps> = ({ label, buttonLabel, configuration, onClose, onClick, clientId }) => {
+export const Popover: React.FC<PopoverProps> = ({ label, buttonLabel, configuration, onClose, onClick }) => {
     const logoExists = configuration?.popover?.head?.logo;
     const logoSrc = logoExists?.base64 ?? logoExists?.url ?? config.styleProperties.popover.head.logo.base64;
 
     return (
         <div className="swp-popover" style={createPopoverCssProperties(configuration)}>
             <div className="swp-popover-head" style={createPopoverHeadCssProperties(configuration)}>
-                <img src={logoSrc} alt={clientId} />
+                <img src={logoSrc} alt="" />
 
                 <div className="close-btn" onClick={onClose}>
                     <Close
