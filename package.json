@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "type": "module",
     "scripts": {
-        "dev": "NODE_ENV=production vite",
+        "dev": "NODE_ENV=production vite --config vite.config.web.ts",
         "build": "npm run build:web; npm run build:plugin;",
         "build:web": "NODE_ENV=production tsc && vite build",
         "build:plugin": "NODE_ENV=production tsc && vite build --config vite.config.plugin.ts",
