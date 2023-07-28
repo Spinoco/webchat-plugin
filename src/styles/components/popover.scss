@@ -21,7 +21,7 @@
             border-bottom: 2px solid transparent;
 
             img {
-                width: 70px;
+                height: var(--popover-head-logo-height);
             }
 
             .close-btn {

@@ -6,7 +6,11 @@ import { config } from "../../../config/config";
  * Creates styles for the popover head element.
  */
 export const createPopoverHeadCssProperties = (configuration: ConfigurationInterface): CSSProperties => {
-    const properties: CSSProperties = {};
+    const properties = {
+        "--popover-head-logo-height": configuration.popover?.head?.logo?.height
+            ? configuration.popover.head.logo.height
+            : config.styleProperties.popover.head.logo.height
+    } as CSSProperties;
 
     properties.backgroundColor = configuration.popover?.head?.backgroundColor
         ? configuration.popover.head.backgroundColor
