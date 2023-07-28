@@ -6,9 +6,9 @@
     "scripts": {
         "dev": "NODE_ENV=production vite --config vite.config.web.ts",
         "build": "npm run build:web; npm run build:plugin;",
-        "build:web": "NODE_ENV=production tsc && vite build",
+        "build:web": "NODE_ENV=production tsc && vite build --config vite.config.web.ts",
         "build:plugin": "NODE_ENV=production tsc && vite build --config vite.config.plugin.ts",
-        "preview": "vite preview",
+        "preview": "vite preview --config vite.config.web.ts",
         "lint": "npm run eslint && npm run stylelint",
         "eslint": "eslint src --fix --max-warnings=0",
         "stylelint": "npx stylelint src/styles/**/*.scss"
