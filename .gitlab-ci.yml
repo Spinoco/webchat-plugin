@@ -12,15 +12,15 @@ stages:
     - build
 
 install:
-    image: node:18.2.0-buster-slim
+    image: node:18.19.0-buster-slim
     stage: install
     script:
-        - npm i --production=false
+        - npm i --production=false --legacy-peer-deps
     tags:
         - docker
 
 lint:
-    image: node:18.2.0-buster-slim
+    image: node:18.19.0-buster-slim
     stage: lint
     script:
         - npm run eslint
@@ -34,7 +34,7 @@ lint:
         policy: pull
 
 build:
-    image: node:18.2.0-buster-slim
+    image: node:18.19.0-buster-slim
     stage: build
     script:
         - npm run build

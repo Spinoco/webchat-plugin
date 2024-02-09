@@ -1,6 +1,6 @@
 services:
     app:
-        image: node:18.2.0-buster-slim
+        image: node:18.19.0-buster-slim
         ports:
             - "4444:4444"
         volumes:
