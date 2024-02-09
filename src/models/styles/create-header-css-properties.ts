@@ -13,6 +13,9 @@ export const createHeaderCSSProperties = (configuration: ConfigurationInterface)
         "--header-close-height": configuration.header?.closeIcon?.height
             ? configuration.header.closeIcon.height
             : config.styleProperties.header.closeIcon.height,
+        "--header-close-color": configuration.header?.closeIcon?.color
+            ? configuration.header.closeIcon.color
+            : config.styleProperties.header.closeIcon.color,
     } as CSSProperties;
 
     properties.backgroundColor = configuration.header?.backgroundColor

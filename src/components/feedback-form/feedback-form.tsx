@@ -52,7 +52,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ configuration, feedb
     };
 
     return (
-        <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(true)}>
+        <div className={config.classes.chatBoxWrapper} style={createChatBoxWrapperCssVariables(true, configuration)}>
             <Header configuration={configuration} onClose={onClose} />
             <div className="feedback-form-wrapper">
                 {logoSrc && (

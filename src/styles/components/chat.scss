@@ -11,7 +11,16 @@
 }
 
 .webchat__suggested-action {
+    border-color: var(--suggested-action-border-color) !important;
+    border-style: var(--suggested-action-border-style) !important;
+    border-width: var(--suggested-action-border-width) !important;
+    border-radius: var(--suggested-action-border-radius) !important;
+
     cursor: pointer;
+
+    &:hover {
+        transform: none;
+    }
 }
 
 .webchat__adaptive-card-renderer {

@@ -30,4 +30,6 @@ export interface ConfigurationInterface {
     features?: FeaturesInterface;
     loader?: LoaderInterface;
     popover?: PopoverInterface;
+    markdownExternalLinkIconImage?: string;
+    linkColor?: string;
 }

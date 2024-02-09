@@ -150,6 +150,7 @@ export const App: React.FC<AppProps> = (props) => {
                 className={config.classes.chatBoxWrapper}
                 style={createChatBoxWrapperCssVariables(
                     chatState === ChatState.Opened || chatState === ChatState.Loading,
+                    props.configuration,
                 )}
             >
                 <Header

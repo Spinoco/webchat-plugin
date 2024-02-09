@@ -5,16 +5,16 @@ Insert this snippet before the ```</body>``` tag.
 ```html
 <div
     id="spinoco-webchat-plugin"
-    data-client-id=""
+    data-config-url=""
     data-customer-name=""
     data-customer-email=""
     data-bot-avatar-url=""
     data-user-avatar-url="">
 </div>
-<script type="module" src="https://spinoco.github.io/webchat-plugin/assets/spinoco-webchat-plugin.js"></script>
+<script type="module" src="https://cdn.spinoco.com/webchat/v2/spinoco-webchat-plugin.js"></script>
 ```
 
-- ```data-client-id``` client identification, required
+- ```data-config-url``` location of configuration file, required
 - ```data-customer-name``` name of customer, optional 
 - ```data-customer-email``` email of customer, optional
 - ```data-bot-avatar-url``` bot avatar image url, optional

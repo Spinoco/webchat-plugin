@@ -96,5 +96,13 @@ export const config = {
         loader: {
             color: "#999999",
         },
+        suggestedAction: {
+            border: {
+                style: "solid",
+                radius: "4px",
+                width: "1px",
+            },
+        },
+        linkColor: "#FFFFFF",
     },
 };

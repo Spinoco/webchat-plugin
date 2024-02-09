@@ -52,6 +52,10 @@
             border-bottom-right-radius: 16px;
             border-bottom-left-radius: 16px;
 
+            h3 {
+                font-size: initial;
+            }
+
             button {
                 margin-top: 15px;
 
@@ -78,6 +82,7 @@
 
                 &:hover {
                     background-color: #CCCCCC !important;
+                    transform: none;
                 }
             }
         }

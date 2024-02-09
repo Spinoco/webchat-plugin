@@ -13,8 +13,8 @@
         }
 
         .swp-header-close {
-            margin-left: auto;
             margin-right: 4px;
+            margin-left: auto;
 
             color: #FFFFFF;
             font-size: rem(24);
@@ -23,6 +23,8 @@
             img,
             svg {
                 height: var(--header-close-height);
+
+                fill: var(--header-close-color);
             }
         }
     }

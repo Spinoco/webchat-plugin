@@ -19,6 +19,8 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
         sendBoxButtonShadeColor: c.sendBox?.button?.shadeColor ?? config.styleProperties.sendBox.button.shadeColor,
         sendBoxButtonShadeColorOnHover:
             c.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
+
+        markdownExternalLinkIconImage: c.markdownExternalLinkIconImage,
     };
 
     // ROOT
@@ -48,6 +50,9 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
 
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
     styleOptions.groupTimestamp = config.chat.groupTimestamp * 1000;
+
+    // Controls when the new messages button should show.
+    styleOptions.scrollToEndButtonBehavior = false;
 
     //todo: do we want/need this? (, customer?: CustomerDto)
     // customer avatar

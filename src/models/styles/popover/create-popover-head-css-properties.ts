@@ -9,7 +9,7 @@ export const createPopoverHeadCssProperties = (configuration: ConfigurationInter
     const properties = {
         "--popover-head-logo-height": configuration.popover?.head?.logo?.height
             ? configuration.popover.head.logo.height
-            : config.styleProperties.popover.head.logo.height
+            : config.styleProperties.popover.head.logo.height,
     } as CSSProperties;
 
     properties.backgroundColor = configuration.popover?.head?.backgroundColor

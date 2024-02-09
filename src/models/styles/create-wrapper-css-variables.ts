@@ -7,7 +7,7 @@ import { config } from "../../config/config";
  * Creates CSS variables for the entire plugin.
  */
 export const createWrapperCssVariables = (configuration: ConfigurationInterface): CSSProperties => {
-    return {
+    const properties = {
         "--color-primary": configuration.primaryColor,
         "--color-primary-hover": configuration.primaryColorHover
             ? configuration.primaryColorHover
@@ -34,4 +34,11 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
             ? configuration.avatar.fontSize
             : config.styleProperties.avatar.fontSize,
     } as React.CSSProperties;
+
+    if (configuration.root?.borderRadius) {
+        properties.borderTopLeftRadius = configuration.root.borderRadius + "px";
+        properties.borderTopRightRadius = configuration.root.borderRadius + "px";
+    }
+
+    return properties;
 };

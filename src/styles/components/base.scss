@@ -3,7 +3,8 @@
     font-family: Calibri, 'Helvetica Neue', Arial, 'sans-serif';
 
     a {
-        font-weight: initial;
+        color: var(--link-color);
+        font-weight: bold;
     }
 
     code {
