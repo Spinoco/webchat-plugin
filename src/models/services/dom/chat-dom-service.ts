@@ -28,6 +28,18 @@ export class ChatDomService extends DomService {
     }
 
     /**
+     * Creates object with information about customer.
+     */
+    getCustomerObject(): { name: string | null, email: string | null, phone: string | null, externalId: string | null } {
+        const customerName = this.getDataAttribute(config.chat.attributes.customerName);
+        const customerEmail = this.getDataAttribute(config.chat.attributes.customerEmail);
+        const customerPhone = this.getDataAttribute(config.chat.attributes.customerPhone);
+        const customerExternalId = this.getDataAttribute(config.chat.attributes.customerExternalId);
+
+        return { name: customerName, email: customerEmail, phone: customerPhone, externalId: customerExternalId };
+    }
+
+    /**
      * Creates information about bot and user (operator).
      */
     getBotDto(): BotDto {

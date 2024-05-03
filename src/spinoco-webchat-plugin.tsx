@@ -18,9 +18,11 @@ declare global {
     }
 }
 
+const chatDomService = new ChatDomService(config.chat.wrapperElementHtmlId);
+
 const createWithConfigUrl = (url: string) => {
     const localeService = new LocaleService();
-    const storeService = new StoreService(localeService);
+    const storeService = new StoreService(localeService, chatDomService);
     const globalEventService = (window.spinocoWebchatPlugin = new GlobalEventService());
 
     fetch(`${url}`)
@@ -53,8 +55,6 @@ const createWithConfigUrl = (url: string) => {
             throw new FailedToLoadConfigurationError(e.message);
         });
 };
-
-const chatDomService = new ChatDomService(config.chat.wrapperElementHtmlId);
 
 const clientId = chatDomService.getClientId();
 const configUrl = chatDomService.getConfigUrl();
