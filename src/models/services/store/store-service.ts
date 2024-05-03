@@ -20,7 +20,7 @@ export class StoreService {
             {},
             ({ dispatch }: { dispatch: (props: object) => void }) =>
                 (next: (action: unknown) => void) =>
-                (action: { type: string }) => {
+                (action: any) => {
                     // add url to channel data
                     if (action.type === "DIRECT_LINE/POST_ACTIVITY") {
                         this.addUrlToChannelData(action as PostActivityAction);
