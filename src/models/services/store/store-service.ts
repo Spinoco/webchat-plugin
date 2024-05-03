@@ -49,6 +49,14 @@ export class StoreService {
                         }
                     }
 
+                    if (action.type === "DIRECT_LINE/INCOMING_ACTIVITY") {
+                      const fromSpinocoBackend = action.payload.activity.channelData?.role;
+                      if (!fromSpinocoBackend) {
+                        if (action.payload.activity.attachments?.length > 0) {
+                          action.payload.activity.from.role = 'user';
+                        }
+                      }
+                   }
                     return next(action);
                 },
         );
