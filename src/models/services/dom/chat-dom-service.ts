@@ -27,6 +27,9 @@ export class ChatDomService extends DomService {
         return undefined;
     }
 
+    /**
+     * Creates object with information about customer.
+     */
     getCustomerObject(): { name: string | null, email: string | null, phone: string | null, externalId: string | null } {
         const customerName = this.getDataAttribute(config.chat.attributes.customerName);
         const customerEmail = this.getDataAttribute(config.chat.attributes.customerEmail);
