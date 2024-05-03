@@ -35,7 +35,6 @@ export class ChatDomService extends DomService {
         const customerEmail = this.getDataAttribute(config.chat.attributes.customerEmail);
         const customerPhone = this.getDataAttribute(config.chat.attributes.customerPhone);
         const customerExternalId = this.getDataAttribute(config.chat.attributes.customerExternalId);
-        console.log(customerName, customerEmail, customerPhone, customerExternalId);
 
         return { name: customerName, email: customerEmail, phone: customerPhone, externalId: customerExternalId };
     }
