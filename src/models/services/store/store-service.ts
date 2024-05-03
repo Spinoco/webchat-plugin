@@ -49,7 +49,19 @@ export class StoreService {
                         }
                     }
 
-                    return next(action);
+                    if (action.type === "DIRECT_LINE/INCOMING_ACTIVITY") {
+                        // when reading message with attachments from history wrong role is set for messages from user
+                        // this is a workaround to fix it
+                        const fromSpinocoBackend = action.payload.activity.channelData?.role;
+
+                        if (!fromSpinocoBackend) {
+                            if (action.payload.activity.attachments?.length > 0) {
+                                action.payload.activity.from.role = 'user';
+                            }
+                        }
+                    }
+
+                   return next(action);
                 },
         );
     }
