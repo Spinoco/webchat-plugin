@@ -10,6 +10,8 @@ export const config = {
             configUrl: "data-config-url",
             customerName: "data-customer-name",
             customerEmail: "data-customer-email",
+            customerPhone: "data-customer-phone",
+            customerExternalId: "data-customer-external-id",
             avatarUserUrl: "data-avatar-user-url",
             avatarUserBase64: "data-avatar-user-base-64",
             avatarBotUrl: "data-avatar-bot-url",

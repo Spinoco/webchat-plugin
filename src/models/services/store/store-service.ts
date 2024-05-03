@@ -2,17 +2,20 @@ import { createStore } from "botframework-webchat";
 import { PostActivityAction } from "botframework-webchat-core/src/actions/postActivity";
 import { Store } from "redux";
 import { LocaleService } from "../locale/locale-service";
+import { ChatDomService } from "../dom/chat-dom-service";
 
 const SCROLL_ANIMATION_DELAY = 850;
 
 export class StoreService {
     private localeService: LocaleService;
+    private domService: ChatDomService;
     public readonly store: Store;
     public onConversationLoaded?: () => void = undefined;
     public onFeedback?: (feedbackInstanceId: string) => void = undefined;
 
-    constructor(localeService: LocaleService) {
+    constructor(localeService: LocaleService, domService: ChatDomService) {
         this.localeService = localeService;
+        this.domService = domService;
         this.store = createStore(
             {},
             ({ dispatch }: { dispatch: (props: object) => void }) =>
@@ -25,11 +28,12 @@ export class StoreService {
 
                     if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
                         // trigger welcome message when connection is fulfilled
+                        console.log("Connected to bot")
                         dispatch({
                             type: "WEB_CHAT/SEND_EVENT",
                             payload: {
                                 name: "webchat/join",
-                                value: { language: this.localeService.locale },
+                                value: { contact: this.domService.getCustomerObject() }
                             },
                         });
 
