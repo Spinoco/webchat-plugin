@@ -28,12 +28,12 @@ export class StoreService {
 
                     if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
                         // trigger welcome message when connection is fulfilled
-                        console.log("Connected to bot")
+                        console.log("Connected to bot");
                         dispatch({
                             type: "WEB_CHAT/SEND_EVENT",
                             payload: {
                                 name: "webchat/join",
-                                value: { contact: this.domService.getCustomerObject() }
+                                value: { contact: this.domService.getCustomerObject() },
                             },
                         });
 
@@ -60,12 +60,12 @@ export class StoreService {
 
                         if (!fromSpinocoBackend) {
                             if (action.payload.activity.attachments?.length > 0) {
-                                action.payload.activity.from.role = 'user';
+                                action.payload.activity.from.role = "user";
                             }
                         }
                     }
 
-                   return next(action);
+                    return next(action);
                 },
         );
     }
