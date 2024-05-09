@@ -21,7 +21,7 @@ declare global {
 const chatDomService = new ChatDomService(config.chat.wrapperElementHtmlId);
 
 const createWithConfigUrl = (url: string) => {
-    const localeService = new LocaleService();
+    const localeService = new LocaleService(chatDomService);
     const storeService = new StoreService(localeService, chatDomService);
     const globalEventService = (window.spinocoWebchatPlugin = new GlobalEventService());
 

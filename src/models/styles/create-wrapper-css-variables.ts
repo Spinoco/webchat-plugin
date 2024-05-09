@@ -8,6 +8,7 @@ import { config } from "../../config/config";
  */
 export const createWrapperCssVariables = (configuration: ConfigurationInterface): CSSProperties => {
     const properties = {
+        "--zIndex": configuration.root?.zIndex ? configuration.root.zIndex : 2,
         "--color-primary": configuration.primaryColor,
         "--color-primary-hover": configuration.primaryColorHover
             ? configuration.primaryColorHover
@@ -36,8 +37,7 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
     } as React.CSSProperties;
 
     if (configuration.root?.borderRadius) {
-        properties.borderTopLeftRadius = configuration.root.borderRadius + "px";
-        properties.borderTopRightRadius = configuration.root.borderRadius + "px";
+        properties.borderRadius = configuration.root.borderRadius + "px";
     }
 
     return properties;

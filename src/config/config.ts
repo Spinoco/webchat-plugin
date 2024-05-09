@@ -16,6 +16,7 @@ export const config = {
             avatarUserBase64: "data-avatar-user-base-64",
             avatarBotUrl: "data-avatar-bot-url",
             avatarBotBase64: "data-avatar-bot-base-64",
+            locale: "data-locale",
         },
         botAvatarInitials: "BOT",
         botAvatarImage: "",
