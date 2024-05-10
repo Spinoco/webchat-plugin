@@ -55,11 +55,7 @@ export const App: React.FC<AppProps> = (props) => {
     const [feedbackConfiguration, setFeedbackConfiguration] = useState<FeedbackConfigurationInterface>();
 
     props.conversationService.onDirectLineCreated = (directLine) => {
-        if (!hasConversationStarted) {
-            setDirectLine(directLine);
-        } else {
-            setChatState(ChatState.Opened);
-        }
+        setDirectLine(directLine);
     };
 
     props.storeService.onConversationLoaded = () => {
