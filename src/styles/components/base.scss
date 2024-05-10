@@ -5,6 +5,10 @@
     a {
         color: var(--link-color);
         font-weight: bold;
+
+        img {
+            display: inline;
+        }
     }
 
     code {
@@ -58,5 +62,16 @@
             padding: rem(8);
         }
     }
+
+    .webchat__bubble__content {
+        div {
+          color: inherit;
+        }
+    }
+
+    .webchat__fileContent {
+      color: inherit;
+    }
+
 }
 

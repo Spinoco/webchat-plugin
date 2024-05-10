@@ -19,8 +19,6 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
         sendBoxButtonShadeColor: c.sendBox?.button?.shadeColor ?? config.styleProperties.sendBox.button.shadeColor,
         sendBoxButtonShadeColorOnHover:
             c.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
-
-        markdownExternalLinkIconImage: c.markdownExternalLinkIconImage,
     };
 
     // ROOT
@@ -34,6 +32,10 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
 
     if (c.root?.background !== undefined) {
         styleOptions.backgroundColor = c.root.background;
+    }
+
+    if (c.markdownExternalLinkIconImage !== undefined) {
+      styleOptions.markdownExternalLinkIconImage = c.markdownExternalLinkIconImage;
     }
 
     // BUBBLE
