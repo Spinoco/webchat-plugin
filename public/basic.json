@@ -4,6 +4,16 @@
     },
     "primaryColor": "#13A361",
     "secondaryColor": "#999999",
+    "root": {
+        "zIndex": 10000,
+        "borderRadius": 16
+    },
+    "header": {
+        "closeIcon": {
+            "height": "22px",
+            "color": "#642d84"
+        }
+    },
     "popover": {
         "borderRadius": "16px",
         "head": {

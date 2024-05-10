@@ -81,4 +81,11 @@ export class ChatDomService extends DomService {
 
         return new PopoverDto(label, buttonLabel, delay);
     }
+
+    /**
+     * Returns locale.
+     */
+    getLocale(): string | null {
+        return this.getDataAttribute(config.chat.attributes.locale);
+    }
 }
