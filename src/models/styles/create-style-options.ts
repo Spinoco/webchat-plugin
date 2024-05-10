@@ -35,7 +35,7 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
     }
 
     if (c.markdownExternalLinkIconImage !== undefined) {
-      styleOptions.markdownExternalLinkIconImage = c.markdownExternalLinkIconImage;
+        styleOptions.markdownExternalLinkIconImage = c.markdownExternalLinkIconImage;
     }
 
     // BUBBLE
