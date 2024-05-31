@@ -34,6 +34,33 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
         "--avatar-font-size": configuration.avatar?.fontSize
             ? configuration.avatar.fontSize
             : config.styleProperties.avatar.fontSize,
+        "--send-box-margin": configuration.sendBox?.margin,
+        "--send-box-upload-width": configuration.sendBox?.upload?.width
+            ? configuration.sendBox.upload.width
+            : (configuration.sendBox?.height ? configuration.sendBox.height + "px" : "40px"),
+        "--send-box-upload-height": configuration.sendBox?.upload?.height
+            ? configuration.sendBox.upload.height
+            : "auto",
+        "--send-box-upload-border-radius": configuration.sendBox?.upload?.borderRadius,
+        "--send-box-upload-align-self": configuration.sendBox?.upload?.height ? "center" : "stretch",
+        "--send-box-upload-backgroundColor": configuration.sendBox?.upload?.backgroundColor,
+        "--send-box-upload-color": configuration.sendBox?.upload?.color,
+        "--send-box-upload-hoverBackgroundColor": configuration.sendBox?.upload?.hoverBackgroundColor
+            ? configuration.sendBox.upload.hoverBackgroundColor
+            : configuration.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
+        "--send-box-send-width": configuration.sendBox?.send?.width
+            ? configuration.sendBox.send.width
+            : (configuration.sendBox?.height ? configuration.sendBox.height + "px" : "40px"),
+        "--send-box-send-height": configuration.sendBox?.send?.height
+            ? configuration.sendBox.send.height
+            : "auto",
+        "--send-box-send-border-radius": configuration.sendBox?.send?.borderRadius,
+        "--send-box-send-align-self": configuration.sendBox?.send?.height ? "center" : "stretch",
+        "--send-box-send-backgroundColor": configuration.sendBox?.send?.backgroundColor,
+        "--send-box-send-color": configuration.sendBox?.send?.color,
+        "--send-box-send-hoverBackgroundColor": configuration.sendBox?.send?.hoverBackgroundColor
+            ? configuration.sendBox.send.hoverBackgroundColor
+            : configuration.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
     } as React.CSSProperties;
 
     if (configuration.root?.borderRadius) {

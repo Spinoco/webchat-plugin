@@ -5,6 +5,7 @@ import { HeaderTitleInterface } from "./header-title-interface";
 export interface HeaderInterface {
     padding?: string;
     backgroundColor?: string;
+    borderBottom?: string;
     logo?: HeaderLogoInterface;
     title?: HeaderTitleInterface;
     closeIcon: HeaderCloseIconInterface;

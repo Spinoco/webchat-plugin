@@ -32,4 +32,6 @@ export interface ConfigurationInterface {
     popover?: PopoverInterface;
     markdownExternalLinkIconImage?: string;
     linkColor?: string;
+    timestampColor?: string;
+    primaryFont?: string;
 }

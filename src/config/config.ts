@@ -44,6 +44,7 @@ export const config = {
     },
     styleProperties: {
         sendBox: {
+            height: 40,
             button: {
                 shadeColorOnHover: "#F3F2F1",
                 shadeColor: "transparent",

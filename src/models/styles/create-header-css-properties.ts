@@ -26,6 +26,10 @@ export const createHeaderCSSProperties = (configuration: ConfigurationInterface)
         properties.padding = configuration.header.padding;
     }
 
+    if (configuration.header && configuration.header.borderBottom) {
+        properties.borderBottom = configuration.header.borderBottom;
+    }
+
     if (configuration.root?.borderRadius) {
         properties.borderTopLeftRadius = configuration.root.borderRadius + "px";
         properties.borderTopRightRadius = configuration.root.borderRadius + "px";

@@ -21,18 +21,19 @@ export const Popover: React.FC<PopoverProps> = ({ label, buttonLabel, configurat
 
     return (
         <div className="swp-popover" style={createPopoverCssProperties(configuration)}>
-            <div className="swp-popover-head" style={createPopoverHeadCssProperties(configuration)}>
-                <img src={logoSrc} alt="" />
-
-                <div className="close-btn" onClick={onClose}>
-                    <Close
-                        color={
-                            configuration.popover?.head?.closeBtnColor
-                                ? configuration.popover.head.closeBtnColor
-                                : config.styleProperties.popover.head.closeBtnColor
-                        }
-                    />
+            {logoExists && (
+                <div className="swp-popover-head" style={createPopoverHeadCssProperties(configuration)}>
+                    <img src={logoSrc} alt="" />
                 </div>
+            )}
+            <div className="close-btn" onClick={onClose}>
+                <Close
+                    color={
+                        configuration.popover?.head?.closeBtnColor
+                            ? configuration.popover.head.closeBtnColor
+                            : config.styleProperties.popover.head.closeBtnColor
+                    }
+                />
             </div>
             <div className="swp-popover-body" style={createPopoverBodyCssProperties(configuration)}>
                 <h3 style={createPopoverTitleCssProperties(configuration)}>{label}</h3>

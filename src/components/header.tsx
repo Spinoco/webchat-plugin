@@ -31,7 +31,9 @@ export const Header: React.FC<HeaderProps> = ({ configuration, onClose }) => {
                 />
             )}
             {(configuration.header?.title?.hide === undefined || configuration.header?.title.hide === false) && (
-                <div className="swp-header-title" style={createHeaderTitleCSSProperties(configuration)}></div>
+                <div className="swp-header-title" style={createHeaderTitleCSSProperties(configuration)}>
+                    {configuration.header?.title?.text === undefined ? "" : configuration.header.title.text}
+                </div>
             )}
             {(configuration.header?.closeIcon?.hide === undefined ||
                 configuration.header?.closeIcon?.hide === false) && (

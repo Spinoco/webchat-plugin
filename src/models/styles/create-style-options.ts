@@ -38,6 +38,14 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
         styleOptions.markdownExternalLinkIconImage = c.markdownExternalLinkIconImage;
     }
 
+    if (c.timestampColor !== undefined) {
+        styleOptions.timestampColor = c.timestampColor;
+    }
+
+    if (c.primaryFont !== undefined) {
+        styleOptions.primaryFont = c.primaryFont;
+    }
+
     // BUBBLE
     styleOptions = createBubbleStyleOptions(c, styleOptions);
 

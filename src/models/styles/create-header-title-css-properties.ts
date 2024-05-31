@@ -11,5 +11,13 @@ export const createHeaderTitleCSSProperties = (configuration: ConfigurationInter
         properties.color = configuration.header.title.color;
     }
 
+    if (configuration.header?.title?.fontSize) {
+        properties.fontSize = configuration.header.title.fontSize;
+    }
+
+    if (configuration.header?.title?.fontWeight) {
+        properties.fontWeight = configuration.header.title.fontWeight;
+    }
+
     return properties;
 };
