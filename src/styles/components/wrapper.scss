@@ -8,6 +8,8 @@
         bottom: rem(20);
         z-index: var(--zIndex);
 
+        pointer-events: none;
+
         @include tablet {
             top: 0;
             right: 0;
@@ -24,6 +26,8 @@
 
             width: inherit;
             height: inherit;
+
+            pointer-events: all;
 
             @include tablet {
                 height: 100%;
