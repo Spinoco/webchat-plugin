@@ -7,23 +7,12 @@ import { config } from "../../config/config";
  * Creates an object to style the chat using its internal properties.
  */
 export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
-    let styleOptions: StyleOptions = {
+    const styleOptions: StyleOptions = {
         accent: c.primaryColor,
         subtle: c.subtle ? c.subtle : c.secondaryColor,
         rootZIndex: c.root?.zIndex && c.root.zIndex,
         botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
-        suggestedActionTextColor: c.suggestedAction?.textColor ? c.suggestedAction.textColor : c.primaryColor,
-        suggestedActionTextColorOnHover: c.suggestedAction?.textColorOnHover
-            ? c.suggestedAction.textColorOnHover
-            : c.primaryColor,
-        suggestedActionBorderColor: c.suggestedAction?.border?.color ? c.suggestedAction?.border.color : c.primaryColor,
         transcriptOverlayButtonBackground: c.primaryColor,
-        sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
-        sendBoxButtonColorOnHover:
-            c.sendBox?.button?.colorOnHover ?? (c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor),
-        sendBoxButtonShadeColor: c.sendBox?.button?.shadeColor ?? config.styleProperties.sendBox.button.shadeColor,
-        sendBoxButtonShadeColorOnHover:
-            c.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
     };
 
     // ROOT
@@ -52,16 +41,16 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
     }
 
     // BUBBLE
-    styleOptions = createBubbleStyleOptions(c, styleOptions);
+    createBubbleStyleOptions(c, styleOptions);
 
     // AVATAR
-    styleOptions = createAvatarStyleOptions(c, styleOptions);
+    createAvatarStyleOptions(c, styleOptions);
 
     // SUGGESTED ACTION
-    styleOptions = createSuggestedActionStyleOptions(c, styleOptions);
+    createSuggestedActionStyleOptions(c, styleOptions);
 
     // SEND BOX
-    styleOptions = createSendBoxStyleOptions(c, styleOptions);
+    createSendBoxStyleOptions(c, styleOptions);
 
     // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
     styleOptions.groupTimestamp = config.chat.groupTimestamp * 1000;
@@ -81,7 +70,7 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
 /**
  * Sets style properties for bubble component.
  */
-const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): void => {
     if (c.bubbleFromUser?.background !== undefined) {
         styleOptions.bubbleFromUserBackground = c.bubbleFromUser.background;
 
@@ -154,14 +143,12 @@ const createBubbleStyleOptions = (c: ConfigurationInterface, styleOptions: Style
         styleOptions.bubbleBorderStyle = c.bubble.border.style;
         styleOptions.bubbleFromUserBorderStyle = c.bubble.border.style;
     }
-
-    return styleOptions;
 };
 
 /**
  * Sets style properties for avatar component.
  */
-const createAvatarStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+const createAvatarStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): void => {
     if (c.avatar?.size !== undefined) {
         styleOptions.avatarSize = c.avatar.size;
     }
@@ -177,14 +164,12 @@ const createAvatarStyleOptions = (c: ConfigurationInterface, styleOptions: Style
         styleOptions.userAvatarBackgroundColor = c.primaryColor;
         styleOptions.botAvatarBackgroundColor = c.primaryColor;
     }
-
-    return styleOptions;
 };
 
 /**
  * Sets style properties for suggested action component.
  */
-const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): void => {
     if (c.suggestedAction?.layout !== undefined) {
         styleOptions.suggestedActionLayout = c.suggestedAction.layout;
     }
@@ -217,13 +202,29 @@ const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptio
         styleOptions.suggestedActionBorderWidth = c.suggestedAction.border.width;
     }
 
-    return styleOptions;
+    if (c.suggestedAction?.textColor) {
+        styleOptions.suggestedActionTextColor = c.suggestedAction?.textColor;
+    } else {
+        styleOptions.suggestedActionTextColor = c.primaryColor;
+    }
+
+    if (c.suggestedAction?.textColorOnHover) {
+        styleOptions.suggestedActionTextColorOnHover = c.suggestedAction?.textColorOnHover;
+    } else {
+        styleOptions.suggestedActionTextColorOnHover = styleOptions.suggestedActionTextColor;
+    }
+
+    if (c.suggestedAction?.border?.color) {
+        styleOptions.suggestedActionBorderColor = c.suggestedAction?.border.color;
+    } else {
+        styleOptions.suggestedActionBorderColor = c.primaryColor;
+    }
 };
 
 /**
  * Sets style properties for send box component.
  */
-const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): StyleOptions => {
+const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: StyleOptions): void => {
     if (c.sendBox?.background) {
         styleOptions.sendBoxBackground = c.sendBox.background;
     }
@@ -244,6 +245,30 @@ const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: Styl
         styleOptions.sendBoxButtonShadeInset = c.sendBox.button.shadeInset;
     }
 
+    if (c.sendBox?.button?.color) {
+        styleOptions.sendBoxButtonColor = c.sendBox.button.color;
+    } else {
+        styleOptions.sendBoxButtonColor = c.primaryColor;
+    }
+
+    if (c.sendBox?.button?.colorOnHover) {
+        styleOptions.sendBoxButtonColorOnHover = c.sendBox?.button?.colorOnHover;
+    } else {
+        styleOptions.sendBoxButtonColorOnHover = styleOptions.sendBoxButtonColor;
+    }
+
+    if (c.sendBox?.button?.shadeColor) {
+        styleOptions.sendBoxButtonShadeColor = c.sendBox?.button?.shadeColor;
+    } else {
+        styleOptions.sendBoxButtonShadeColor = config.styleProperties.sendBox.button.shadeColor;
+    }
+
+    if (c.sendBox?.button?.shadeColorOnHover) {
+        styleOptions.sendBoxButtonShadeColorOnHover = c.sendBox?.button?.shadeColorOnHover;
+    } else {
+        styleOptions.sendBoxButtonShadeColorOnHover = config.styleProperties.sendBox.button.shadeColorOnHover;
+    }
+
     if (c.sendBox?.border?.top) {
         styleOptions.sendBoxBorderTop = c.sendBox.border.top;
     }
@@ -259,6 +284,4 @@ const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: Styl
     if (c.sendBox?.border?.left) {
         styleOptions.sendBoxBorderLeft = c.sendBox.border.left;
     }
-
-    return styleOptions;
 };
