@@ -1,0 +1,49 @@
+.webchat__send-box {
+    margin: var(--send-box-margin);
+
+    .webchat__upload-button {
+
+        align-self: var(--send-box-upload-align-self) !important;
+
+        width: var(--send-box-upload-width);
+
+        height: var(--send-box-upload-height);
+
+        overflow: hidden;
+
+        background-color: var(--send-box-upload-backgroundColor) !important;
+
+        border-radius: var(--send-box-upload-border-radius);
+
+        svg {
+            fill: var(--send-box-upload-color) !important;
+        }
+    }
+
+    .webchat__send-button {
+
+        align-self: var(--send-box-send-align-self) !important;
+
+        width: var(--send-box-send-width) !important;
+
+        height: var(--send-box-send-height);
+
+        overflow: hidden;
+
+        border-radius: var(--send-box-send-border-radius);
+
+        svg {
+            fill: var(--send-box-send-color) !important;
+        }
+
+        .webchat__icon-button__shade {
+            background-color: var(--send-box-send-backgroundColor) !important;
+        }
+
+        &:hover {
+            .webchat__icon-button__shade {
+                background-color: var(--send-box-send-hoverBackgroundColor) !important;
+            }
+        }
+    }
+}

@@ -8,6 +8,10 @@
         bottom: rem(20);
         z-index: var(--zIndex);
 
+        overflow: hidden;
+
+        border-radius: var(--wrapper-border-radius);
+
         pointer-events: none;
 
         @include tablet {
@@ -15,6 +19,12 @@
             right: 0;
             bottom: 0;
             left: 0;
+
+            border-radius: 0;
+        }
+
+        @include mobile {
+            border-radius: 0;
         }
 
         .swp-chat-box {
@@ -93,8 +103,7 @@
         }
 
         .swp-chat {
-            border-bottom-right-radius: var(--wrapper-border-radius);
-            border-bottom-left-radius: var(--wrapper-border-radius);
+
 
             @include tablet {
                 flex-grow: 1;

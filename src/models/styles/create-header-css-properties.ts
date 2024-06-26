@@ -30,10 +30,5 @@ export const createHeaderCSSProperties = (configuration: ConfigurationInterface)
         properties.borderBottom = configuration.header.borderBottom;
     }
 
-    if (configuration.root?.borderRadius) {
-        properties.borderTopLeftRadius = configuration.root.borderRadius + "px";
-        properties.borderTopRightRadius = configuration.root.borderRadius + "px";
-    }
-
     return properties;
 };

@@ -12,7 +12,7 @@ docker-compose exec app bash
 ```
 ### install latest npm
 ```shell
-npm install -g npm@latest
+npm install 
 ```
 
 ### start dev server

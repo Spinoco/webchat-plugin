@@ -5,6 +5,7 @@ import { SendBoxButtonCSSInterface } from "./send-box-button-css-interface";
 export interface SendBoxInterface {
     background?: string;
     color?: string;
+    textWrap?: boolean;
     height?: number | string;
     margin?: string;
     button?: SendBoxButtonInterface;

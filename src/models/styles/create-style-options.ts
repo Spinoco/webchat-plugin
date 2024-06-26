@@ -13,9 +13,14 @@ export const createStyleOptions = (c: ConfigurationInterface): StyleOptions => {
         rootZIndex: c.root?.zIndex && c.root.zIndex,
         botAvatarInitials: config.chat.botAvatarInitials, // enables bot avatar
         suggestedActionTextColor: c.suggestedAction?.textColor ? c.suggestedAction.textColor : c.primaryColor,
+        suggestedActionTextColorOnHover: c.suggestedAction?.textColorOnHover
+            ? c.suggestedAction.textColorOnHover
+            : c.primaryColor,
         suggestedActionBorderColor: c.suggestedAction?.border?.color ? c.suggestedAction?.border.color : c.primaryColor,
         transcriptOverlayButtonBackground: c.primaryColor,
         sendBoxButtonColor: c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor,
+        sendBoxButtonColorOnHover:
+            c.sendBox?.button?.colorOnHover ?? (c.sendBox?.button?.color ? c.sendBox.button.color : c.primaryColor),
         sendBoxButtonShadeColor: c.sendBox?.button?.shadeColor ?? config.styleProperties.sendBox.button.shadeColor,
         sendBoxButtonShadeColorOnHover:
             c.sendBox?.button?.shadeColorOnHover ?? config.styleProperties.sendBox.button.shadeColorOnHover,
@@ -196,6 +201,10 @@ const createSuggestedActionStyleOptions = (c: ConfigurationInterface, styleOptio
         styleOptions.suggestedActionBackgroundColor = c.suggestedAction.background;
     }
 
+    if (c.suggestedAction?.backgroundOnHover !== undefined) {
+        styleOptions.suggestedActionBackgroundColorOnHover = c.suggestedAction.backgroundOnHover;
+    }
+
     if (c.suggestedAction?.border?.radius !== undefined) {
         styleOptions.suggestedActionBorderRadius = c.suggestedAction.border.radius;
     }
@@ -221,6 +230,10 @@ const createSendBoxStyleOptions = (c: ConfigurationInterface, styleOptions: Styl
 
     if (c.sendBox?.color) {
         styleOptions.sendBoxTextColor = c.sendBox.color;
+    }
+
+    if (c.sendBox?.textWrap) {
+        styleOptions.sendBoxTextWrap = c.sendBox.textWrap;
     }
 
     if (c.sendBox?.height) {

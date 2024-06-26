@@ -5,6 +5,8 @@ export interface SuggestedActionInterface {
     height?: number | string;
     imageHeight?: number | string;
     textColor?: string;
+    textColorOnHover?: string;
     background?: string;
+    backgroundOnHover?: string;
     border?: SuggestedActionBorderInterface;
 }
