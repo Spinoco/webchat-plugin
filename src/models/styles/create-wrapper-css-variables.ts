@@ -7,10 +7,11 @@ import { config } from "../../config/config";
  * Creates CSS variables for the entire plugin.
  */
 export const createWrapperCssVariables = (configuration: ConfigurationInterface): CSSProperties => {
-    const properties = {
+    const properties: Record<string, string | number | undefined> = {
         "--zIndex": configuration.root?.zIndex ? configuration.root.zIndex : 2,
-        "--color-primary": configuration.primaryColor,
-        "--color-primary-hover": configuration.primaryColorHover
+        "--swp-color-primary": configuration.primaryColor,
+        "--swp-color-secondary": configuration.secondaryColor,
+        "--swp-color-primary-hover": configuration.primaryColorHover
             ? configuration.primaryColorHover
             : configuration.primaryColor,
         "--border-color": configuration.borderColor ? configuration.borderColor : configuration.primaryColor,
@@ -65,7 +66,13 @@ export const createWrapperCssVariables = (configuration: ConfigurationInterface)
             ? configuration.sendBox.send.hoverBackgroundColor
             : configuration.sendBox?.button?.shadeColorOnHover ??
               config.styleProperties.sendBox.button.shadeColorOnHover,
-    } as React.CSSProperties;
+    };
 
-    return properties;
+    if (configuration.variables) {
+        for (const variable in configuration.variables) {
+            properties[`--swp-${variable}`] = configuration.variables[variable];
+        }
+    }
+
+    return properties as React.CSSProperties;
 };

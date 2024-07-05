@@ -4,13 +4,14 @@
         right: rem(20);
         bottom: rem(20);
 
+        z-index: var(--trigger-zindex);
+
         display: flex;
         align-items: center;
         justify-content: center;
-        width: rem(50);
-        height: rem(50);
 
-        border-radius: 100%;
+        background-color: var(--trigger-background-color);
+
         cursor: pointer;
 
         pointer-events: all;
@@ -18,6 +19,8 @@
         img,
         svg {
             height: var(--trigger-icon-height) !important;
+
+            fill: var(--trigger-icon-color) !important;
         }
     }
 }

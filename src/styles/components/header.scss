@@ -1,8 +1,11 @@
 #spinoco-webchat-plugin {
     .swp-header {
+        z-index: 1; // make sure header is always above the loader
+
         display: flex;
         align-items: center;
         padding: rem(8);
+
 
         color: #FFFFFF !important;
 
