@@ -19,13 +19,27 @@ key: `directLine`
 
 These properties are available in root of the configuration document
 
-| Property           | Type   | Default          | Description                                                                                                                                         |
-|--------------------|--------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **primaryColor**   | string |                  | Primary color that is used in the chat plugin. This can be overridden in certain areas of the plugin but serves as the base through the chat window |
-| **secondaryColor** | string |                  | Secondary color that complement primary color                                                                                                       |
-| primaryColorHover  | string | `primaryColor`   | Whenever primary color is used and the item has hover functionality, this is used on that hover                                                     |
-| borderColor        | string | `primaryColor`   | Color of the border (i.e. in input element)                                                                                                         |
-| subtle             | string | `secondaryColor` | Color of the text that shall not be highlighted i.e. Placeholder text, message Timestamp                                                            |
+| Property           | Type   | Default                 | Description                                                                                                                                                                                                |
+|--------------------|--------|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **primaryColor**   | string |                         | Primary color that is used in the chat plugin. This can be overridden in certain areas of the plugin but serves as the base through the chat window. May be referenced as variable (`--swp-color-primary`) |
+| **secondaryColor** | string |                         | Secondary color that complement primary color, May be referenced as variable (`-swp-color-secondary`)                                                                                                       |
+| primaryColorHover  | string | `--swp-color-primary`   | Whenever primary color is used and the item has hover functionality, this is used on that hover                                                                                                            |
+| borderColor        | string | `--swp-color-primary`   | Color of the border (i.e. in input element)                                                                                                                                                                |
+| subtle             | string | `--swp-color-secondary` | Color of the text that shall not be highlighted i.e. Placeholder text, message Timestamp                                                                                                                   |
+
+### Variables
+
+For complex configurations, variables are useful way how to ensure consistent look and feel across the chat window. 
+Variables are defined in the `variables` of the configuration document and can be referenced in other parts of the configuration.
+Variables are implemented as css variables and can be referenced as `var(--swp-<name>)`.
+
+key `variables`
+
+
+| Property           | Type   | Default             | Description                                   |
+|--------------------|--------|---------------------|-----------------------------------------------|
+| <name>       | string |                     | defines a name of the varaible `--swp-<name>` |
+
 
 ### Trigger
 
@@ -34,20 +48,20 @@ Properties of the icon that opens chat window.
 key: `trigger`
 
 
-| Property         | Type           | Default        | Description                                                                               |
-|------------------|----------------|----------------|-------------------------------------------------------------------------------------------|
-| height           | number, string | 50px           | Height of the trigger                                                                     |
-| width            | number, string | 50px           | Width of the trigger                                                                      |
-| zIndex           | number         |                | Allows to set html zIndex to customize zIndex order                                       |
-| background       | string         | `primaryColor` | Background color of the trigger                                                           |
-| border           | string         |                | Border of the trigger                                                                     |
-| borderRadius     | string         | 100%           | Border radius (100% creates a circle)                                                     |
-| icon.base64      | string         |                | Icon graphics encoded in BASE64                                                           |
-| icon.url         | string         |                | Link to Icon graphics if not provided as base64                                           |
-| icon.color       | string         | #FFFFFF        | Color of the Icon                                                                         |
-| icon.height      | string         | 24px           | Height of the Icon                                                                        |
-| icon.lottie.data | object         |                | [Lottie animations](https://lottiefiles.com/59839-commnet-animation) Json                 |
-| icon.lottie.url  | string         |                | [Lottie animations](https://lottiefiles.com/59839-commnet-animation) Lottie Animation URL |
+| Property         | Type           | Default               | Description                                                                               |
+|------------------|----------------|-----------------------|-------------------------------------------------------------------------------------------|
+| height           | number, string | 50px                  | Height of the trigger                                                                     |
+| width            | number, string | 50px                  | Width of the trigger                                                                      |
+| zIndex           | number         |                       | Allows to set html zIndex to customize zIndex order                                       |
+| background       | string         | `--swp-color-primary` | Background color of the trigger                                                           |
+| border           | string         |                       | Border of the trigger                                                                     |
+| borderRadius     | string         | 100%                  | Border radius (100% creates a circle)                                                     |
+| icon.base64      | string         |                       | Icon graphics encoded in BASE64                                                           |
+| icon.url         | string         |                       | Link to Icon graphics if not provided as base64                                           |
+| icon.color       | string         | #FFFFFF               | Color of the Icon                                                                         |
+| icon.height      | string         | 24px                  | Height of the Icon                                                                        |
+| icon.lottie.data | object         |                       | [Lottie animations](https://lottiefiles.com/59839-commnet-animation) Json                 |
+| icon.lottie.url  | string         |                       | [Lottie animations](https://lottiefiles.com/59839-commnet-animation) Lottie Animation URL |
 
 ### Chat Window : Header
 
@@ -58,8 +72,8 @@ key: `header`
 | Property         | Type    | Default        | Description                                                         |
 |------------------|---------|----------------|---------------------------------------------------------------------|
 | padding          | string  | 8px            | Padding of the window content                                       |
-| backgroundColor  | string  | `primaryColor` | Background of the chat window                                       |
-| borderBottom     | string  | `primaryColor` | Botom border definition such as `1px solid var(--color-grey-500)`   |                                |
+| backgroundColor  | string  | `--swp-color-primary` | Background of the chat window                                       |
+| borderBottom     | string  | `--swp-color-primary` | Botom border definition such as `1px solid var(--swp-color-grey-500)`   |                                |
 | logo.height      | string  | 20px           | Width of the logo placed in the header                              |
 | logo.base64      | string  |                | BASE64 encoded source of the image to be used as logo               |
 | logo.url         | string  |                | Url where the image for hte logo may be found                       |
@@ -142,11 +156,13 @@ key: `bubbleFromUser`
 
 Avatar parameters to be shown for the user 
 
+key `avatar`
+
 | Property     | Type           | Default        | Description               |
 |--------------|----------------|----------------|---------------------------|
 | size         | number         | 30             | Size of the avatar        |
 | borderRadius | number, string | 100%           | Radius of the border      |
-| background   | string         | `primaryColor` | Background of the avatar  |
+| background   | string         | `--swp-color-primary` | Background of the avatar  |
 | fontSize     | string         | 12px           | Font to use inside avatar |
 
 ### Typing indicator
@@ -169,11 +185,11 @@ key: `suggestedAction`
 | layout            | "carousel", "stacked", "flow" | stacked        | Defines how the suggested actions are laid out.           |
 | height            | number, string                | 40             | Defines height of the suggested action                    |
 | imageHeight       | number, string                | 20             | Defines height of the image in suggested action if shown  |
-| textColor         | string                        | `primaryColor` | Defines text color                                        |
-| textColorOnHover  | string                        | `primaryColor` | Defines text color to be used when hovering over          |
-| background        | string                        | `primaryColor` | Defines background color of the action                    |
+| textColor         | string                        | `--swp-olor-primary` | Defines text color                                        |
+| textColorOnHover  | string                        | `--swp-color-primary` | Defines text color to be used when hovering over          |
+| background        | string                        | `--swp-color-primary` | Defines background color of the action                    |
 | backgroundOnHover | string                        | #F3F2F1        | Defines background color of the action when hovering over |
-| border.color      | string                        | `primaryColor` | Defines border color of the action                        |
+| border.color      | string                        | `--swp-color-primary` | Defines border color of the action                        |
 | border.radius     | number, string                | 4px            | Defines border radius                                     |
 | border.style      | string                        | solid          | Defines style of the border                               |
 | border.width      | number                        | 2px            | Defines border width                                      |
@@ -194,8 +210,8 @@ key: `sendBox`
 | border.right             | number, string |                  |                                                                             |
 | border.bottom            | number, string |                  |                                                                             |
 | border.left              | number, string |                  |                                                                             |
-| button.color             | string         | `primaryColor`   | Default color for any buttons in the send box                               |
-| button.colorOnHover      | string         | `primaryColor`   | Default color for any buttons in the send box when hovoered over            |
+| button.color             | string         | `--swp-color-primary`   | Default color for any buttons in the send box                               |
+| button.colorOnHover      | string         | `--swp-color-primary`   | Default color for any buttons in the send box when hovoered over            |
 | button.shadeInset        | number         | 0                | Default shade (~ background) inset for any buttons in the send box          |
 | button.shadeColor        | string         | #F3F2F1          | Default shade (~ background) color for any buttons in the send box          |
 | button.shadeColorOnHover | string         | #F3F2F1          | Default shade (~ background) color on hover for any buttons in the send box |
@@ -209,7 +225,7 @@ key: `sendBox.send`
 | Property             | Type           | Default           | Description                |
 |----------------------|----------------|-------------------|----------------------------|
 | background           | string         | transparent       |                            |
-| hoverBackgroundColor | string         | `primaryColor`        | Color to show the icon with  |
+| hoverBackgroundColor | string         | `--swp-color-primary`        | Color to show the icon with  |
 | color                | string         | #000000           |                            |
 | hoverColor           | string         | #000000           |                            |
 | width                | number, string | 40                | Width of the button in px  |

@@ -12,12 +12,12 @@ docker-compose exec app bash
 ```
 ### install latest npm
 ```shell
-npm install 
+npm install --legacy-peer-deps
 ```
 
 ### start dev server
 ```shell
-npm i
+npm i --legacy-peer-deps
 npm run dev
 ```
 

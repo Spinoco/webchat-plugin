@@ -34,4 +34,5 @@ export interface ConfigurationInterface {
     linkColor?: string;
     timestampColor?: string;
     primaryFont?: string;
+    variables?: Record<string, string | number>;
 }

@@ -33,12 +33,12 @@
 
         font-size: rem(13);
 
-        border-color: var(--color-primary) !important;
+        border-color: var(--swp-color-primary) !important;
         border-radius: rem(4);
         cursor: pointer;
 
         &[aria-pressed='true'] {
-            background-color: var(--color-primary) !important;
+            background-color: var(--swp-color-primary) !important;
         }
     }
 }
