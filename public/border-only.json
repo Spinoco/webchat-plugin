@@ -1,0 +1,74 @@
+{
+    "directLine": {
+        "secret": "pyNBGiN_07E.dmABqUqbXp-XcY45Q3MW0tjelJDX-duh53gZQ67XqfU"
+    },
+    "primaryColor": "#BA1B02",
+    "primaryColorHover": "#821301",
+    "secondaryColor": "#666666",
+    "trigger": {
+        "borderRadius": "10px"
+    },
+    "header": {
+        "backgroundColor": "#ffffff",
+        "padding": "0 24px",
+
+        "title": {
+            "hide": true
+        },
+        "closeIcon": {
+            "base64": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSIjQkExQjAyIj4KICAgIDxwYXRoIGQ9Ik0wIDIyNEgzMiA0ODBoMzJ2NjRINDgwIDMyIDBWMjI0eiIvPgo8L3N2Zz4="
+        }
+    },
+    "root": {
+        "height": 516,
+        "width": 350
+    },
+    "bubble": {
+        "background": "#FFFFFF",
+        "border": {
+            "width": 2,
+            "radius": 0
+        },
+        "color": "#000000"
+    },
+    "avatar": {
+        "size": 0
+    },
+    "typingIndicator": {
+        "background": "#FFFFFF",
+        "color": "#BA1B02"
+    },
+    "suggestedAction": {
+        "layout": "flow",
+        "height": 32,
+        "border": {
+            "radius": 0,
+            "width": 1
+        }
+    },
+    "sendBox": {
+        "height": 60
+    },
+    "features": {
+        "bubbleSingleBorder": true,
+        "scrollbar": true
+    },
+    "popover": {
+        "borderRadius": "16px",
+        "head": {
+            "borderColor": "#000000",
+            "backgroundColor": "#ba1b02",
+            "closeBtnColor": "#ffffff"
+        },
+        "body": {
+            "titleColor": "#000000",
+            "backgroundColor": "#ffffff",
+            "descriptionColor": "#cccccc",
+            "button": {
+                "backgroundColor": "#ba1b02",
+                "color": "#ffffff",
+                "iconColor": "#ffffff"
+            }
+        }
+    }
+}

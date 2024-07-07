@@ -1,0 +1,31 @@
+{
+    "directLine": {
+        "secret": "pyNBGiN_07E.dmABqUqbXp-XcY45Q3MW0tjelJDX-duh53gZQ67XqfU"
+    },
+    "primaryColor": "#BA1B02",
+    "secondaryColor": "#666666",
+    "header": {
+
+        "title": {
+            "hide": true
+        }
+    },
+    "bubble": {
+        "background": "#FFFFFF",
+        "border": {
+            "width": 2,
+            "radius": 0
+        }
+    },
+    "suggestedAction": {
+        "layout": "flow",
+        "border": {
+            "radius": 0,
+            "width": 1
+        }
+    },
+    "features": {
+        "bubbleSingleBorder": true,
+        "scrollbar": true
+    }
+}
