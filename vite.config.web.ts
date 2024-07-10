@@ -40,8 +40,8 @@ export default defineConfig({
                 mockbot: path.resolve(__dirname, "examples/mockbot.html"),
                 lottie: path.resolve(__dirname, "examples/lottie.html"),
                 slevomat: path.resolve(__dirname, "examples/slevomat.html"),
-                zasilkovna: path.resolve(__dirname, "examples/zasilkovna.html"),
-                zasilkovna_minified: path.resolve(__dirname, "examples/zasilkovna-minified.html"),
+                zasilkovna: path.resolve(__dirname, "examples/border-only.html"),
+                zasilkovna_minified: path.resolve(__dirname, "examples/border-only-minified.html"),
             },
             output: {
                 entryFileNames: `assets/[name].js`,
