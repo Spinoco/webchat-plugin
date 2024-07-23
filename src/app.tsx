@@ -101,7 +101,7 @@ export const App: React.FC<AppProps> = (props) => {
     };
 
     useEffect(() => {
-        if (props.chatStorage.getChatState() == ChatState.Opened) {
+        if (props.chatStorage.getChatState() == ChatState.Opened || props.configuration.features?.embedded) {
             openChat();
         }
 

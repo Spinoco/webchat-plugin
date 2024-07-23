@@ -40,6 +40,7 @@ export const config = {
             bubbleSingleBorder: "swp-feature-bubble-single-border",
             sendBoxInputBorder: "swp-feature-sendbox-input-border",
             boxShadow: "swp-feature-box-shadow",
+            embedded: "swp-feature-embedded",
         },
     },
     styleProperties: {

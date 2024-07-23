@@ -3,4 +3,5 @@ export interface FeaturesInterface {
     scrollbar?: boolean;
     sendBoxInputBorder?: boolean;
     boxShadow?: boolean;
+    embedded?: boolean;
 }

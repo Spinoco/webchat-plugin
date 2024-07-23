@@ -255,6 +255,7 @@ key: `features`
 | bubbleSingleBorder | boolean |         | Set bubble only one border. Bot bubble - left border, user bubble - right border |
 | scrollbar          | boolean |         | Minimalistic scrollbar style                                                     |
 | sendBoxInputBorder | boolean |         | 1px solid border around input box with `borderColor`                             |
+| embedded           | boolean |         | Allows the webchat plugin to be embedded directly into a webview                 |
 
 ## Configuration example
 
