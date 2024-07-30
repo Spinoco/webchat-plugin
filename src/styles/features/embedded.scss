@@ -1,0 +1,26 @@
+.swp-feature-embedded {
+    inset: 0 !important;
+
+    border-radius: 0 !important;
+
+    .swp-chat {
+        flex-grow: 1;
+        width: 100%;
+        height: 0;
+    }
+
+    .swp-trigger,
+    .swp-popover {
+        display: none !important;
+    }
+
+
+
+    .swp-chat-box {
+        height: 100% !important;
+
+        .swp-header {
+            display: none !important;
+        }
+    }
+}

@@ -27,5 +27,9 @@ export const createChatBoxWrapperClasses = (configuration: ConfigurationInterfac
         classes.push(config.classes.features.boxShadow);
     }
 
+    if (configuration.features?.embedded) {
+        classes.push(config.classes.features.embedded);
+    }
+
     return classes.join(" ");
 };
