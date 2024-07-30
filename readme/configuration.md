@@ -198,7 +198,7 @@ key: `suggestedAction`
 
 Controls visauals of the box where user can type and send messages
 
-key: `sendBox`
+key: ``
 
 | Property                 | Type           | Default          | Description                                                                 |
 |--------------------------|----------------|------------------|-----------------------------------------------------------------------------|
@@ -220,7 +220,7 @@ key: `sendBox`
 
 Properties to control send button 
 
-key: `sendBox.send`
+key: `.send`
 
 | Property             | Type           | Default           | Description                |
 |----------------------|----------------|-------------------|----------------------------|
@@ -234,7 +234,7 @@ key: `sendBox.send`
 
 ### upload
 
-key: `sendBox.upload`
+key: `.upload`
 
 Properties to control upload button
 
@@ -255,7 +255,7 @@ key: `features`
 | bubbleSingleBorder | boolean |         | Set bubble only one border. Bot bubble - left border, user bubble - right border |
 | scrollbar          | boolean |         | Minimalistic scrollbar style                                                     |
 | sendBoxInputBorder | boolean |         | 1px solid border around input box with `borderColor`                             |
-| embedded           | boolean |         | Allows the webchat plugin to be embedded directly into a webview                 |
+| embedded           | boolean |         | Allows the webchat plugin to be embedded directly into a webview. Embeded plugin does not have header and may not be opened/closed.|
 
 ## Configuration example
 
