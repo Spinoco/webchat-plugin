@@ -198,7 +198,7 @@ key: `suggestedAction`
 
 Controls visauals of the box where user can type and send messages
 
-key: ``
+key: `sendBox`
 
 | Property                 | Type           | Default          | Description                                                                 |
 |--------------------------|----------------|------------------|-----------------------------------------------------------------------------|
@@ -220,7 +220,7 @@ key: ``
 
 Properties to control send button 
 
-key: `.send`
+key: `sendBox.send`
 
 | Property             | Type           | Default           | Description                |
 |----------------------|----------------|-------------------|----------------------------|
@@ -234,7 +234,7 @@ key: `.send`
 
 ### upload
 
-key: `.upload`
+key: `sendBox.upload`
 
 Properties to control upload button
 
