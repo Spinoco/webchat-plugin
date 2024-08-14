@@ -9,10 +9,11 @@ List of all configuration properties.
 key: `directLine`
 
 
-| Property          | Type    | Default    | Description                                       |
-|-------------------|---------|------------|---------------------------------------------------|
-| **secret**        | string  | undefined  | Spinoco key to pair with Chat in Spinoco instance |
-| **useMockbot**    | boolean | true       | When true, the mockbot is used instead            |
+| Property       | Type    | Default    | Description                                    |
+|----------------|---------|------------|------------------------------------------------|
+| **secret**     | string  | undefined  | Spinoco key to pair with Chat in Spinoco instance |
+| **useMockbot** | boolean | true       | When true, the mockbot is used instead         |
+| domain         | string  | undefined  | Domain of the direct line  (europe/india)      |
 
 
 ### Base properties
@@ -34,7 +35,6 @@ Variables are defined in the `variables` of the configuration document and can b
 Variables are implemented as css variables and can be referenced as `var(--swp-<name>)`.
 
 key `variables`
-
 
 | Property           | Type   | Default             | Description                                   |
 |--------------------|--------|---------------------|-----------------------------------------------|

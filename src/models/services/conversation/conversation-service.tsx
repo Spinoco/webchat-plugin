@@ -21,7 +21,14 @@ export class ConversationService {
     public async startConversation(): Promise<void> {
         const conversationId = this.directLine.useMockbot ? undefined : this.chatStorage.getConversationId();
         const secret = this.directLine.useMockbot ? await this.getTokenFromMockbot() : this.directLine.secret;
-        const directLine: DirectLine = createLine({ secret, watermark: "0", conversationId });
+        let domain = undefined;
+        if (this.directLine.domain === "europe") {
+            domain = "https://europe.directline.botframework.com/v3/directline";
+        } else if (this.directLine.domain === "india") {
+            domain = "https://india.directline.botframework.com/v3/directline";
+        }
+
+        const directLine: DirectLine = createLine({ secret, watermark: "0", conversationId, domain });
 
         directLine.connectionStatus$.subscribe(() => {
             const conversationId = directLine["conversationId"];
