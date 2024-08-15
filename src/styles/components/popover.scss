@@ -11,6 +11,8 @@
 
         box-shadow: rgba(100, 100, 111, .2) 0 .7rem 2.9rem 0;
 
+        pointer-events: all;
+
         @include mobile {
             width: calc(100% - 2.5rem);
         }
