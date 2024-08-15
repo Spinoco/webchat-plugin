@@ -126,7 +126,6 @@ export const App: React.FC<AppProps> = (props) => {
 
     useEffect(() => {
         const callback = (params: string[]) => {
-            console.log("Received URL: ", params);
             params.forEach((param) => {
                 if (param === "open") {
                     openChat();
