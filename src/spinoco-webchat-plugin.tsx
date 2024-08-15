@@ -47,6 +47,7 @@ const createWithConfigUrl = (url: string) => {
                         popover={chatDomService.getPopoverDto()}
                         configuration={configuration}
                         globalEventService={globalEventService}
+                        domService={chatDomService}
                     />
                 </React.StrictMode>,
             );
