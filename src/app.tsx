@@ -26,6 +26,7 @@ import { AppState } from "./models/enums/app-state";
 import { ChatState } from "./models/enums/chat-state";
 import { createChatBoxLoaderWrapperCssVariables } from "./models/styles/create-chat-box-loader-wrapper-css-variables";
 import { ChatStorage } from "./models/services/storage/chat-storage";
+import { DomService } from "./models/services/dom/dom-service";
 
 interface AppProps {
     chatStorage: ChatStorage;
@@ -37,6 +38,7 @@ interface AppProps {
     localeService: LocaleService;
     storeService: StoreService;
     globalEventService: GlobalEventService;
+    domService: DomService;
 }
 
 interface PopoverInterface {
@@ -100,6 +102,10 @@ export const App: React.FC<AppProps> = (props) => {
         await fetchFeedbackConfiguration("demo-feedback-instance-id.json");
     };
 
+    props.globalEventService.onOpenChat = async () => {
+        openChat();
+    };
+
     useEffect(() => {
         if (props.chatStorage.getChatState() == ChatState.Opened || props.configuration.features?.embedded) {
             openChat();
@@ -117,6 +123,18 @@ export const App: React.FC<AppProps> = (props) => {
     useEffect(() => {
         props.chatStorage.setChatState(chatState);
     }, [appState, chatState]);
+
+    useEffect(() => {
+        const callback = (params: string[]) => {
+            params.forEach((param) => {
+                if (param === "open") {
+                    openChat();
+                }
+            });
+        };
+
+        props.domService.registerHashCallback(callback);
+    }, []);
 
     return (
         <div
