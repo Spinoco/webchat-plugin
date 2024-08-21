@@ -11,6 +11,7 @@ import { FailedToLoadConfigurationError } from "./models/error/failed-to-load-co
 import { config } from "./config/config";
 import { GlobalEventService } from "./models/services/global-event-service/global-event-service";
 import "./styles/app.scss";
+import { UrlNavigationService } from "./models/services/dom/url-navigation-service";
 
 declare global {
     interface Window {
@@ -24,6 +25,7 @@ const createWithConfigUrl = (url: string) => {
     const localeService = new LocaleService(chatDomService);
     const storeService = new StoreService(localeService, chatDomService);
     const globalEventService = (window.spinocoWebchatPlugin = new GlobalEventService());
+    const urlNavigationService = new UrlNavigationService(globalEventService, chatDomService);
 
     fetch(`${url}`)
         .then((response) => response.json())
@@ -47,7 +49,7 @@ const createWithConfigUrl = (url: string) => {
                         popover={chatDomService.getPopoverDto()}
                         configuration={configuration}
                         globalEventService={globalEventService}
-                        domService={chatDomService}
+                        urlNavigationService={urlNavigationService}
                     />
                 </React.StrictMode>,
             );

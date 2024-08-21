@@ -26,7 +26,7 @@ import { AppState } from "./models/enums/app-state";
 import { ChatState } from "./models/enums/chat-state";
 import { createChatBoxLoaderWrapperCssVariables } from "./models/styles/create-chat-box-loader-wrapper-css-variables";
 import { ChatStorage } from "./models/services/storage/chat-storage";
-import { DomService } from "./models/services/dom/dom-service";
+import { UrlNavigationService } from "./models/services/dom/url-navigation-service";
 
 interface AppProps {
     chatStorage: ChatStorage;
@@ -38,7 +38,7 @@ interface AppProps {
     localeService: LocaleService;
     storeService: StoreService;
     globalEventService: GlobalEventService;
-    domService: DomService;
+    urlNavigationService: UrlNavigationService;
 }
 
 interface PopoverInterface {
@@ -125,15 +125,7 @@ export const App: React.FC<AppProps> = (props) => {
     }, [appState, chatState]);
 
     useEffect(() => {
-        const callback = (params: string[]) => {
-            params.forEach((param) => {
-                if (param === "open") {
-                    openChat();
-                }
-            });
-        };
-
-        props.domService.registerHashCallback(callback);
+        props.urlNavigationService.initialize();
     }, []);
 
     return (
