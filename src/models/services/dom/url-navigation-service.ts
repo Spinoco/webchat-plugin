@@ -33,6 +33,8 @@ export class UrlNavigationService {
 
             // check if there is a hash url when we are initializing this
             this.handleHashUrl();
+
+            this.initialized = true;
         }
     }
 
