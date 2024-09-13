@@ -2,6 +2,13 @@
     text-align: initial;
     -webkit-font-smoothing: auto;
 
+    // Reset before/after pseudo elements as we do not use them in the plugin
+
+    button::before,
+    button::after {
+        content: none;
+    }
+
     .swp-chat-wrapper {
         position: fixed;
         right: rem(20);
@@ -11,8 +18,6 @@
         overflow: hidden;
 
         border-radius: var(--wrapper-border-radius);
-
-        pointer-events: none;
 
         @include tablet {
             top: 0;
