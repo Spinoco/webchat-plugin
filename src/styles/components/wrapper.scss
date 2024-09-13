@@ -19,6 +19,8 @@
 
         border-radius: var(--wrapper-border-radius);
 
+        pointer-events: none;
+
         @include tablet {
             top: 0;
             right: 0;
