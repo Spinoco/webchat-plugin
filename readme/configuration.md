@@ -257,6 +257,32 @@ key: `features`
 | sendBoxInputBorder | boolean |         | 1px solid border around input box with `borderColor`                             |
 | embedded           | boolean |         | Allows the webchat plugin to be embedded directly into a webview. Embeded plugin does not have header and may not be opened/closed.|
 
+### Rules that allow to customize behaviour of the plugin based on certain criteria.
+
+key `rules`
+
+This is defined as array of the following objects. First rule matching applies others are ignored
+
+
+| Property   | Type                    | Default | Description                                                                                                                                                                                                                                                                                                                |
+|------------|-------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **domain** | string, Array of string |         | Required. Defines url of the domain this rule applies to. It is defined as string. If the string starts with "/" character, it is applied only to url path without hostName, otherwise it applies to hostname and path. Url is tested to start with given string, case ignored. multiple urls can be specified with array. |
+| disable    | boolean                 | false   | Disables webchat functionality, webchat will not initialize/render.                                                                                                                                                                                                                                                        |
+                                                                                                                                                                                                                                                                                                         |
+Example of the rules configuration :
+
+```json
+{
+  "rules": [
+    {
+      "domain": "https://www.example.com",
+      "disable": true
+    }  
+  ]
+}
+
+```
+
 ## Configuration example
 
 ### Minimal
