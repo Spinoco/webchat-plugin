@@ -9,6 +9,11 @@ $mobile-breakpoint: "384px";
     @media (max-width: $mobile-breakpoint) { @content; }
 }
 
+// For the desktop screens that are smaller on height so the full plugin is not visible (close button is not visible)
+@mixin low-height-screen {
+    @media (max-height: 680px) { @content; }
+}
+
 @function rem($value) {
     $remValue: calc($value / 16) + rem;
 
