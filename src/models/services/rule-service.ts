@@ -20,15 +20,10 @@ export class RuleService {
      * Returns the rule for the current domain.
      */
     private findRuleForCurrentDomain(rules: RuleInterface[]): RuleInterface | undefined {
-        const location = window.location;
-        const currentPathName = location.pathname.toLowerCase();
-        const currentHost = location.hostname.toLowerCase();
-        const currentPort = location.port;
-        const currentProtocol = location.protocol;
 
         return rules.find((rule) => {
             const domains = rule.domain instanceof Array ? rule.domain : [rule.domain];
-            return domains.find(this.acceptDomain(currentPathName, currentHost, currentPort, currentProtocol));
+            return domains.find(this.acceptDomain(window.location));
         });
     }
 
@@ -41,31 +36,13 @@ export class RuleService {
      * @private
      */
     private acceptDomain(
-        currentPathName: string,
-        currentHost: string,
-        currentPort: string,
-        currentProtocol: string,
+        location: Location
     ): (domain: string) => boolean {
         return (domain: string) => {
             if (domain.startsWith("/")) {
-                return currentPathName.startsWith(domain.toLowerCase());
+                return location.pathname.toLowerCase().startsWith(domain.toLowerCase());
             } else {
-                let url: URL | undefined = undefined;
-                try {
-                    url = new URL(domain);
-                } catch (e) {
-                    console.error(`Invalid domain: ${domain}`);
-                }
-
-                if (url === undefined) return false;
-                else {
-                    const portMatch = url.port == null || url.port === "" || url.port === currentPort;
-                    const protocolMatch = url.protocol === currentProtocol;
-                    const hostMatch = url.hostname === currentHost;
-                    const pathMatch = currentPathName.startsWith(url.pathname.toLowerCase());
-
-                    return portMatch && protocolMatch && hostMatch && pathMatch;
-                }
+                return location.href.toLowerCase().startsWith(domain.toLowerCase());
             }
         };
     }
