@@ -12,6 +12,7 @@ import { config } from "./config/config";
 import { GlobalEventService } from "./models/services/global-event-service/global-event-service";
 import "./styles/app.scss";
 import { UrlNavigationService } from "./models/services/dom/url-navigation-service";
+import { RuleService } from "./models/services/rule-service";
 
 declare global {
     interface Window {
@@ -30,29 +31,34 @@ const createWithConfigUrl = (url: string) => {
     fetch(`${url}`)
         .then((response) => response.json())
         .then((configuration: ConfigurationInterface) => {
-            const directLineSecret = configuration.directLine.secret;
-            if (!directLineSecret) {
-                configuration.directLine.useMockbot = true;
-            }
-            const chatStorage = ChatStorage.getInstance();
-            const conversationService = new ConversationService(chatStorage, configuration.directLine);
+            const ruleSrevice = new RuleService(configuration);
+            if (ruleSrevice.mayDisplayForCurrentDomain()) {
+                const directLineSecret = configuration.directLine.secret;
+                if (!directLineSecret) {
+                    configuration.directLine.useMockbot = true;
+                }
+                const chatStorage = ChatStorage.getInstance();
+                const conversationService = new ConversationService(chatStorage, configuration.directLine);
 
-            ReactDOM.createRoot(chatDomService.wrapperElement).render(
-                <React.StrictMode>
-                    <App
-                        chatStorage={chatStorage}
-                        storeService={storeService}
-                        localeService={localeService}
-                        conversationService={conversationService}
-                        customer={chatDomService.getCustomerDto()}
-                        bot={chatDomService.getBotDto()}
-                        popover={chatDomService.getPopoverDto()}
-                        configuration={configuration}
-                        globalEventService={globalEventService}
-                        urlNavigationService={urlNavigationService}
-                    />
-                </React.StrictMode>,
-            );
+                ReactDOM.createRoot(chatDomService.wrapperElement).render(
+                    <React.StrictMode>
+                        <App
+                            chatStorage={chatStorage}
+                            storeService={storeService}
+                            localeService={localeService}
+                            conversationService={conversationService}
+                            customer={chatDomService.getCustomerDto()}
+                            bot={chatDomService.getBotDto()}
+                            popover={chatDomService.getPopoverDto()}
+                            configuration={configuration}
+                            globalEventService={globalEventService}
+                            urlNavigationService={urlNavigationService}
+                        />
+                    </React.StrictMode>,
+                );
+            } else {
+                console.warn("Chat is disabled for this domain.");
+            }
         })
         .catch((e) => {
             throw new FailedToLoadConfigurationError(e.message);
