@@ -1,4 +1,6 @@
-$tablet-breakpoint: "768px";
+
+
+$tablet-breakpoint: "768px"; // when changing breakpoint, also update the `src/middlewares/device-query.tsx` file
 $mobile-breakpoint: "384px";
 
 @mixin tablet {

@@ -39,6 +39,7 @@ interface AppProps {
     storeService: StoreService;
     globalEventService: GlobalEventService;
     urlNavigationService: UrlNavigationService;
+    isFullScreen: boolean;
 }
 
 interface PopoverInterface {
@@ -107,7 +108,9 @@ export const App: React.FC<AppProps> = (props) => {
     };
 
     useEffect(() => {
-        if (props.chatStorage.getChatState() == ChatState.Opened || props.configuration.features?.embedded) {
+        // we are opening chat on the new page only if it was opened before and if the chat is not in fullscreen mode
+        const shallOpenChat = !props.isFullScreen && props.chatStorage.getChatState() == ChatState.Opened;
+        if (shallOpenChat || props.configuration.features?.embedded) {
             openChat();
         }
 
