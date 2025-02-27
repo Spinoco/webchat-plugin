@@ -13,6 +13,7 @@ import { GlobalEventService } from "./models/services/global-event-service/globa
 import "./styles/app.scss";
 import { UrlNavigationService } from "./models/services/dom/url-navigation-service";
 import { RuleService } from "./models/services/rule-service";
+import { isFullScreen } from "./middlewares/device-query";
 
 declare global {
     interface Window {
@@ -53,6 +54,7 @@ const createWithConfigUrl = (url: string) => {
                             configuration={configuration}
                             globalEventService={globalEventService}
                             urlNavigationService={urlNavigationService}
+                            isFullScreen={isFullScreen()}
                         />
                     </React.StrictMode>,
                 );
