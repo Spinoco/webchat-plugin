@@ -20,6 +20,11 @@ export const Trigger: React.FC<TriggerProps> = ({ configuration, setOpened }) =>
                 setOpened(true);
             }}
             className="swp-trigger"
+            tabIndex={0}
+            role="button"
+            aria-label={
+                configuration.trigger?.accessibilityLabel ? configuration.trigger.accessibilityLabel : "Open chat"
+            }
         >
             {configuration.trigger?.icon?.lottie?.data !== undefined ||
             configuration.trigger?.icon?.lottie?.url !== undefined ? (
