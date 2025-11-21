@@ -8,4 +8,5 @@ export interface TriggerInterface {
     border?: string;
     borderRadius?: string;
     icon?: TriggerIconInterface;
+    accessibilityLabel?: string;
 }
