@@ -6,33 +6,61 @@ import { config } from "../../../config/config";
 
 export class ConversationService {
     private chatStorage: ChatStorage;
-    private readonly directLine: DirectLineInterface;
+
+    /** Configuration the direct lines are created from, ie. the secret and the domain. */
+    private readonly directLineConfiguration: DirectLineInterface;
+
     public onDirectLineCreated?: (directLine: DirectLine) => void = undefined;
 
-    public constructor(chatStorage: ChatStorage, directLine: DirectLineInterface) {
+    /**
+     * The direct line of the conversation that is currently running, if any.
+     *
+     * It is held to be able to end it when the conversation is replaced, and to tell whether a
+     * direct line that reports something is still the one we are running.
+     */
+    private currentDirectLine?: DirectLine;
+
+    /**
+     * Subscription to the connection status of the currently running conversation.
+     *
+     * Ending a direct line does not complete its connection status, so the subscription has to
+     * be released by hand when the conversation is replaced.
+     */
+    private currentSubscription?: { unsubscribe: () => void };
+
+    public constructor(chatStorage: ChatStorage, directLineConfiguration: DirectLineInterface) {
         this.chatStorage = chatStorage;
-        this.directLine = directLine;
+        this.directLineConfiguration = directLineConfiguration;
         this.attachEvents();
+    }
+
+    /** Yields to true when there is a conversation that was started before and may be resumed. */
+    public hasStoredConversation(): boolean {
+        return this.chatStorage.getConversationId() !== undefined;
     }
 
     /**
      * Load conversation from storage or create new one.
      */
     public async startConversation(): Promise<void> {
-        const conversationId = this.directLine.useMockbot ? undefined : this.chatStorage.getConversationId();
-        const secret = this.directLine.useMockbot ? await this.getTokenFromMockbot() : this.directLine.secret;
+        const useMockbot = this.directLineConfiguration.useMockbot;
+        const conversationId = useMockbot ? undefined : this.chatStorage.getConversationId();
+        const secret = useMockbot ? await this.getTokenFromMockbot() : this.directLineConfiguration.secret;
         let domain = undefined;
-        if (this.directLine.domain === "europe") {
+        if (this.directLineConfiguration.domain === "europe") {
             domain = "https://europe.directline.botframework.com/v3/directline";
-        } else if (this.directLine.domain === "india") {
+        } else if (this.directLineConfiguration.domain === "india") {
             domain = "https://india.directline.botframework.com/v3/directline";
         }
 
         const directLine: DirectLine = createLine({ secret, watermark: "0", conversationId, domain });
+        this.currentDirectLine = directLine;
 
-        directLine.connectionStatus$.subscribe(() => {
+        this.currentSubscription = directLine.connectionStatus$.subscribe(() => {
             const conversationId = directLine["conversationId"];
-            if (conversationId && !this.directLine.useMockbot) {
+            // the conversation may have been replaced in the meantime, in such case its id
+            // must not be stored anymore, as it would overwrite the id of the current one
+            if (conversationId && !useMockbot && this.currentDirectLine === directLine) {
                 this.chatStorage.setConversationId(conversationId);
             }
         });
@@ -40,6 +68,18 @@ export class ConversationService {
         if (this.onDirectLineCreated) {
             this.onDirectLineCreated(directLine);
         }
+    }
+
+    /**
+     * Replaces the conversation that is currently running with a brand new one.
+     *
+     * The stored conversation id is dropped, so the direct line creates (and stores) a new
+     * conversation instead of loading the previous one.
+     */
+    public async replaceConversation(): Promise<void> {
+        this.endCurrentConversation();
+        this.chatStorage.clear();
+        await this.startConversation();
     }
 
     /**
@@ -60,16 +100,16 @@ export class ConversationService {
                 event.error?.response?.error?.message === "Conversation not found" ||
                 event.error?.response?.error?.message === "Token not valid for this conversation"
             ) {
-                await this.resetConversation();
+                await this.replaceConversation();
             }
         });
     }
 
-    /**
-     * Removes stored conversation and starts new one.
-     */
-    private async resetConversation(): Promise<void> {
-        this.chatStorage.clear();
-        await this.startConversation();
+    /** Releases the conversation that is currently running, so it does not receive anything anymore. */
+    private endCurrentConversation(): void {
+        this.currentSubscription?.unsubscribe();
+        this.currentSubscription = undefined;
+        this.currentDirectLine?.end();
+        this.currentDirectLine = undefined;
     }
 }

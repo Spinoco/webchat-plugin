@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ConfigurationInterface } from "./models/interfaces/configuration/configuration-interface";
 import ReactWebChat from "botframework-webchat";
 import { DirectLine } from "botframework-directlinejs";
+import { Store } from "redux";
 import { createStyleOptions } from "./models/styles/create-style-options";
 import { botTypingIndicatorMiddleware } from "./middlewares/bot-typing-indicator-middleware";
 import { Header } from "./components/header";
@@ -27,6 +28,10 @@ import { ChatState } from "./models/enums/chat-state";
 import { createChatBoxLoaderWrapperCssVariables } from "./models/styles/create-chat-box-loader-wrapper-css-variables";
 import { ChatStorage } from "./models/services/storage/chat-storage";
 import { UrlNavigationService } from "./models/services/dom/url-navigation-service";
+import { WebchatContextService } from "./models/services/context/webchat-context-service";
+import { WebchatContextInterface } from "./models/interfaces/context/webchat-context-interface";
+import { ChatConversationStartPayloadInterface } from "./models/interfaces/conversation/chat-conversation-start-payload-interface";
+import { QuestionDialog } from "./components/question-dialog";
 
 interface AppProps {
     chatStorage: ChatStorage;
@@ -39,6 +44,7 @@ interface AppProps {
     storeService: StoreService;
     globalEventService: GlobalEventService;
     urlNavigationService: UrlNavigationService;
+    webchatContextService: WebchatContextService;
     isFullScreen: boolean;
 }
 
@@ -47,18 +53,46 @@ interface PopoverInterface {
     buttonLabel?: string;
 }
 
+interface ConversationInterface {
+    /** Direct line of the conversation. */
+    directLine: DirectLine;
+
+    /** Store that holds the state (ie. the transcript) of the conversation. */
+    store: Store;
+
+    /**
+     * Distinguishes the conversations from each other, so the chat is re-mounted whenever the
+     * conversation is replaced and does not carry over anything of the previous one.
+     */
+    generation: number;
+}
+
 export const App: React.FC<AppProps> = (props) => {
     const [appState, setAppState] = useState<AppState>(AppState.Loading);
     const [chatState, setChatState] = useState<ChatState>(ChatState.Closed);
 
-    const [directLine, setDirectLine] = useState<DirectLine>();
+    const [conversation, setConversation] = useState<ConversationInterface>();
     const [popover, setPopover] = useState<PopoverInterface>();
 
     const [hasConversationStarted, setHasConversationStarted] = useState<boolean>(false);
     const [feedbackConfiguration, setFeedbackConfiguration] = useState<FeedbackConfigurationInterface>();
 
+    // context that was handed over in the url, that the user has to confirm before we act on it
+    const [contextToConfirm, setContextToConfirm] = useState<WebchatContextInterface>();
+
+    // the configuration and the bot do not change once the plugin is loaded, while a new identity
+    // of these props re-renders the whole chat - which every state of this component would do
+    const styleOptions = useMemo(() => createStyleOptions(props.configuration), []);
+    const avatarMiddleware = useMemo(() => createAvatarMiddleware(props.bot), []);
+
     props.conversationService.onDirectLineCreated = (directLine) => {
-        setDirectLine(directLine);
+        // the store belongs to the conversation, so both are handed over to the chat at once,
+        // otherwise the chat could render the store of one conversation with the direct line of another
+        setConversation((current) => ({
+            directLine,
+            store: props.storeService.store,
+            generation: (current?.generation ?? 0) + 1,
+        }));
     };
 
     props.storeService.onConversationLoaded = () => {
@@ -66,9 +100,21 @@ export const App: React.FC<AppProps> = (props) => {
         setChatState(ChatState.Opened);
     };
 
-    const openChat = async () => {
+    /**
+     * Opens the chat on a conversation.
+     *
+     * The conversation that is already running is resumed, unless it is to be replaced - then it
+     * is dropped together with its transcript and a brand new one is started in its place.
+     */
+    const openChat = async (startPayload?: ChatConversationStartPayloadInterface, replaceRunning = false) => {
         setChatState(ChatState.Loading);
-        await props.conversationService.startConversation();
+        if (startPayload) {
+            // the payload belongs to the conversation we are about to start, so it goes with its store
+            props.storeService.recreateStore(startPayload);
+        }
+        await (replaceRunning
+            ? props.conversationService.replaceConversation()
+            : props.conversationService.startConversation());
         setHasConversationStarted(true);
     };
 
@@ -108,13 +154,26 @@ export const App: React.FC<AppProps> = (props) => {
     };
 
     useEffect(() => {
-        // we are opening chat on the new page only if it was opened before and if the chat is not in fullscreen mode
-        const shallOpenChat = !props.isFullScreen && props.chatStorage.getChatState() == ChatState.Opened;
-        if (shallOpenChat || props.configuration.features?.embedded) {
-            openChat();
+        const context = props.webchatContextService.getContext();
+        // there is no conversation to be replaced, so the conversation of the context may be
+        // started right away, otherwise the user has to confirm that we may replace it
+        const hasConversation = props.conversationService.hasStoredConversation();
+        const startPayload =
+            context && !hasConversation ? props.webchatContextService.createStartPayload(context) : undefined;
+
+        if (context && hasConversation) {
+            setContextToConfirm(context);
         }
 
-        if (props.popover.shouldShowPopover()) {
+        // we are opening chat on the new page only if it was opened before and if the chat is not in fullscreen mode
+        const shallOpenChat = !props.isFullScreen && props.chatStorage.getChatState() == ChatState.Opened;
+        // the question of a context is asked inside the chat window, so the window is opened either way
+        if (shallOpenChat || props.configuration.features?.embedded || context) {
+            openChat(startPayload);
+        }
+
+        // the popover must not compete with the question we are about to ask the user
+        if (!context && props.popover.shouldShowPopover()) {
             props.globalEventService.showPopover(
                 props.popover.label as string,
                 props.popover.buttonLabel,
@@ -169,24 +228,25 @@ export const App: React.FC<AppProps> = (props) => {
                     }}
                 />
 
-                {directLine && (
+                {conversation && (
                     <ReactWebChat
+                        key={conversation.generation}
                         className={config.classes.chat}
-                        avatarMiddleware={createAvatarMiddleware(props.bot)}
+                        avatarMiddleware={avatarMiddleware}
                         sendTypingIndicator={true}
                         typingIndicatorMiddleware={botTypingIndicatorMiddleware}
                         username={props.customer?.username}
                         locale={props.localeService.locale}
-                        styleOptions={createStyleOptions(props.configuration)}
-                        directLine={directLine}
-                        store={props.storeService.store}
+                        styleOptions={styleOptions}
+                        directLine={conversation.directLine}
+                        store={conversation.store}
                     />
                 )}
 
                 {chatState === ChatState.Loading && (
                     <div
                         style={createChatBoxLoaderWrapperCssVariables(
-                            !directLine && props.configuration.directLine.useMockbot,
+                            !conversation && props.configuration.directLine.useMockbot,
                             props.configuration.root,
                         )}
                         className={config.classes.chatBoxLoaderWrapper}
@@ -198,6 +258,21 @@ export const App: React.FC<AppProps> = (props) => {
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>
                         </div>
                     </div>
+                )}
+
+                {/* the dialog covers the chat, so it is shown once the chat gives the window its size */}
+                {contextToConfirm && conversation && (
+                    <QuestionDialog
+                        question={contextToConfirm.question}
+                        yesLabel={contextToConfirm.yesLabel}
+                        noLabel={contextToConfirm.noLabel}
+                        onYes={() => {
+                            const startPayload = props.webchatContextService.createStartPayload(contextToConfirm);
+                            setContextToConfirm(undefined);
+                            openChat(startPayload, true);
+                        }}
+                        onNo={() => setContextToConfirm(undefined)}
+                    />
                 )}
             </div>
 

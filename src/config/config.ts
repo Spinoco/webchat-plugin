@@ -5,6 +5,7 @@ export const config = {
         groupTimestamp: 3, // timestamp grouping https://microsoft.github.io/BotFramework-WebChat/05.custom-components/a.timestamp-grouping/?ts=default
         defaultLanguage: "en",
         wrapperElementHtmlId: "spinoco-webchat-plugin",
+        contextQueryParam: "webchat_context",
         attributes: {
             clientId: "data-client-id",
             configUrl: "data-config-url",
@@ -27,6 +28,10 @@ export const config = {
             buttonLabel: "data-popover-button-label",
             delay: "data-popover-delay",
         },
+    },
+    questionDialog: {
+        yesLabel: "Yes",
+        noLabel: "No",
     },
     feedbackApiUrl: import.meta.env.VITE_FEEDBACK_API_URL,
     classes: {

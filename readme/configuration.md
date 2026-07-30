@@ -28,6 +28,23 @@ These properties are available in root of the configuration document
 | borderColor        | string | `--swp-color-primary`   | Color of the border (i.e. in input element)                                                                                                                                                                |
 | subtle             | string | `--swp-color-secondary` | Color of the text that shall not be highlighted i.e. Placeholder text, message Timestamp                                                                                                                   |
 
+### Css variables published by the plugin
+
+The base properties above, and the radius of the chat window, are published as css variables on the
+root of the plugin. They may be referenced from the configuration (i.e.
+`borderBottom: 1px solid var(--border-color)`) and they are what the parts of the plugin that have
+no configuration of their own are styled with.
+
+| Variable                    | Holds                                        |
+|-----------------------------|----------------------------------------------|
+| `--swp-color-primary`       | `primaryColor`                               |
+| `--swp-color-secondary`     | `secondaryColor`                             |
+| `--swp-color-primary-hover` | `primaryColorHover`, falls back to `primaryColor` |
+| `--border-color`            | `borderColor`, falls back to `primaryColor`   |
+| `--wrapper-border-radius`   | `root.borderRadius`                          |
+
+Individual parts of the plugin declare further variables of their own on top of these.
+
 ### Variables
 
 For complex configurations, variables are useful way how to ensure consistent look and feel across the chat window. 
