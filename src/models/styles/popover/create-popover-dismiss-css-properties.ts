@@ -4,7 +4,7 @@ import { CSSProperties } from "react";
 /**
  * Creates styles for the button that dismisses the popover.
  *
- * It complements the button that confirms it, so it is drawn as its outline.
+ * It complements the button that confirms it, so it carries its color as a plain text button.
  */
 export const createPopoverDismissCssProperties = (configuration: ConfigurationInterface): CSSProperties => {
     const properties: CSSProperties = {
@@ -16,8 +16,6 @@ export const createPopoverDismissCssProperties = (configuration: ConfigurationIn
     properties.color = configuration.popover?.body?.button?.backgroundColor
         ? configuration.popover.body.button.backgroundColor
         : configuration.primaryColor;
-
-    properties.borderColor = properties.color;
 
     return properties;
 };

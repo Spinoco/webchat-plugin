@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Close, Send } from "./icons";
 import { ConfigurationInterface } from "../models/interfaces/configuration/configuration-interface";
 import { createPopoverHeadCssProperties } from "../models/styles/popover/create-popover-head-css-properties";
@@ -42,16 +42,10 @@ export const Popover: React.FC<PopoverProps> = ({
 }) => {
     const logoExists = configuration?.popover?.head?.logo;
     const logoSrc = logoExists?.base64 ?? logoExists?.url ?? config.styleProperties.popover.head.logo.base64;
-    const confirmButtonRef = useRef<HTMLButtonElement>(null);
-
-    // a popover over the whole page interrupts the user, so it takes the focus over and can be
-    // dismissed by escape
     useEffect(() => {
         if (!fullscreen) {
             return;
         }
-
-        confirmButtonRef.current?.focus();
 
         const onKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape" && onClose) {
@@ -66,7 +60,6 @@ export const Popover: React.FC<PopoverProps> = ({
 
     const confirmButton = (
         <button
-            ref={confirmButtonRef}
             onClick={onClick}
             style={createPopoverButtonCssProperties(configuration)}
             className={`inline-flex items-center justify-center px-4 py-2 leading-6 text-white rounded-full md:w-auto hover:bg-gray-800 ${
