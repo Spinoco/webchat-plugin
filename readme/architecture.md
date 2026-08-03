@@ -19,7 +19,7 @@ The plugin is a wrapper around **`botframework-webchat`** (Microsoft Bot Framewo
 ```mermaid
 flowchart LR
     page["Customer page<br/>with the plugin host element"] --> plugin["spinoco-webchat-plugin.js"]
-    plugin --> shell["Own shell<br/>trigger, header, popover,<br/>question dialog, feedback"]
+    plugin --> shell["Own shell<br/>trigger, header, popover,<br/>feedback"]
     plugin --> webchat["botframework-webchat"]
     webchat --> dl["DirectLine"]
     dl --> azure["Azure Bot Services"]
@@ -32,8 +32,8 @@ flowchart LR
 | Path | Content |
 |---|---|
 | `src/spinoco-webchat-plugin.tsx` | Bootstrap: reads the host element, loads the configuration, wires the services, mounts `App`. |
-| `src/app.tsx` | The whole ui state machine: trigger, chat window, popover, question dialog, feedback form. |
-| `src/components/` | Presentational components (`trigger`, `header`, `popover`, `question-dialog`, `feedback-form/*`, `icons`). |
+| `src/app.tsx` | The whole ui state machine: trigger, chat window, popover, feedback form. |
+| `src/components/` | Presentational components (`trigger`, `header`, `popover`, `feedback-form/*`, `icons`). The popover serves both the invitation in the corner and the question over the whole page, see its `fullscreen` and `dismissLabel` props. |
 | `src/middlewares/` | `botframework-webchat` middlewares (avatars, typing indicator) + `device-query` (fullscreen detection). |
 | `src/models/services/` | All behaviour that is not rendering, see [Services](#services). |
 | `src/models/interfaces/configuration/` | Typed shape of the customer configuration json. |
@@ -141,7 +141,7 @@ stateDiagram-v2
     Closed --> Loading: openChat - trigger, embedded,<br/>stored state or url context
     Loading --> Opened: connection fulfilled<br/>plus the scroll animation delay
     Opened --> Closed: header close
-    Opened --> Loading: replaceConversation<br/>question dialog confirmed
+    Opened --> Loading: replaceConversation<br/>question of a context confirmed
     Loading --> Loading: window error<br/>conversation not found
 ```
 
@@ -227,7 +227,7 @@ See [usage.md](usage.md) for the details of each.
 
 - **`--legacy-peer-deps` is mandatory** - `vite-plugin-ejs` demands a newer vite than the one pinned here, so a plain `npm install` / `npm ci` fails.
 - **Tailwind does not reach the plugin** - `tailwind.config.cjs` scans only `index.html` and `examples/*.html`, so utility classes written in `src/*.tsx` (`Popover`, `FeedbackForm`) are not in the built css. New components should use scss, not tailwind.
-- **The chat window has no size of its own** - it is sized by the mounted `botframework-webchat` (`styleOptions.rootWidth/rootHeight`, default 400x500). Anything drawn before the chat mounts has to bring its own dimensions (see the loader), or wait for it to mount (see the question dialog).
+- **The chat window has no size of its own** - it is sized by the mounted `botframework-webchat` (`styleOptions.rootWidth/rootHeight`, default 400x500). Anything drawn inside the window before the chat mounts has to bring its own dimensions, see the loader.
 - **The transcript can only be dropped by recreating the store** - the `botframework-webchat` activities reducer never clears on reconnect.
 - **`React.StrictMode` doubles the mount effects in development** - the initial `openChat()` runs twice and two conversations are created. Production is unaffected.
 - **The feedback form is a demo** - the instance id is hardcoded in `StoreService` (`TODO`) and the configuration is fetched from `VITE_FEEDBACK_API_URL`.

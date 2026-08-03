@@ -31,7 +31,6 @@ import { UrlNavigationService } from "./models/services/dom/url-navigation-servi
 import { WebchatContextService } from "./models/services/context/webchat-context-service";
 import { WebchatContextInterface } from "./models/interfaces/context/webchat-context-interface";
 import { ChatConversationStartPayloadInterface } from "./models/interfaces/conversation/chat-conversation-start-payload-interface";
-import { QuestionDialog } from "./components/question-dialog";
 
 interface AppProps {
     chatStorage: ChatStorage;
@@ -167,8 +166,8 @@ export const App: React.FC<AppProps> = (props) => {
 
         // we are opening chat on the new page only if it was opened before and if the chat is not in fullscreen mode
         const shallOpenChat = !props.isFullScreen && props.chatStorage.getChatState() == ChatState.Opened;
-        // the question of a context is asked inside the chat window, so the window is opened either way
-        if (shallOpenChat || props.configuration.features?.embedded || context) {
+        // the question is asked over the page, so nothing is opened until the user has answered it
+        if (shallOpenChat || props.configuration.features?.embedded || startPayload) {
             openChat(startPayload);
         }
 
@@ -211,6 +210,22 @@ export const App: React.FC<AppProps> = (props) => {
                         setAppState(AppState.Loaded);
                     }}
                     onClick={() => openChat()}
+                />
+            )}
+
+            {contextToConfirm && (
+                <Popover
+                    label={contextToConfirm.question}
+                    configuration={props.configuration}
+                    buttonLabel={contextToConfirm.yesLabel ?? config.questionDialog.yesLabel}
+                    dismissLabel={contextToConfirm.noLabel ?? config.questionDialog.noLabel}
+                    fullscreen
+                    onClose={() => setContextToConfirm(undefined)}
+                    onClick={() => {
+                        const startPayload = props.webchatContextService.createStartPayload(contextToConfirm);
+                        setContextToConfirm(undefined);
+                        openChat(startPayload, true);
+                    }}
                 />
             )}
 
@@ -258,21 +273,6 @@ export const App: React.FC<AppProps> = (props) => {
                             <div style={createChatBoxLoaderProperties(props.configuration)}></div>
                         </div>
                     </div>
-                )}
-
-                {/* the dialog covers the chat, so it is shown once the chat gives the window its size */}
-                {contextToConfirm && conversation && (
-                    <QuestionDialog
-                        question={contextToConfirm.question}
-                        yesLabel={contextToConfirm.yesLabel}
-                        noLabel={contextToConfirm.noLabel}
-                        onYes={() => {
-                            const startPayload = props.webchatContextService.createStartPayload(contextToConfirm);
-                            setContextToConfirm(undefined);
-                            openChat(startPayload, true);
-                        }}
-                        onNo={() => setContextToConfirm(undefined)}
-                    />
                 )}
             </div>
 

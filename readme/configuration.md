@@ -109,6 +109,11 @@ key: `header`
 
 Popover is small window that is inviting customer in the chat 
 
+The popover is also used to ask the user a question they have to answer, ie. when a
+[webchat context](webchat-context.md) is passed in the url of the page. It is presented over the
+whole page then, with a second button that dismisses it, and it is styled by these very properties -
+the dismissing button is drawn as the outline of `body.button`.
+
 key: `popover`
 
 | Property                    | Type           | Default | Description                                            |

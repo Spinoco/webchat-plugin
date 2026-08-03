@@ -1,4 +1,34 @@
 #spinoco-webchat-plugin {
+    // a popover that the user has to answer before they can go on covers the whole page and is
+    // centered in it, instead of sitting in the corner above the trigger
+    .swp-popover-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: rem(20);
+
+        background-color: rgba(0, 0, 0, .35);
+
+        pointer-events: all;
+
+        // the popover is centered by this backdrop instead of being pinned to the corner, while it
+        // stays the containing block of its own close button
+        .swp-popover {
+            position: relative;
+            right: auto;
+            bottom: auto;
+            z-index: auto;
+        }
+    }
+
     .swp-popover {
         position: fixed;
         right: 1.25rem;
@@ -9,7 +39,7 @@
 
         overflow: hidden;
 
-        box-shadow: $card-box-shadow;
+        box-shadow: rgba(100, 100, 111, .2) 0 .7rem 2.9rem 0;
 
         pointer-events: all;
 
@@ -91,6 +121,34 @@
                     background-color: var(--popover-button-hover-background-color) !important;
                     transform: none;
                 }
+            }
+        }
+
+        // the two answers of a question share the width of the popover
+        &-actions {
+            display: flex;
+
+            button {
+                flex: 1 1 0;
+
+                @include mobile {
+                    width: auto;
+                }
+
+                + button {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        &-dismiss {
+            padding: 8px 16px;
+
+            background-color: transparent;
+            border: 1px solid currentcolor;
+
+            &:hover {
+                background-color: transparent !important;
             }
         }
     }

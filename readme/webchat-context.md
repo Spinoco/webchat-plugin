@@ -15,9 +15,12 @@ json:
 ```
 
 With no conversation running, the chat opens and starts the conversation of the context right away.
-With one running, the question is asked in the chat window first - dismissed nothing happens,
-confirmed the running conversation is replaced by a new one. The parameter is then removed from the
-url, so the user is not asked again on a reload.
+With one running, the question is asked first, as a popover over the whole page - dismissed nothing
+happens and the chat is not even opened, confirmed the running conversation is replaced by a new
+one. The parameter is then removed from the url, so the user is not asked again on a reload.
+
+The question is presented by the popover of the plugin, so it is styled by the ```popover``` section
+of the [configuration](configuration.md).
 
 Mind that ```btoa``` alone breaks on diacritics, the json has to be encoded as utf-8 first.
 

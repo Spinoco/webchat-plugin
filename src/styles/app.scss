@@ -22,9 +22,6 @@ $mobile-breakpoint: "384px";
     @return $remValue;
 }
 
-// shadow of the cards that float above the page or above the chat
-$card-box-shadow: rgba(100, 100, 111, .2) 0 .7rem 2.9rem 0;
-
 @import "components/base";
 
 @import "components/avatar";
@@ -36,7 +33,6 @@ $card-box-shadow: rgba(100, 100, 111, .2) 0 .7rem 2.9rem 0;
 @import "components/typing-indicator";
 @import "components/wrapper";
 @import "components/popover";
-@import "components/question-dialog";
 
 @import "features/box-shadow";
 @import "features/bubble-single-border";
