@@ -12,8 +12,7 @@ import { DomService } from "../dom/dom-service";
  *
  * ```
  * webchat_context=base64url({
- *     wfId: "..."                                       // optional
- *     , question: "You sure you want to start newChat?"
+ *     question: "You sure you want to start newChat?"
  *     , kind: "YesNo"
  *     , params: {}
  * })
@@ -52,7 +51,6 @@ export class WebchatContextService {
      */
     createStartPayload(context: WebchatContextInterface): ChatConversationStartPayloadInterface {
         return {
-            hintedWfId: context.wfId,
             params: context.params,
         };
     }
@@ -62,13 +60,13 @@ export class WebchatContextService {
         const url = new URL(this.window.location.href);
         const encoded = url.searchParams.get(config.chat.contextQueryParam);
 
-        if (!encoded) {
+        if (encoded) {
+            this.removeFromUrl(url);
+
+            return this.parse(encoded);
+        } else {
             return undefined;
         }
-
-        this.removeFromUrl(url);
-
-        return this.parse(encoded);
     }
 
     /** Removes the context parameter from the url of the page, keeping the rest of the url intact. */
@@ -86,7 +84,7 @@ export class WebchatContextService {
         let parsed: Partial<WebchatContextInterface>;
 
         try {
-            parsed = JSON.parse(this.decodeBase64Url(encoded));
+            parsed = JSON.parse(this.decodeBase64(encoded));
         } catch (error) {
             console.warn("Failed to decode the webchat context, ignoring it", error);
             return undefined;
@@ -105,11 +103,10 @@ export class WebchatContextService {
         return { ...parsed, question: parsed.question, kind: parsed.kind as WebchatContextKind };
     }
 
-    /** Decodes base64url (RFC 4648, section 5) encoded utf-8 string. */
-    private decodeBase64Url(encoded: string): string {
+    /** Decodes base64, this also accepts the bae64url variant, for compatibility. */
+    private decodeBase64(encoded: string): string {
         const base64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
-        const padding = (4 - (base64.length % 4)) % 4;
-        const binary = this.window.atob(base64 + "=".repeat(padding));
+        const binary = this.window.atob(base64);
 
         return new TextDecoder().decode(Uint8Array.from(binary, (character) => character.charCodeAt(0)));
     }

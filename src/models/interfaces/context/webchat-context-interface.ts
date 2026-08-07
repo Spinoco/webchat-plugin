@@ -5,9 +5,6 @@ import { WebchatContextKind } from "../../enums/webchat-context-kind";
  * see the `WebchatContextService`.
  */
 export interface WebchatContextInterface {
-    /** Workflow that we are hinted to start. Optional, the backend verifies it before it starts it. */
-    wfId?: string;
-
     /** Question that is presented to the user, already localised by the producer of the context. */
     question: string;
 

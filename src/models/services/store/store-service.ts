@@ -44,10 +44,6 @@ export class StoreService {
     }
 
     private createStore(startPayload?: ChatConversationStartPayloadInterface): Store {
-        // the payload belongs to the start of the conversation only, so it is dropped once it is
-        // sent and is not repeated when the very same conversation reconnects
-        let pendingStartPayload = startPayload;
-
         return createStore(
             {},
             ({ dispatch }: { dispatch: (props: object) => void }) =>
@@ -62,8 +58,7 @@ export class StoreService {
                         // trigger welcome message when connection is fulfilled
                         console.log("Connected to bot");
                         const contact = this.domService.getCustomerObject();
-                        const value = pendingStartPayload ? { contact, payload: pendingStartPayload } : { contact };
-                        pendingStartPayload = undefined;
+                        const value = startPayload ? { contact, payload: startPayload } : { contact };
 
                         dispatch({
                             type: "WEB_CHAT/SEND_EVENT",
