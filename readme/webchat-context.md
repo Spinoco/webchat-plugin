@@ -5,8 +5,7 @@ json:
 
 ```javascript
 {
-    wfId: "2c1f5b9e4a7d8c30"              // workflow to start, verified by the backend, optional
-    , question: "Start a new chat about order A-4711?"
+    question: "Start a new chat about order A-4711?"
     , kind: "YesNo"                       // the only kind so far
     , params: { orderId: "A-4711" }       // handed over to the workflow, optional
     , yesLabel: "Start a new chat"        // optional, defaults to Yes
