@@ -157,6 +157,9 @@ export const App: React.FC<AppProps> = (props) => {
         // there is no conversation to be replaced, so the conversation of the context may be
         // started right away, otherwise the user has to confirm that we may replace it
         const hasConversation = props.conversationService.hasStoredConversation();
+
+        // If there is payload with which we should start the chat immediately
+        // this is only used when there was no conversation previously, and we do not need confirmation dialog.
         const startPayload =
             context && !hasConversation ? props.webchatContextService.createStartPayload(context) : undefined;
 
@@ -166,12 +169,16 @@ export const App: React.FC<AppProps> = (props) => {
 
         // we are opening chat on the new page only if it was opened before and if the chat is not in fullscreen mode
         const shallOpenChat = !props.isFullScreen && props.chatStorage.getChatState() == ChatState.Opened;
-        // the question is asked over the page, so nothing is opened until the user has answered it
+
+        // Only open the chat directly when -
+        // We had stored that chat was already opened.
+        // The chat fully embeded
+        // We received chat payload from url.
         if (shallOpenChat || props.configuration.features?.embedded || startPayload) {
             openChat(startPayload);
         }
 
-        // the popover must not compete with the question we are about to ask the user
+        // When we presented full screen question, do not present the small popover.
         if (!context && props.popover.shouldShowPopover()) {
             props.globalEventService.showPopover(
                 props.popover.label as string,
