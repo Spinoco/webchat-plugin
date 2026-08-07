@@ -45,6 +45,11 @@ for example, when customer clicks on a link. You can use the following code:
 Once user clicks on the link, chat window will be opened.
 
 
+## How to start a chat with a structured context
+
+A link may carry the workflow to start, the question to ask and parameters for the workflow, see
+[webchat context](webchat-context.md).
+
 ### How to open popover
 
 - Call method bellow from javascript. You can test it from browser console.

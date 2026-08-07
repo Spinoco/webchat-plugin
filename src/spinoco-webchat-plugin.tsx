@@ -13,6 +13,7 @@ import { GlobalEventService } from "./models/services/global-event-service/globa
 import "./styles/app.scss";
 import { UrlNavigationService } from "./models/services/dom/url-navigation-service";
 import { RuleService } from "./models/services/rule-service";
+import { WebchatContextService } from "./models/services/context/webchat-context-service";
 import { isFullScreen } from "./middlewares/device-query";
 
 declare global {
@@ -28,6 +29,7 @@ const createWithConfigUrl = (url: string) => {
     const storeService = new StoreService(localeService, chatDomService);
     const globalEventService = (window.spinocoWebchatPlugin = new GlobalEventService());
     const urlNavigationService = new UrlNavigationService(globalEventService, chatDomService);
+    const webchatContextService = new WebchatContextService(chatDomService);
 
     fetch(`${url}`)
         .then((response) => response.json())
@@ -54,6 +56,7 @@ const createWithConfigUrl = (url: string) => {
                             configuration={configuration}
                             globalEventService={globalEventService}
                             urlNavigationService={urlNavigationService}
+                            webchatContextService={webchatContextService}
                             isFullScreen={isFullScreen()}
                         />
                     </React.StrictMode>,

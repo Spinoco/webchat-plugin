@@ -1,4 +1,45 @@
 #spinoco-webchat-plugin {
+    // a popover that the user has to answer before they can go on covers the whole page and is
+    // centered in it, instead of sitting in the corner above the trigger
+    .swp-popover-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: rem(20);
+
+        background-color: rgba(0, 0, 0, .35);
+
+        pointer-events: all;
+
+        // the popover is centered by this backdrop instead of being pinned to the corner, while it
+        // stays the containing block of its own close button. It is also given room to fit the
+        // answers of the question on one line
+        .swp-popover {
+            position: relative;
+            right: auto;
+            bottom: auto;
+            z-index: auto;
+
+            width: auto;
+            min-width: min(rem(330), 100%);
+            max-width: rem(560);
+
+            // there is no logo above the question for the close button to sit in, so the question
+            // has to keep its corner free
+            h3 {
+                padding-right: rem(30);
+            }
+        }
+    }
+
     .swp-popover {
         position: fixed;
         right: 1.25rem;
@@ -91,6 +132,40 @@
                     background-color: var(--popover-button-hover-background-color) !important;
                     transform: none;
                 }
+            }
+        }
+
+        // the two answers of a question share the width of the popover, and when their labels do
+        // not fit next to each other, each of them takes a whole line
+        &-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-top: 15px;
+
+            // the buttons are spaced by this row, not by the margin every popover button has
+            button {
+                flex: 1 1 auto;
+
+                margin-top: 0;
+
+                white-space: nowrap;
+
+                @include mobile {
+                    width: auto;
+                }
+            }
+        }
+
+        &-dismiss {
+            padding: 8px 16px;
+
+            background-color: transparent;
+            border: 1px solid currentcolor;
+
+            &:hover {
+                background-color: transparent !important;
             }
         }
     }
